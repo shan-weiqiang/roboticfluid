@@ -1,0 +1,15 @@
+# Ignore build directory
+build/
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore compile_commands.json
+compile_commands.json 
