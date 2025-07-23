@@ -13,6 +13,24 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pybind11)
 
+# Detect Python version for extension suffix
+execute_process(
+    COMMAND ${PYTHON_EXECUTABLE} -c "import sys; print(f'{sys.version_info.major} {sys.version_info.minor}')"
+    RESULT_VARIABLE _PYTHON_VERSION_RESULT
+    OUTPUT_VARIABLE _PYTHON_VERSION_OUTPUT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+string(REPLACE " " ";" _PYTHON_VERSION_LIST "${_PYTHON_VERSION_OUTPUT}")
+list(GET _PYTHON_VERSION_LIST 0 PYTHON_VERSION_MAJOR)
+list(GET _PYTHON_VERSION_LIST 1 PYTHON_VERSION_MINOR)
+
+# Detect Python extension suffix for platform and version
+execute_process(
+    COMMAND ${PYTHON_EXECUTABLE} -c "from sysconfig import get_config_var; print(get_config_var('EXT_SUFFIX'))"
+    OUTPUT_VARIABLE PYTHON_EXT_SUFFIX
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
 # Library target for C++
 add_library(roboticfluid SHARED
     src/shared_struct.cpp
@@ -33,7 +51,7 @@ set_target_properties(roboticfluid_rf_owner PROPERTIES
     PREFIX ""
     OUTPUT_NAME "rf_owner"
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
-    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+    SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
 # Python module for roboticfluid.rf_pet
@@ -47,7 +65,7 @@ set_target_properties(roboticfluid_rf_pet PROPERTIES
     PREFIX ""
     OUTPUT_NAME "rf_pet"
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
-    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+    SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
 # Python module for roboticfluid.owner_v4 (top-level)
@@ -57,7 +75,7 @@ set_target_properties(owner_v4 PROPERTIES
     PREFIX ""
     OUTPUT_NAME "owner_v4"
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
-    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+    SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
 # Ensure __init__.py is present in the build/roboticfluid directory

@@ -1,8 +1,8 @@
 import sys
 import os
 
-# Add the build/roboticfluid directory to the Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build', 'roboticfluid'))
+# Add the build directory to the Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build'))
 
 try:
     from roboticfluid.rf_owner import Owner, OwnerV2
