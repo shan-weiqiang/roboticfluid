@@ -1,12 +1,9 @@
-#include "pybind11/pybind11.h"
-#include "pybind11/stl.h"
+#include <pybind11/pybind11.h>
 #include "shared_struct.hpp"
 
-namespace py = pybind11;
-
-PYBIND11_MODULE(rf_owner, m) {
-    py::class_<rf_owner::Owner>(m, "Owner")
-        .def(py::init<>())
+void init_owner(pybind11::module_ &m) {
+    pybind11::class_<rf_owner::Owner>(m, "Owner")
+        .def(pybind11::init<>())
         .def_readwrite("name", &rf_owner::Owner::name)
         .def_readwrite("age", &rf_owner::Owner::age)
         .def("get_name", &rf_owner::Owner::get_name)

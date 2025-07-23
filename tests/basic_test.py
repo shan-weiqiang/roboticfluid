@@ -119,4 +119,14 @@ for i, o in enumerate(vec_owners_new):
     assert o.get_age() == 200 + i
 print("✓ Custom Owner members round-trip test passed!")
 
+print("\n=== Testing OwnerV2 ===")
+from rf_owner import OwnerV2
+ownerv2 = OwnerV2()
+ownerv2.set_name("Jane Smith")
+ownerv2.set_age(33)
+print(f"Created OwnerV2: {ownerv2.get_name()} (age: {ownerv2.get_age()})")
+assert ownerv2.get_name() == "Jane Smith"
+assert ownerv2.get_age() == 33
+print("✓ OwnerV2 test passed!")
+
 print("\n✓ All basic tests passed!") 

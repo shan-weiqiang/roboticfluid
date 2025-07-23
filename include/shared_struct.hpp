@@ -17,6 +17,19 @@ public:
   int get_age() const { return age; }
   void set_age(int val) { age = val; }
 };
+
+class OwnerV2 {
+public:
+  // Data members (public)
+  std::string name;
+  int age;
+
+  // Getters and Setters
+  std::string get_name() const { return name; }
+  void set_name(const std::string &val) { name = val; }
+  int get_age() const { return age; }
+  void set_age(int val) { age = val; }
+};
 } // namespace rf_owner
 
 namespace rf_pet {
@@ -116,12 +129,14 @@ public:
   const rf_owner::Owner &get_own() const { return own; }
   void set_own(const rf_owner::Owner &val) { own = val; }
   const std::array<rf_owner::Owner, 10> &get_arr_own() const { return arr_own; }
-  void set_arr_own(const std::array<rf_owner::Owner, 10> &val) { arr_own = val; }
+  void set_arr_own(const std::array<rf_owner::Owner, 10> &val) {
+    arr_own = val;
+  }
   const std::vector<rf_owner::Owner> &get_vec_own() const { return vec_own; }
   void set_vec_own(const std::vector<rf_owner::Owner> &val) { vec_own = val; }
 
   // Serialization
-  std::string freeze() const;            // Serialize and return string
-  void melt(const std::string &src);     // Deserialize from src
+  std::string freeze() const;        // Serialize and return string
+  void melt(const std::string &src); // Deserialize from src
 };
 } // namespace rf_pet
