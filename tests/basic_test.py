@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import os
 
@@ -58,5 +56,24 @@ new_pet = Pet()
 new_pet.deserialize(serialized)
 print(f"Deserialized pet name: {new_pet.name}")
 print(f"Deserialized pet age: {new_pet.age}")
+
+print("\n=== Testing round-trip serialization/deserialization ===")
+pet.name = "Fido"
+pet.age = 42
+pet.weight = 12.5
+
+serialized = pet.serialize()
+print("Serialized:", serialized)
+
+new_pet = Pet()
+new_pet.deserialize(serialized)
+print("Deserialized name:", new_pet.name)
+print("Deserialized age:", new_pet.age)
+print("Deserialized weight:", new_pet.weight)
+
+assert new_pet.name == pet.name
+assert new_pet.age == pet.age
+assert abs(new_pet.weight - pet.weight) < 1e-6
+print("✓ Round-trip test passed!")
 
 print("\n✓ All basic tests passed!") 
