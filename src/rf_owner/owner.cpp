@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include "shared_struct.hpp"
 
 void init_owner(pybind11::module_ &m) {

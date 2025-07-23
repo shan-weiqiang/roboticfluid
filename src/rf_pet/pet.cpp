@@ -1,12 +1,10 @@
-#include "pybind11/pybind11.h"
-#include "pybind11/stl.h"
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include "shared_struct.hpp"
 
-namespace py = pybind11;
-
-PYBIND11_MODULE(rf_pet, m) {
-    py::class_<rf_pet::Pet>(m, "Pet")
-        .def(py::init<>())
+void init_pet(pybind11::module_ &m) {
+    pybind11::class_<rf_pet::Pet>(m, "Pet")
+        .def(pybind11::init<>())
         .def_readwrite("own", &rf_pet::Pet::own)
         .def_readwrite("arr_own", &rf_pet::Pet::arr_own)
         .def_readwrite("vec_own", &rf_pet::Pet::vec_own)
@@ -35,15 +33,15 @@ PYBIND11_MODULE(rf_pet, m) {
         .def_readwrite("vec_bval", &rf_pet::Pet::vec_bval)
         .def_readwrite("vec_s", &rf_pet::Pet::vec_s)
         .def("bark", &rf_pet::Pet::bark)
-        .def("freeze", [](const rf_pet::Pet& pet) { return py::bytes(pet.freeze()); })
-        .def("melt", [](rf_pet::Pet& pet, const py::bytes& src) {
+        .def("freeze", [](const rf_pet::Pet& pet) { return pybind11::bytes(pet.freeze()); })
+        .def("melt", [](rf_pet::Pet& pet, const pybind11::bytes& src) {
             pet.melt(std::string(src));
         })
         .def("get_own", &rf_pet::Pet::get_own)
         .def("set_own", &rf_pet::Pet::set_own)
-        .def("get_arr_own", &rf_pet::Pet::get_arr_own, py::return_value_policy::reference_internal)
+        .def("get_arr_own", &rf_pet::Pet::get_arr_own, pybind11::return_value_policy::reference_internal)
         .def("set_arr_own", &rf_pet::Pet::set_arr_own)
-        .def("get_vec_own", &rf_pet::Pet::get_vec_own, py::return_value_policy::reference_internal)
+        .def("get_vec_own", &rf_pet::Pet::get_vec_own, pybind11::return_value_policy::reference_internal)
         .def("set_vec_own", &rf_pet::Pet::set_vec_own)
         .def("get_d", &rf_pet::Pet::get_d)
         .def("set_d", &rf_pet::Pet::set_d)
@@ -61,36 +59,36 @@ PYBIND11_MODULE(rf_pet, m) {
         .def("set_bval", &rf_pet::Pet::set_bval)
         .def("get_s", &rf_pet::Pet::get_s)
         .def("set_s", &rf_pet::Pet::set_s)
-        .def("get_arr_d", &rf_pet::Pet::get_arr_d, py::return_value_policy::reference_internal)
+        .def("get_arr_d", &rf_pet::Pet::get_arr_d, pybind11::return_value_policy::reference_internal)
         .def("set_arr_d", &rf_pet::Pet::set_arr_d)
-        .def("get_arr_f", &rf_pet::Pet::get_arr_f, py::return_value_policy::reference_internal)
+        .def("get_arr_f", &rf_pet::Pet::get_arr_f, pybind11::return_value_policy::reference_internal)
         .def("set_arr_f", &rf_pet::Pet::set_arr_f)
-        .def("get_arr_i32", &rf_pet::Pet::get_arr_i32, py::return_value_policy::reference_internal)
+        .def("get_arr_i32", &rf_pet::Pet::get_arr_i32, pybind11::return_value_policy::reference_internal)
         .def("set_arr_i32", &rf_pet::Pet::set_arr_i32)
-        .def("get_arr_i64", &rf_pet::Pet::get_arr_i64, py::return_value_policy::reference_internal)
+        .def("get_arr_i64", &rf_pet::Pet::get_arr_i64, pybind11::return_value_policy::reference_internal)
         .def("set_arr_i64", &rf_pet::Pet::set_arr_i64)
-        .def("get_arr_u32", &rf_pet::Pet::get_arr_u32, py::return_value_policy::reference_internal)
+        .def("get_arr_u32", &rf_pet::Pet::get_arr_u32, pybind11::return_value_policy::reference_internal)
         .def("set_arr_u32", &rf_pet::Pet::set_arr_u32)
-        .def("get_arr_u64", &rf_pet::Pet::get_arr_u64, py::return_value_policy::reference_internal)
+        .def("get_arr_u64", &rf_pet::Pet::get_arr_u64, pybind11::return_value_policy::reference_internal)
         .def("set_arr_u64", &rf_pet::Pet::set_arr_u64)
-        .def("get_arr_bval", &rf_pet::Pet::get_arr_bval, py::return_value_policy::reference_internal)
+        .def("get_arr_bval", &rf_pet::Pet::get_arr_bval, pybind11::return_value_policy::reference_internal)
         .def("set_arr_bval", &rf_pet::Pet::set_arr_bval)
-        .def("get_arr_s", &rf_pet::Pet::get_arr_s, py::return_value_policy::reference_internal)
+        .def("get_arr_s", &rf_pet::Pet::get_arr_s, pybind11::return_value_policy::reference_internal)
         .def("set_arr_s", &rf_pet::Pet::set_arr_s)
-        .def("get_vec_d", &rf_pet::Pet::get_vec_d, py::return_value_policy::reference_internal)
+        .def("get_vec_d", &rf_pet::Pet::get_vec_d, pybind11::return_value_policy::reference_internal)
         .def("set_vec_d", &rf_pet::Pet::set_vec_d)
-        .def("get_vec_f", &rf_pet::Pet::get_vec_f, py::return_value_policy::reference_internal)
+        .def("get_vec_f", &rf_pet::Pet::get_vec_f, pybind11::return_value_policy::reference_internal)
         .def("set_vec_f", &rf_pet::Pet::set_vec_f)
-        .def("get_vec_i32", &rf_pet::Pet::get_vec_i32, py::return_value_policy::reference_internal)
+        .def("get_vec_i32", &rf_pet::Pet::get_vec_i32, pybind11::return_value_policy::reference_internal)
         .def("set_vec_i32", &rf_pet::Pet::set_vec_i32)
-        .def("get_vec_i64", &rf_pet::Pet::get_vec_i64, py::return_value_policy::reference_internal)
+        .def("get_vec_i64", &rf_pet::Pet::get_vec_i64, pybind11::return_value_policy::reference_internal)
         .def("set_vec_i64", &rf_pet::Pet::set_vec_i64)
-        .def("get_vec_u32", &rf_pet::Pet::get_vec_u32, py::return_value_policy::reference_internal)
+        .def("get_vec_u32", &rf_pet::Pet::get_vec_u32, pybind11::return_value_policy::reference_internal)
         .def("set_vec_u32", &rf_pet::Pet::set_vec_u32)
-        .def("get_vec_u64", &rf_pet::Pet::get_vec_u64, py::return_value_policy::reference_internal)
+        .def("get_vec_u64", &rf_pet::Pet::get_vec_u64, pybind11::return_value_policy::reference_internal)
         .def("set_vec_u64", &rf_pet::Pet::set_vec_u64)
-        .def("get_vec_bval", &rf_pet::Pet::get_vec_bval, py::return_value_policy::reference_internal)
+        .def("get_vec_bval", &rf_pet::Pet::get_vec_bval, pybind11::return_value_policy::reference_internal)
         .def("set_vec_bval", &rf_pet::Pet::set_vec_bval)
-        .def("get_vec_s", &rf_pet::Pet::get_vec_s, py::return_value_policy::reference_internal)
+        .def("get_vec_s", &rf_pet::Pet::get_vec_s, pybind11::return_value_policy::reference_internal)
         .def("set_vec_s", &rf_pet::Pet::set_vec_s);
 } 
