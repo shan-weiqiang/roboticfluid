@@ -5,7 +5,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build'))
 
 try:
-    from example import Pet, Owner
+    from rf_owner import Owner
+    from rf_pet import Pet
     print("✓ Successfully imported Pet and Owner classes")
 except ImportError as e:
     print(f"✗ Failed to import: {e}")

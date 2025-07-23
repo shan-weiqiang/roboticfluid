@@ -2,21 +2,9 @@
 #include "pybind11/stl.h"
 #include "shared_struct.hpp"
 
-using namespace rf_owner;
-using namespace rf_pet;
-
 namespace py = pybind11;
 
-PYBIND11_MODULE(example, m) {
-    py::class_<rf_owner::Owner>(m, "Owner")
-        .def(py::init<>())
-        .def_readwrite("name", &rf_owner::Owner::name)
-        .def_readwrite("age", &rf_owner::Owner::age)
-        .def("get_name", &rf_owner::Owner::get_name)
-        .def("set_name", &rf_owner::Owner::set_name)
-        .def("get_age", &rf_owner::Owner::get_age)
-        .def("set_age", &rf_owner::Owner::set_age);
-
+PYBIND11_MODULE(rf_pet, m) {
     py::class_<rf_pet::Pet>(m, "Pet")
         .def(py::init<>())
         .def_readwrite("own", &rf_pet::Pet::own)
@@ -105,4 +93,4 @@ PYBIND11_MODULE(example, m) {
         .def("set_vec_bval", &rf_pet::Pet::set_vec_bval)
         .def("get_vec_s", &rf_pet::Pet::get_vec_s, py::return_value_policy::reference_internal)
         .def("set_vec_s", &rf_pet::Pet::set_vec_s);
-}
+} 

@@ -19,10 +19,15 @@ add_library(roboticfluid SHARED
 )
 target_include_directories(roboticfluid PUBLIC include)
 
-# Python module
-pybind11_add_module(example src/pybind_module.cpp)
-target_include_directories(example PRIVATE include)
-target_link_libraries(example PRIVATE roboticfluid)
+# Python module for rf_owner
+pybind11_add_module(rf_owner src/owner_pybind.cpp)
+target_include_directories(rf_owner PRIVATE include)
+target_link_libraries(rf_owner PRIVATE roboticfluid)
+
+# Python module for rf_pet
+pybind11_add_module(rf_pet src/pet_pybind.cpp)
+target_include_directories(rf_pet PRIVATE include)
+target_link_libraries(rf_pet PRIVATE roboticfluid)
 
 # Install rules
 install(TARGETS roboticfluid DESTINATION lib)
