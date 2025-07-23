@@ -1,127 +1,84 @@
-#pragma once
+#include <string>
 #include <array>
 #include <vector>
-#include <string>
-#include <cstdint>
-#include <stdexcept>
+#include <iostream>
 
-struct CustomType {
-    int32_t a;
-    double b;
+// Custom Owner class
+class Owner {
+public:
+    // Data members (public)
+    std::string name_;
+    int age_;
 
-    int32_t get_a() const { return a; }
-    void set_a(int32_t val) { a = val; }
-    double get_b() const { return b; }
-    void set_b(double val) { b = val; }
+    // Getters and Setters
+    std::string getName() const { return name_; }
+    void setName(const std::string& name) { name_ = name; }
+    int getAge() const { return age_; }
+    void setAge(int age) { age_ = age; }
 };
 
-struct SharedStruct {
-    // Basic types
-    double d;
-    float f;
-    int32_t i32;
-    int64_t i64;
-    uint32_t u32;
-    uint64_t u64;
-    bool bval;
-    std::string s;
+// Modified Pet class
+class Pet {
+public:
+    // Data members (all public)
+    std::string name;
+    int age;
+    float weight;
+    double height;
+    bool isVaccinated;
+    char gender;
+    std::array<int, 3> favoriteNumbers;
+    std::array<float, 2> coordinates;
+    std::vector<std::string> tricks;
+    std::vector<int> scores;
+    Owner owner;
+    std::array<Owner, 2> multipleOwners;
+    std::vector<Owner> ownerList;
 
-    // std::array for each basic type
-    std::array<double, 4> arr_d;
-    std::array<float, 4> arr_f;
-    std::array<int32_t, 4> arr_i32;
-    std::array<int64_t, 4> arr_i64;
-    std::array<uint32_t, 4> arr_u32;
-    std::array<uint64_t, 4> arr_u64;
-    std::array<bool, 4> arr_bval;
-    std::array<std::string, 4> arr_s;
+    // Methods (all public)
+    void bark() { std::cout << name << " barks!\n"; }
 
-    // std::vector for each basic type
-    std::vector<double> vec_d;
-    std::vector<float> vec_f;
-    std::vector<int32_t> vec_i32;
-    std::vector<int64_t> vec_i64;
-    std::vector<uint32_t> vec_u32;
-    std::vector<uint64_t> vec_u64;
-    std::vector<bool> vec_bval;
-    std::vector<std::string> vec_s;
+    // Setters and Getters for all data members
+    std::string getName() const { return name; }
+    void setName(const std::string& n) { name = n; }
 
-    // std::array and std::vector for custom type
-    std::array<CustomType, 2> arr_custom;
-    std::vector<CustomType> vec_custom;
+    int getAge() const { return age; }
+    void setAge(int a) { age = a; }
 
-    // Getters and setters for each field
-    // Basic types
-    double get_d() const { return d; }
-    void set_d(double val) { d = val; }
-    float get_f() const { return f; }
-    void set_f(float val) { f = val; }
-    int32_t get_i32() const { return i32; }
-    void set_i32(int32_t val) { i32 = val; }
-    int64_t get_i64() const { return i64; }
-    void set_i64(int64_t val) { i64 = val; }
-    uint32_t get_u32() const { return u32; }
-    void set_u32(uint32_t val) { u32 = val; }
-    uint64_t get_u64() const { return u64; }
-    void set_u64(uint64_t val) { u64 = val; }
-    bool get_bval() const { return bval; }
-    void set_bval(bool val) { bval = val; }
-    std::string get_s() const { return s; }
-    void set_s(const std::string& val) { s = val; }
+    float getWeight() const { return weight; }
+    void setWeight(float w) { weight = w; }
 
-    // Arrays: get/set by index, get whole array
-#define ARRAY_GETTER_SETTER(TYPE, NAME) \
-    TYPE get_##NAME(size_t idx) const { return NAME.at(idx); } \
-    void set_##NAME(size_t idx, TYPE val) { NAME.at(idx) = val; } \
-    const std::array<TYPE, 4>& get_##NAME##_array() const { return NAME; } \
-    void set_##NAME##_array(const std::array<TYPE, 4>& arr) { NAME = arr; }
+    double getHeight() const { return height; }
+    void setHeight(double h) { height = h; }
 
-    ARRAY_GETTER_SETTER(double, arr_d)
-    ARRAY_GETTER_SETTER(float, arr_f)
-    ARRAY_GETTER_SETTER(int32_t, arr_i32)
-    ARRAY_GETTER_SETTER(int64_t, arr_i64)
-    ARRAY_GETTER_SETTER(uint32_t, arr_u32)
-    ARRAY_GETTER_SETTER(uint64_t, arr_u64)
-    ARRAY_GETTER_SETTER(bool, arr_bval)
-#undef ARRAY_GETTER_SETTER
+    bool getIsVaccinated() const { return isVaccinated; }
+    void setIsVaccinated(bool v) { isVaccinated = v; }
 
-    std::string get_arr_s(size_t idx) const { return arr_s.at(idx); }
-    void set_arr_s(size_t idx, const std::string& val) { arr_s.at(idx) = val; }
-    const std::array<std::string, 4>& get_arr_s_array() const { return arr_s; }
-    void set_arr_s_array(const std::array<std::string, 4>& arr) { arr_s = arr; }
+    char getGender() const { return gender; }
+    void setGender(char g) { gender = g; }
 
-    // Vectors: get/set by index, get/set whole vector, resize
-#define VECTOR_GETTER_SETTER(TYPE, NAME) \
-    TYPE get_##NAME(size_t idx) const { return NAME.at(idx); } \
-    void set_##NAME(size_t idx, TYPE val) { NAME.at(idx) = val; } \
-    const std::vector<TYPE>& get_##NAME##_vector() const { return NAME; } \
-    void set_##NAME##_vector(const std::vector<TYPE>& vec) { NAME = vec; } \
-    void resize_##NAME(size_t n) { NAME.resize(n); }
+    const std::array<int, 3>& getFavoriteNumbers() const { return favoriteNumbers; }
+    void setFavoriteNumbers(const std::array<int, 3>& fn) { favoriteNumbers = fn; }
 
-    VECTOR_GETTER_SETTER(double, vec_d)
-    VECTOR_GETTER_SETTER(float, vec_f)
-    VECTOR_GETTER_SETTER(int32_t, vec_i32)
-    VECTOR_GETTER_SETTER(int64_t, vec_i64)
-    VECTOR_GETTER_SETTER(uint32_t, vec_u32)
-    VECTOR_GETTER_SETTER(uint64_t, vec_u64)
-    VECTOR_GETTER_SETTER(bool, vec_bval)
-#undef VECTOR_GETTER_SETTER
+    const std::array<float, 2>& getCoordinates() const { return coordinates; }
+    void setCoordinates(const std::array<float, 2>& c) { coordinates = c; }
 
-    std::string get_vec_s(size_t idx) const { return vec_s.at(idx); }
-    void set_vec_s(size_t idx, const std::string& val) { vec_s.at(idx) = val; }
-    const std::vector<std::string>& get_vec_s_vector() const { return vec_s; }
-    void set_vec_s_vector(const std::vector<std::string>& vec) { vec_s = vec; }
-    void resize_vec_s(size_t n) { vec_s.resize(n); }
+    const std::vector<std::string>& getTricks() const { return tricks; }
+    void setTricks(const std::vector<std::string>& t) { tricks = t; }
 
-    // CustomType arrays and vectors
-    CustomType get_arr_custom(size_t idx) const { return arr_custom.at(idx); }
-    void set_arr_custom(size_t idx, const CustomType& val) { arr_custom.at(idx) = val; }
-    const std::array<CustomType, 2>& get_arr_custom_array() const { return arr_custom; }
-    void set_arr_custom_array(const std::array<CustomType, 2>& arr) { arr_custom = arr; }
+    const std::vector<int>& getScores() const { return scores; }
+    void setScores(const std::vector<int>& s) { scores = s; }
 
-    CustomType get_vec_custom(size_t idx) const { return vec_custom.at(idx); }
-    void set_vec_custom(size_t idx, const CustomType& val) { vec_custom.at(idx) = val; }
-    const std::vector<CustomType>& get_vec_custom_vector() const { return vec_custom; }
-    void set_vec_custom_vector(const std::vector<CustomType>& vec) { vec_custom = vec; }
-    void resize_vec_custom(size_t n) { vec_custom.resize(n); }
-}; 
+    const Owner& getOwner() const { return owner; }
+    void setOwner(const Owner& o) { owner = o; }
+
+    const std::array<Owner, 2>& getMultipleOwners() const { return multipleOwners; }
+    void setMultipleOwners(const std::array<Owner, 2>& mo) { multipleOwners = mo; }
+
+    const std::vector<Owner>& getOwnerList() const { return ownerList; }
+    void setOwnerList(const std::vector<Owner>& ol) { ownerList = ol; }
+
+    // New methods
+    std::string serialize() const; // Serialize and return string
+    void deserialize(const std::string& src); // Deserialize from src
+};

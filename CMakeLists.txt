@@ -20,16 +20,9 @@ add_library(roboticfluid SHARED
 target_include_directories(roboticfluid PUBLIC include)
 
 # Python module
-pybind11_add_module(roboticfluid_python src/pybind_module.cpp)
-target_include_directories(roboticfluid_python PRIVATE include)
-target_link_libraries(roboticfluid_python PRIVATE roboticfluid)
-
-# C++ IPC test executable
-enable_testing()
-add_executable(ipc_test_cpp tests/ipc_test_cpp.cpp)
-target_include_directories(ipc_test_cpp PRIVATE include)
-target_link_libraries(ipc_test_cpp PRIVATE roboticfluid rt)
-set_target_properties(ipc_test_cpp PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+pybind11_add_module(example src/pybind_module.cpp)
+target_include_directories(example PRIVATE include)
+target_link_libraries(example PRIVATE roboticfluid)
 
 # Install rules
 install(TARGETS roboticfluid DESTINATION lib)
