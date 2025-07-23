@@ -1,13 +1,15 @@
 import sys
 import os
 
-# Add the build directory to the Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build'))
+# Add the build/roboticfluid directory to the Python path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build', 'roboticfluid'))
 
 try:
-    from rf_owner import Owner
-    from rf_pet import Pet
-    print("✓ Successfully imported Pet and Owner classes")
+    from roboticfluid.rf_owner import Owner, OwnerV2
+    from roboticfluid.rf_pet import Pet
+    from roboticfluid.rf_owner.nested import OwnerV3
+    from roboticfluid import OwnerV4
+    print("✓ Successfully imported Pet, Owner, OwnerV2, OwnerV3, OwnerV4 classes")
 except ImportError as e:
     print(f"✗ Failed to import: {e}")
     sys.exit(1)
@@ -27,8 +29,6 @@ pet.set_s("Buddy")
 pet.set_i32(5)
 pet.set_f(25.5)
 pet.set_d(45.2)
-# pet.set_isvaccinated(True)  # If you have isvaccinated, otherwise skip
-# pet.set_gender('M')         # If you have gender, otherwise skip
 pet.set_own(owner)
 
 # Set some arrays and vectors
@@ -120,7 +120,6 @@ for i, o in enumerate(vec_owners_new):
 print("✓ Custom Owner members round-trip test passed!")
 
 print("\n=== Testing OwnerV2 ===")
-from rf_owner import OwnerV2
 ownerv2 = OwnerV2()
 ownerv2.set_name("Jane Smith")
 ownerv2.set_age(33)
@@ -130,7 +129,6 @@ assert ownerv2.get_age() == 33
 print("✓ OwnerV2 test passed!")
 
 print("\n=== Testing OwnerV3 ===")
-from rf_owner.nested import OwnerV3
 ownerv3 = OwnerV3()
 ownerv3.set_name("Nested User")
 ownerv3.set_age(44)
@@ -138,5 +136,14 @@ print(f"Created OwnerV3: {ownerv3.get_name()} (age: {ownerv3.get_age()})")
 assert ownerv3.get_name() == "Nested User"
 assert ownerv3.get_age() == 44
 print("✓ OwnerV3 test passed!")
+
+print("\n=== Testing OwnerV4 ===")
+ownerv4 = OwnerV4()
+ownerv4.set_name("Top User")
+ownerv4.set_age(55)
+print(f"Created OwnerV4: {ownerv4.get_name()} (age: {ownerv4.get_age()})")
+assert ownerv4.get_name() == "Top User"
+assert ownerv4.get_age() == 55
+print("✓ OwnerV4 test passed!")
 
 print("\n✓ All basic tests passed!") 

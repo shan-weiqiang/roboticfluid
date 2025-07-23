@@ -19,16 +19,53 @@ add_library(roboticfluid SHARED
 )
 target_include_directories(roboticfluid PUBLIC include)
 
-# Python module for rf_owner (structured in subfolder)
-pybind11_add_module(rf_owner src/rf_owner/module.cpp src/rf_owner/owner.cpp src/rf_owner/owner_v2.cpp src/rf_owner/nested.cpp src/rf_owner/nested/owner_v3.cpp)
-target_include_directories(rf_owner PRIVATE include)
-target_link_libraries(rf_owner PRIVATE roboticfluid)
+# Python module for roboticfluid.rf_owner
+pybind11_add_module(roboticfluid_rf_owner
+    src/roboticfluid/rf_owner/module.cpp
+    src/roboticfluid/rf_owner/owner.cpp
+    src/roboticfluid/rf_owner/owner_v2.cpp
+    src/roboticfluid/rf_owner/nested.cpp
+    src/roboticfluid/rf_owner/nested/owner_v3.cpp
+)
+target_include_directories(roboticfluid_rf_owner PRIVATE include)
+target_link_libraries(roboticfluid_rf_owner PRIVATE roboticfluid)
+set_target_properties(roboticfluid_rf_owner PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "rf_owner"
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
+    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+)
 
-# Python module for rf_pet (structured in subfolder)
-pybind11_add_module(rf_pet src/rf_pet/module.cpp src/rf_pet/pet.cpp)
-target_include_directories(rf_pet PRIVATE include)
-target_link_libraries(rf_pet PRIVATE roboticfluid)
+# Python module for roboticfluid.rf_pet
+pybind11_add_module(roboticfluid_rf_pet
+    src/roboticfluid/rf_pet/module.cpp
+    src/roboticfluid/rf_pet/pet.cpp
+)
+target_include_directories(roboticfluid_rf_pet PRIVATE include)
+target_link_libraries(roboticfluid_rf_pet PRIVATE roboticfluid)
+set_target_properties(roboticfluid_rf_pet PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "rf_pet"
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
+    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+)
+
+# Python module for roboticfluid.owner_v4 (top-level)
+pybind11_add_module(owner_v4 src/roboticfluid/owner_v4.cpp)
+target_include_directories(owner_v4 PRIVATE include)
+set_target_properties(owner_v4 PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "owner_v4"
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
+    SUFFIX ".cpython-310-x86_64-linux-gnu.so"
+)
+
+# Ensure __init__.py is present in the build/roboticfluid directory
+configure_file(src/roboticfluid/__init__.py ${CMAKE_BINARY_DIR}/roboticfluid/__init__.py COPYONLY)
 
 # Install rules
 install(TARGETS roboticfluid DESTINATION lib)
-install(DIRECTORY include/ DESTINATION include) 
+install(DIRECTORY include/ DESTINATION include)
+install(FILES src/roboticfluid/__init__.py DESTINATION roboticfluid)
+
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid) 

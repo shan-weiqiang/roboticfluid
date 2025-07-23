@@ -1,5 +1,5 @@
 from typing import Any, List
-from rf_owner import Owner
+from roboticfluid.rf_owner import Owner
 
 class Pet:
     own: Owner
