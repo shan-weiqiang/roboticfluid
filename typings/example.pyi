@@ -1,3 +1,4 @@
+# C++: Owner is in rf_owner, Pet is in rf_pet namespace
 from typing import Any, List
 
 class Owner:

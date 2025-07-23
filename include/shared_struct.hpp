@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+namespace rf_owner {
 // Custom Owner class
 class Owner {
 public:
@@ -16,7 +17,9 @@ public:
   int get_age() const { return age; }
   void set_age(int val) { age = val; }
 };
+} // namespace rf_owner
 
+namespace rf_pet {
 class Pet {
 public:
   // Basic types
@@ -48,11 +51,11 @@ public:
   std::vector<std::string> vec_s;
 
   // Custom typs
-  Owner own;
+  rf_owner::Owner own;
   // Arrays for custom
-  std::array<Owner, 10> arr_own;
+  std::array<rf_owner::Owner, 10> arr_own;
   // Vector for custom
-  std::vector<Owner> vec_own;
+  std::vector<rf_owner::Owner> vec_own;
 
   // Methods (all public)
   void bark() { std::cout << s << " barks!\n"; }
@@ -110,14 +113,15 @@ public:
   void set_vec_s(const std::vector<std::string> &val) { vec_s = val; }
 
   // Custom type getters/setters
-  const Owner &get_own() const { return own; }
-  void set_own(const Owner &val) { own = val; }
-  const std::array<Owner, 10> &get_arr_own() const { return arr_own; }
-  void set_arr_own(const std::array<Owner, 10> &val) { arr_own = val; }
-  const std::vector<Owner> &get_vec_own() const { return vec_own; }
-  void set_vec_own(const std::vector<Owner> &val) { vec_own = val; }
+  const rf_owner::Owner &get_own() const { return own; }
+  void set_own(const rf_owner::Owner &val) { own = val; }
+  const std::array<rf_owner::Owner, 10> &get_arr_own() const { return arr_own; }
+  void set_arr_own(const std::array<rf_owner::Owner, 10> &val) { arr_own = val; }
+  const std::vector<rf_owner::Owner> &get_vec_own() const { return vec_own; }
+  void set_vec_own(const std::vector<rf_owner::Owner> &val) { vec_own = val; }
 
   // Serialization
   std::string freeze() const;            // Serialize and return string
   void melt(const std::string &src);     // Deserialize from src
 };
+} // namespace rf_pet

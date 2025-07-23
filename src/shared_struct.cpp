@@ -3,6 +3,9 @@
 #include <cstring>
 #include "shared_struct.hpp"
 
+using namespace rf_owner;
+using namespace rf_pet;
+
 // Helper to write a length-prefixed string
 static void write_string(std::ostream& os, const std::string& s) {
     uint32_t len = static_cast<uint32_t>(s.size());
@@ -18,7 +21,7 @@ static void read_string(std::istream& is, std::string& s) {
     if (len > 0) is.read(&s[0], len);
 }
 
-std::string Pet::freeze() const {
+std::string rf_pet::Pet::freeze() const {
     std::ostringstream oss(std::ios::binary);
     // Serialize main Pet fields
     write_string(oss, s);
@@ -42,7 +45,7 @@ std::string Pet::freeze() const {
     return oss.str();
 }
 
-void Pet::melt(const std::string& src) {
+void rf_pet::Pet::melt(const std::string& src) {
     std::istringstream iss(src, std::ios::binary);
     // Deserialize main Pet fields
     read_string(iss, s);
