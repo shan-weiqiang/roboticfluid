@@ -18,7 +18,7 @@ static void read_string(std::istream& is, std::string& s) {
     if (len > 0) is.read(&s[0], len);
 }
 
-std::string Pet::serialize() const {
+std::string Pet::freeze() const {
     std::ostringstream oss(std::ios::binary);
     // Serialize main Pet fields
     write_string(oss, s);
@@ -42,7 +42,7 @@ std::string Pet::serialize() const {
     return oss.str();
 }
 
-void Pet::deserialize(const std::string& src) {
+void Pet::melt(const std::string& src) {
     std::istringstream iss(src, std::ios::binary);
     // Deserialize main Pet fields
     read_string(iss, s);

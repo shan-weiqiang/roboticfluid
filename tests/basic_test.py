@@ -57,31 +57,31 @@ print(f"Pet favorite numbers: {pet.get_arr_i32()}")
 print("\nTesting bark method:")
 pet.bark()
 
-# Test serialization
-print("\n=== Testing serialization ===")
-serialized = pet.serialize()
-print(f"Serialized pet: {serialized}")
+# Test freezing
+print("\n=== Testing freezing ===")
+freezed = pet.freeze()
+print(f"Freezed pet: {freezed}")
 
-# Test deserialization
-print("\n=== Testing deserialization ===")
+# Test melting
+print("\n=== Testing melting ===")
 new_pet = Pet()
-new_pet.deserialize(serialized)
-print(f"Deserialized pet name: {new_pet.get_s()}")
-print(f"Deserialized pet age: {new_pet.get_i32()}")
+new_pet.melt(freezed)
+print(f"Melted s: {new_pet.get_s()}")
+print(f"Melted i32: {new_pet.get_i32()}")
 
-print("\n=== Testing round-trip serialization/deserialization ===")
+print("\n=== Testing round-trip freezing/melting ===")
 pet.set_s("Fido")
 pet.set_i32(42)
 pet.set_f(12.5)
 
-serialized = pet.serialize()
-print("Serialized:", serialized)
+freezed = pet.freeze()
+print("Freezed:", freezed)
 
 new_pet = Pet()
-new_pet.deserialize(serialized)
-print("Deserialized name:", new_pet.get_s())
-print("Deserialized age:", new_pet.get_i32())
-print("Deserialized weight:", new_pet.get_f())
+new_pet.melt(freezed)
+print("Melted s:", new_pet.get_s())
+print("Melted i32:", new_pet.get_i32())
+print("Melted f:", new_pet.get_f())
 
 assert new_pet.get_s() == pet.get_s()
 assert new_pet.get_i32() == pet.get_i32()
@@ -103,9 +103,9 @@ for i, o in enumerate(vec_owners):
     o.set_name(f"VecOwner{i}")
     o.set_age(200 + i)
 pet.set_vec_own(vec_owners)
-serialized = pet.serialize()
+freezed = pet.freeze()
 new_pet = Pet()
-new_pet.deserialize(serialized)
+new_pet.melt(freezed)
 assert new_pet.get_own().get_name() == "Alice"
 assert new_pet.get_own().get_age() == 30
 arr_owners_new = new_pet.get_arr_own()

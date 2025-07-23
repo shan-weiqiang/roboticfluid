@@ -118,6 +118,6 @@ public:
   void set_vec_own(const std::vector<Owner> &val) { vec_own = val; }
 
   // Serialization
-  std::string serialize() const;            // Serialize and return string
-  void deserialize(const std::string &src); // Deserialize from src
+  std::string freeze() const;            // Serialize and return string
+  void melt(const std::string &src);     // Deserialize from src
 };

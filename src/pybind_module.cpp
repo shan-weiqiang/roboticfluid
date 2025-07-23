@@ -44,9 +44,9 @@ PYBIND11_MODULE(example, m) {
         .def_readwrite("vec_bval", &Pet::vec_bval)
         .def_readwrite("vec_s", &Pet::vec_s)
         .def("bark", &Pet::bark)
-        .def("serialize", [](const Pet& pet) { return py::bytes(pet.serialize()); })
-        .def("deserialize", [](Pet& pet, const py::bytes& src) {
-            pet.deserialize(std::string(src));
+        .def("freeze", [](const Pet& pet) { return py::bytes(pet.freeze()); })
+        .def("melt", [](Pet& pet, const py::bytes& src) {
+            pet.melt(std::string(src));
         })
         .def("get_own", &Pet::get_own)
         .def("set_own", &Pet::set_own)
