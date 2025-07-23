@@ -129,4 +129,14 @@ assert ownerv2.get_name() == "Jane Smith"
 assert ownerv2.get_age() == 33
 print("✓ OwnerV2 test passed!")
 
+print("\n=== Testing OwnerV3 ===")
+from rf_owner.nested import OwnerV3
+ownerv3 = OwnerV3()
+ownerv3.set_name("Nested User")
+ownerv3.set_age(44)
+print(f"Created OwnerV3: {ownerv3.get_name()} (age: {ownerv3.get_age()})")
+assert ownerv3.get_name() == "Nested User"
+assert ownerv3.get_age() == 44
+print("✓ OwnerV3 test passed!")
+
 print("\n✓ All basic tests passed!") 

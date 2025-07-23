@@ -20,7 +20,7 @@ add_library(roboticfluid SHARED
 target_include_directories(roboticfluid PUBLIC include)
 
 # Python module for rf_owner (structured in subfolder)
-pybind11_add_module(rf_owner src/rf_owner/module.cpp src/rf_owner/owner.cpp src/rf_owner/owner_v2.cpp)
+pybind11_add_module(rf_owner src/rf_owner/module.cpp src/rf_owner/owner.cpp src/rf_owner/owner_v2.cpp src/rf_owner/nested.cpp src/rf_owner/nested/owner_v3.cpp)
 target_include_directories(rf_owner PRIVATE include)
 target_link_libraries(rf_owner PRIVATE roboticfluid)
 
