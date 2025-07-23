@@ -2,13 +2,17 @@
 #include <pybind11/stl.h>
 #include "shared_struct.hpp"
 
+namespace rf_owner {
+
 void init_owner(pybind11::module_ &m) {
-    pybind11::class_<rf_owner::Owner>(m, "Owner")
+    pybind11::class_<Owner>(m, "Owner")
         .def(pybind11::init<>())
-        .def_readwrite("name", &rf_owner::Owner::name)
-        .def_readwrite("age", &rf_owner::Owner::age)
-        .def("get_name", &rf_owner::Owner::get_name)
-        .def("set_name", &rf_owner::Owner::set_name)
-        .def("get_age", &rf_owner::Owner::get_age)
-        .def("set_age", &rf_owner::Owner::set_age);
-} 
+        .def_readwrite("name", &Owner::name)
+        .def_readwrite("age", &Owner::age)
+        .def("get_name", &Owner::get_name)
+        .def("set_name", &Owner::set_name)
+        .def("get_age", &Owner::get_age)
+        .def("set_age", &Owner::set_age);
+}
+
+} // namespace rf_owner 
