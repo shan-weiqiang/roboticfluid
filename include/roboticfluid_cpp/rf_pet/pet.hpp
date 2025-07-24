@@ -1,67 +1,13 @@
+#pragma once
+
 #include <array>
 #include <iostream>
 #include <string>
 #include <vector>
-
-namespace rf_owner {
-// Custom Owner class
-class Owner {
-public:
-  // Data members (public)
-  std::string name;
-  int age;
-
-  // Getters and Setters
-  std::string get_name() const { return name; }
-  void set_name(const std::string &val) { name = val; }
-  int get_age() const { return age; }
-  void set_age(int val) { age = val; }
-};
-
-class OwnerV2 {
-public:
-  // Data members (public)
-  std::string name;
-  int age;
-
-  // Getters and Setters
-  std::string get_name() const { return name; }
-  void set_name(const std::string &val) { name = val; }
-  int get_age() const { return age; }
-  void set_age(int val) { age = val; }
-};
-
-namespace nested {
-class OwnerV3 {
-public:
-  // Data members (public)
-  std::string name;
-  int age;
-
-  // Getters and Setters
-  std::string get_name() const { return name; }
-  void set_name(const std::string &val) { name = val; }
-  int get_age() const { return age; }
-  void set_age(int val) { age = val; }
-};
-} // namespace nested
-
-} // namespace rf_owner
-
-class OwnerV4 {
-public:
-  // Data members (public)
-  std::string name;
-  int age;
-
-  // Getters and Setters
-  std::string get_name() const { return name; }
-  void set_name(const std::string &val) { name = val; }
-  int get_age() const { return age; }
-  void set_age(int val) { age = val; }
-};
+#include "../rf_owner/owner.hpp"
 
 namespace rf_pet {
+
 class Pet {
 public:
   // Basic types
@@ -92,7 +38,7 @@ public:
   std::vector<bool> vec_bval;
   std::vector<std::string> vec_s;
 
-  // Custom typs
+  // Custom types
   rf_owner::Owner own;
   // Arrays for custom
   std::array<rf_owner::Owner, 10> arr_own;
@@ -168,4 +114,5 @@ public:
   std::string freeze() const;        // Serialize and return string
   void melt(const std::string &src); // Deserialize from src
 };
-} // namespace rf_pet
+
+} // namespace rf_pet 

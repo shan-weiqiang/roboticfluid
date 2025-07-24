@@ -1,7 +1,7 @@
 #include <sstream>
 #include <string>
 #include <cstring>
-#include "shared_struct.hpp"
+#include "roboticfluid_cpp/rf_pet/pet.hpp"
 
 using namespace rf_owner;
 using namespace rf_pet;

@@ -1,6 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "shared_struct.hpp"
+#include "roboticfluid_cpp/owner_v4.hpp"
 
 PYBIND11_MODULE(owner_v4, m) {
     pybind11::class_<OwnerV4>(m, "OwnerV4")

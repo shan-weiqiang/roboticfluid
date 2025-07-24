@@ -2,13 +2,14 @@ import sys
 import os
 
 # Add the build directory to the Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build', 'roboticfluid', 'lib'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build', 'roboticfluid'))
 
 try:
-    from roboticfluid.rf_owner import Owner, OwnerV2
-    from roboticfluid.rf_pet import Pet
-    from roboticfluid.rf_owner.nested import OwnerV3
-    from roboticfluid import OwnerV4
+    from roboticfluid_py.rf_owner import Owner, OwnerV2
+    from roboticfluid_py.rf_pet import Pet
+    from roboticfluid_py.rf_owner.nested import OwnerV3
+    from roboticfluid_py import OwnerV4
     print("✓ Successfully imported Pet, Owner, OwnerV2, OwnerV3, OwnerV4 classes")
 except ImportError as e:
     print(f"✗ Failed to import: {e}")

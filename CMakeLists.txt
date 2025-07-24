@@ -1,8 +1,17 @@
 cmake_minimum_required(VERSION 3.14)
 project(roboticfluid LANGUAGES CXX)
 
+# Set install prefix to build directory for testing
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/roboticfluid)
+
+# Include GNU tools directory
+include(GNUInstallDirs)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_INSTALL_RPATH $ORIGIN/../)
+
 
 # Fetch pybind11 from GitHub
 include(FetchContent)
@@ -31,59 +40,57 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
-# Library target for C++
-add_library(roboticfluid SHARED
-    src/shared_struct.cpp
+# C++ Library target for roboticfluid types
+add_library(roboticfluid_cpp SHARED
+    src/roboticfluid_cpp/rf_pet/pet.cpp
 )
-target_include_directories(roboticfluid PUBLIC include)
+target_include_directories(roboticfluid_cpp PUBLIC include)
+set_target_properties(roboticfluid_cpp PROPERTIES
+    OUTPUT_NAME "roboticfluid_cpp"
+)
 
 # Python module for roboticfluid.rf_owner
 pybind11_add_module(roboticfluid_rf_owner
-    src/roboticfluid/rf_owner/module.cpp
-    src/roboticfluid/rf_owner/owner.cpp
-    src/roboticfluid/rf_owner/owner_v2.cpp
-    src/roboticfluid/rf_owner/nested.cpp
-    src/roboticfluid/rf_owner/nested/owner_v3.cpp
+    src/roboticfluid_py/rf_owner.cpp
+    src/roboticfluid_py/rf_owner/owner.cpp
+    src/roboticfluid_py/rf_owner/owner_v2.cpp
+    src/roboticfluid_py/rf_owner/nested.cpp
+    src/roboticfluid_py/rf_owner/nested/owner_v3.cpp
 )
 target_include_directories(roboticfluid_rf_owner PRIVATE include)
-target_link_libraries(roboticfluid_rf_owner PRIVATE roboticfluid)
+target_link_libraries(roboticfluid_rf_owner PRIVATE roboticfluid_cpp)
 set_target_properties(roboticfluid_rf_owner PROPERTIES
     PREFIX ""
     OUTPUT_NAME "rf_owner"
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
     SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
 # Python module for roboticfluid.rf_pet
 pybind11_add_module(roboticfluid_rf_pet
-    src/roboticfluid/rf_pet/module.cpp
-    src/roboticfluid/rf_pet/pet.cpp
+    src/roboticfluid_py/rf_pet.cpp
+    src/roboticfluid_py/rf_pet/pet.cpp
 )
 target_include_directories(roboticfluid_rf_pet PRIVATE include)
-target_link_libraries(roboticfluid_rf_pet PRIVATE roboticfluid)
+target_link_libraries(roboticfluid_rf_pet PRIVATE roboticfluid_cpp)
 set_target_properties(roboticfluid_rf_pet PROPERTIES
     PREFIX ""
     OUTPUT_NAME "rf_pet"
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
     SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
 # Python module for roboticfluid.owner_v4 (top-level)
-pybind11_add_module(owner_v4 src/roboticfluid/owner_v4.cpp)
+pybind11_add_module(owner_v4 src/roboticfluid_py/owner_v4.cpp)
 target_include_directories(owner_v4 PRIVATE include)
+target_link_libraries(owner_v4 PRIVATE roboticfluid_cpp)
 set_target_properties(owner_v4 PROPERTIES
     PREFIX ""
     OUTPUT_NAME "owner_v4"
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid
     SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
-# Ensure __init__.py is present in the build/roboticfluid directory
-configure_file(src/roboticfluid/__init__.py ${CMAKE_BINARY_DIR}/roboticfluid/__init__.py COPYONLY)
-
 # Install rules
-install(TARGETS roboticfluid DESTINATION lib)
-install(DIRECTORY include/ DESTINATION include)
-install(FILES src/roboticfluid/__init__.py DESTINATION roboticfluid)
-
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/roboticfluid) 
+install(TARGETS roboticfluid_cpp DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS roboticfluid_rf_owner roboticfluid_rf_pet owner_v4 DESTINATION ${CMAKE_INSTALL_LIBDIR}/roboticfluid_py)
+install(DIRECTORY include/roboticfluid_cpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY typings/roboticfluid_py DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.pyi")
+install(FILES src/roboticfluid_py/__init__.py DESTINATION ${CMAKE_INSTALL_LIBDIR}/roboticfluid_py) 

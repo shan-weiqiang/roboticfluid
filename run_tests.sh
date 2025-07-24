@@ -10,6 +10,7 @@ fi
 cd $BUILD_DIR
 cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 make -j$(nproc)
+make install
 cd ..
 
 echo "\n=== Running basic functionality test ==="

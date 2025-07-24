@@ -1,10 +1,10 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "shared_struct.hpp"
+#include "roboticfluid_cpp/rf_owner/owner_v2.hpp"
 
 namespace rf_owner {
 
-void init_owner_v2(pybind11::module_ &m) {
+void init_type_owner_v2(pybind11::module_ &m) {
     pybind11::class_<OwnerV2>(m, "OwnerV2")
         .def(pybind11::init<>())
         .def_readwrite("name", &OwnerV2::name)

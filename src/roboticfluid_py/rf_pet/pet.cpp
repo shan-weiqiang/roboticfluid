@@ -1,10 +1,10 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "shared_struct.hpp"
+#include "roboticfluid_cpp/rf_pet/pet.hpp"
 
 namespace rf_pet {
 
-void init_pet(pybind11::module_ &m) {
+void init_type_pet(pybind11::module_ &m) {
     pybind11::class_<Pet>(m, "Pet")
         .def(pybind11::init<>())
         .def_readwrite("own", &Pet::own)
