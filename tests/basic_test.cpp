@@ -113,6 +113,90 @@ int main() {
     assert(std::abs(p.get_f() - pet.get_f()) < 1e-6);
     std::cout << "\u2713 Round-trip test passed!\n";
 
+    // Test OwnerV2
+    rf_owner::OwnerV2 ownerv2;
+    ownerv2.set_name("Jane Smith");
+    ownerv2.set_age(33);
+    pet.set_own_v2(ownerv2);
+    std::array<rf_owner::OwnerV2, 10> arr_own_v2;
+    for (int i = 0; i < 10; ++i) {
+        arr_own_v2[i].set_name("ArrOwnerV2" + std::to_string(i));
+        arr_own_v2[i].set_age(100 + i);
+    }
+    pet.set_arr_own_v2(arr_own_v2);
+    std::vector<rf_owner::OwnerV2> vec_own_v2(3);
+    for (int i = 0; i < 3; ++i) {
+        vec_own_v2[i].set_name("VecOwnerV2" + std::to_string(i));
+        vec_own_v2[i].set_age(200 + i);
+    }
+    pet.set_vec_own_v2(vec_own_v2);
+    // Test OwnerV3
+    rf_owner::nested::OwnerV3 ownerv3;
+    ownerv3.set_name("Nested User");
+    ownerv3.set_age(44);
+    pet.set_own_v3(ownerv3);
+    std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3;
+    for (int i = 0; i < 10; ++i) {
+        arr_own_v3[i].set_name("ArrOwnerV3" + std::to_string(i));
+        arr_own_v3[i].set_age(110 + i);
+    }
+    pet.set_arr_own_v3(arr_own_v3);
+    std::vector<rf_owner::nested::OwnerV3> vec_own_v3(3);
+    for (int i = 0; i < 3; ++i) {
+        vec_own_v3[i].set_name("VecOwnerV3" + std::to_string(i));
+        vec_own_v3[i].set_age(210 + i);
+    }
+    pet.set_vec_own_v3(vec_own_v3);
+    // Test OwnerV4
+    OwnerV4 ownerv4;
+    ownerv4.set_name("Top User");
+    ownerv4.set_age(55);
+    pet.set_own_v4(ownerv4);
+    std::array<OwnerV4, 10> arr_own_v4;
+    for (int i = 0; i < 10; ++i) {
+        arr_own_v4[i].set_name("ArrOwnerV4" + std::to_string(i));
+        arr_own_v4[i].set_age(120 + i);
+    }
+    pet.set_arr_own_v4(arr_own_v4);
+    std::vector<OwnerV4> vec_own_v4(3);
+    for (int i = 0; i < 3; ++i) {
+        vec_own_v4[i].set_name("VecOwnerV4" + std::to_string(i));
+        vec_own_v4[i].set_age(220 + i);
+    }
+    pet.set_vec_own_v4(vec_own_v4);
+
+    // After melting, check OwnerV2/3/4 round-trip
+    assert(new_pet.get_own_v2().get_name() == "Jane Smith");
+    assert(new_pet.get_own_v2().get_age() == 33);
+    for (int i = 0; i < 10; ++i) {
+        assert(new_pet.get_arr_own_v2()[i].get_name() == "ArrOwnerV2" + std::to_string(i));
+        assert(new_pet.get_arr_own_v2()[i].get_age() == 100 + i);
+    }
+    for (int i = 0; i < 3; ++i) {
+        assert(new_pet.get_vec_own_v2()[i].get_name() == "VecOwnerV2" + std::to_string(i));
+        assert(new_pet.get_vec_own_v2()[i].get_age() == 200 + i);
+    }
+    assert(new_pet.get_own_v3().get_name() == "Nested User");
+    assert(new_pet.get_own_v3().get_age() == 44);
+    for (int i = 0; i < 10; ++i) {
+        assert(new_pet.get_arr_own_v3()[i].get_name() == "ArrOwnerV3" + std::to_string(i));
+        assert(new_pet.get_arr_own_v3()[i].get_age() == 110 + i);
+    }
+    for (int i = 0; i < 3; ++i) {
+        assert(new_pet.get_vec_own_v3()[i].get_name() == "VecOwnerV3" + std::to_string(i));
+        assert(new_pet.get_vec_own_v3()[i].get_age() == 210 + i);
+    }
+    assert(new_pet.get_own_v4().get_name() == "Top User");
+    assert(new_pet.get_own_v4().get_age() == 55);
+    for (int i = 0; i < 10; ++i) {
+        assert(new_pet.get_arr_own_v4()[i].get_name() == "ArrOwnerV4" + std::to_string(i));
+        assert(new_pet.get_arr_own_v4()[i].get_age() == 120 + i);
+    }
+    for (int i = 0; i < 3; ++i) {
+        assert(new_pet.get_vec_own_v4()[i].get_name() == "VecOwnerV4" + std::to_string(i));
+        assert(new_pet.get_vec_own_v4()[i].get_age() == 220 + i);
+    }
+
     std::cout << "\n\u2713 All basic tests passed!\n";
     return 0;
 } 

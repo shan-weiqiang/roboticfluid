@@ -1,11 +1,14 @@
 #pragma once
 
+#include "../owner_v4.hpp"
+#include "../rf_owner/nested/owner_v3.hpp"
+#include "../rf_owner/owner.hpp"
+#include "../rf_owner/owner_v2.hpp"
+#include "pet_type.hpp"
 #include <array>
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../rf_owner/owner.hpp"
-#include "pet_type.hpp"
 
 namespace rf_pet {
 
@@ -40,11 +43,22 @@ public:
   std::vector<std::string> vec_s;
 
   // Custom types
+  // Owner
   rf_owner::Owner own;
-  // Arrays for custom
   std::array<rf_owner::Owner, 10> arr_own;
-  // Vector for custom
   std::vector<rf_owner::Owner> vec_own;
+  // OwnerV2
+  rf_owner::OwnerV2 own_v2;
+  std::array<rf_owner::OwnerV2, 10> arr_own_v2;
+  std::vector<rf_owner::OwnerV2> vec_own_v2;
+  // OwnerV3
+  rf_owner::nested::OwnerV3 own_v3;
+  std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3;
+  std::vector<rf_owner::nested::OwnerV3> vec_own_v3;
+  // OwnerV4
+  OwnerV4 own_v4;
+  std::array<OwnerV4, 10> arr_own_v4;
+  std::vector<OwnerV4> vec_own_v4;
 
   // Enum types
   PetType pet_type;
@@ -114,18 +128,56 @@ public:
   // Custom type getters/setters
   const rf_owner::Owner &get_own() const { return own; }
   void set_own(const rf_owner::Owner &val) { own = val; }
-  const std::array<rf_owner::Owner, 10> &get_arr_own() const { return arr_own; }
   void set_arr_own(const std::array<rf_owner::Owner, 10> &val) {
     arr_own = val;
   }
   const std::vector<rf_owner::Owner> &get_vec_own() const { return vec_own; }
   void set_vec_own(const std::vector<rf_owner::Owner> &val) { vec_own = val; }
+  const rf_owner::OwnerV2 &get_own_v2() const { return own_v2; }
+  void set_own_v2(const rf_owner::OwnerV2 &val) { own_v2 = val; }
+  const std::array<rf_owner::OwnerV2, 10> &get_arr_own_v2() const {
+    return arr_own_v2;
+  }
+  void set_arr_own_v2(const std::array<rf_owner::OwnerV2, 10> &val) {
+    arr_own_v2 = val;
+  }
+  const std::vector<rf_owner::OwnerV2> &get_vec_own_v2() const {
+    return vec_own_v2;
+  }
+  void set_vec_own_v2(const std::vector<rf_owner::OwnerV2> &val) {
+    vec_own_v2 = val;
+  }
+  const rf_owner::nested::OwnerV3 &get_own_v3() const { return own_v3; }
+  void set_own_v3(const rf_owner::nested::OwnerV3 &val) { own_v3 = val; }
+  const std::array<rf_owner::nested::OwnerV3, 10> &get_arr_own_v3() const {
+    return arr_own_v3;
+  }
+  void set_arr_own_v3(const std::array<rf_owner::nested::OwnerV3, 10> &val) {
+    arr_own_v3 = val;
+  }
+  const std::vector<rf_owner::nested::OwnerV3> &get_vec_own_v3() const {
+    return vec_own_v3;
+  }
+  void set_vec_own_v3(const std::vector<rf_owner::nested::OwnerV3> &val) {
+    vec_own_v3 = val;
+  }
+  const OwnerV4 &get_own_v4() const { return own_v4; }
+  void set_own_v4(const OwnerV4 &val) { own_v4 = val; }
+  const std::array<OwnerV4, 10> &get_arr_own_v4() const { return arr_own_v4; }
+  void set_arr_own_v4(const std::array<OwnerV4, 10> &val) { arr_own_v4 = val; }
+  const std::vector<OwnerV4> &get_vec_own_v4() const { return vec_own_v4; }
+  void set_vec_own_v4(const std::vector<OwnerV4> &val) { vec_own_v4 = val; }
+  const std::array<rf_owner::Owner, 10> &get_arr_own() const { return arr_own; }
 
   // Enum type getters/setters
   PetType get_pet_type() const { return pet_type; }
   void set_pet_type(PetType val) { pet_type = val; }
-  const std::array<PetType, 2> &get_arr_pet_type() const { return arr_pet_type; }
-  void set_arr_pet_type(const std::array<PetType, 2> &val) { arr_pet_type = val; }
+  const std::array<PetType, 2> &get_arr_pet_type() const {
+    return arr_pet_type;
+  }
+  void set_arr_pet_type(const std::array<PetType, 2> &val) {
+    arr_pet_type = val;
+  }
   const std::vector<PetType> &get_vec_pet_type() const { return vec_pet_type; }
   void set_vec_pet_type(const std::vector<PetType> &val) { vec_pet_type = val; }
 
@@ -138,4 +190,4 @@ public:
   void melt(const std::string &src); // Deserialize from src
 };
 
-} // namespace rf_pet 
+} // namespace rf_pet

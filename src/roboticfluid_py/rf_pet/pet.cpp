@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include "roboticfluid_cpp/rf_pet/pet.hpp"
+#include "roboticfluid_cpp/owner_v4.hpp"
 
 namespace rf_pet {
 
@@ -10,6 +11,15 @@ void init_type_pet(pybind11::module_ &m) {
         .def_readwrite("own", &Pet::own)
         .def_readwrite("arr_own", &Pet::arr_own)
         .def_readwrite("vec_own", &Pet::vec_own)
+        .def_readwrite("own_v2", &Pet::own_v2)
+        .def_readwrite("arr_own_v2", &Pet::arr_own_v2)
+        .def_readwrite("vec_own_v2", &Pet::vec_own_v2)
+        .def_readwrite("own_v3", &Pet::own_v3)
+        .def_readwrite("arr_own_v3", &Pet::arr_own_v3)
+        .def_readwrite("vec_own_v3", &Pet::vec_own_v3)
+        .def_readwrite("own_v4", &Pet::own_v4)
+        .def_readwrite("arr_own_v4", &Pet::arr_own_v4)
+        .def_readwrite("vec_own_v4", &Pet::vec_own_v4)
         .def_readwrite("pet_type", &Pet::pet_type)
         .def_readwrite("arr_pet_type", &Pet::arr_pet_type)
         .def_readwrite("vec_pet_type", &Pet::vec_pet_type)
@@ -49,6 +59,24 @@ void init_type_pet(pybind11::module_ &m) {
         .def("set_arr_own", &Pet::set_arr_own)
         .def("get_vec_own", &Pet::get_vec_own, pybind11::return_value_policy::reference_internal)
         .def("set_vec_own", &Pet::set_vec_own)
+        .def("get_own_v2", &Pet::get_own_v2)
+        .def("set_own_v2", &Pet::set_own_v2)
+        .def("get_arr_own_v2", &Pet::get_arr_own_v2, pybind11::return_value_policy::reference_internal)
+        .def("set_arr_own_v2", &Pet::set_arr_own_v2)
+        .def("get_vec_own_v2", &Pet::get_vec_own_v2, pybind11::return_value_policy::reference_internal)
+        .def("set_vec_own_v2", &Pet::set_vec_own_v2)
+        .def("get_own_v3", &Pet::get_own_v3)
+        .def("set_own_v3", &Pet::set_own_v3)
+        .def("get_arr_own_v3", &Pet::get_arr_own_v3, pybind11::return_value_policy::reference_internal)
+        .def("set_arr_own_v3", &Pet::set_arr_own_v3)
+        .def("get_vec_own_v3", &Pet::get_vec_own_v3, pybind11::return_value_policy::reference_internal)
+        .def("set_vec_own_v3", &Pet::set_vec_own_v3)
+        .def("get_own_v4", &Pet::get_own_v4)
+        .def("set_own_v4", &Pet::set_own_v4)
+        .def("get_arr_own_v4", &Pet::get_arr_own_v4, pybind11::return_value_policy::reference_internal)
+        .def("set_arr_own_v4", &Pet::set_arr_own_v4)
+        .def("get_vec_own_v4", &Pet::get_vec_own_v4, pybind11::return_value_policy::reference_internal)
+        .def("set_vec_own_v4", &Pet::set_vec_own_v4)
         .def("get_pet_type", &Pet::get_pet_type)
         .def("set_pet_type", &Pet::set_pet_type)
         .def("get_arr_pet_type", &Pet::get_arr_pet_type, pybind11::return_value_policy::reference_internal)

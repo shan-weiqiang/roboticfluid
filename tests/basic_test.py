@@ -176,4 +176,71 @@ assert ownerv4.get_name() == "Top User"
 assert ownerv4.get_age() == 55
 print("✓ OwnerV4 test passed!")
 
+print("\n=== Testing custom OwnerV2/OwnerV3/OwnerV4 members ===")
+ownerv2 = OwnerV2(); ownerv2.set_name("Jane Smith"); ownerv2.set_age(33)
+ownerv3 = OwnerV3(); ownerv3.set_name("Nested User"); ownerv3.set_age(44)
+ownerv4 = OwnerV4(); ownerv4.set_name("Top User"); ownerv4.set_age(55)
+pet = Pet()
+pet.set_own_v2(ownerv2)
+arr_own_v2 = [OwnerV2() for _ in range(10)]
+for i, o in enumerate(arr_own_v2):
+    o.set_name(f"ArrOwnerV2{i}")
+    o.set_age(100 + i)
+pet.set_arr_own_v2(arr_own_v2)
+vec_own_v2 = [OwnerV2() for _ in range(3)]
+for i, o in enumerate(vec_own_v2):
+    o.set_name(f"VecOwnerV2{i}")
+    o.set_age(200 + i)
+pet.set_vec_own_v2(vec_own_v2)
+pet.set_own_v3(ownerv3)
+arr_own_v3 = [OwnerV3() for _ in range(10)]
+for i, o in enumerate(arr_own_v3):
+    o.set_name(f"ArrOwnerV3{i}")
+    o.set_age(110 + i)
+pet.set_arr_own_v3(arr_own_v3)
+vec_own_v3 = [OwnerV3() for _ in range(3)]
+for i, o in enumerate(vec_own_v3):
+    o.set_name(f"VecOwnerV3{i}")
+    o.set_age(210 + i)
+pet.set_vec_own_v3(vec_own_v3)
+pet.set_own_v4(ownerv4)
+arr_own_v4 = [OwnerV4() for _ in range(10)]
+for i, o in enumerate(arr_own_v4):
+    o.set_name(f"ArrOwnerV4{i}")
+    o.set_age(120 + i)
+pet.set_arr_own_v4(arr_own_v4)
+vec_own_v4 = [OwnerV4() for _ in range(3)]
+for i, o in enumerate(vec_own_v4):
+    o.set_name(f"VecOwnerV4{i}")
+    o.set_age(220 + i)
+pet.set_vec_own_v4(vec_own_v4)
+freezed = pet.freeze()
+new_pet = Pet()
+new_pet.melt(freezed)
+assert new_pet.get_own_v2().get_name() == "Jane Smith"
+assert new_pet.get_own_v2().get_age() == 33
+for i, o in enumerate(new_pet.get_arr_own_v2()):
+    assert o.get_name() == f"ArrOwnerV2{i}"
+    assert o.get_age() == 100 + i
+for i, o in enumerate(new_pet.get_vec_own_v2()):
+    assert o.get_name() == f"VecOwnerV2{i}"
+    assert o.get_age() == 200 + i
+assert new_pet.get_own_v3().get_name() == "Nested User"
+assert new_pet.get_own_v3().get_age() == 44
+for i, o in enumerate(new_pet.get_arr_own_v3()):
+    assert o.get_name() == f"ArrOwnerV3{i}"
+    assert o.get_age() == 110 + i
+for i, o in enumerate(new_pet.get_vec_own_v3()):
+    assert o.get_name() == f"VecOwnerV3{i}"
+    assert o.get_age() == 210 + i
+assert new_pet.get_own_v4().get_name() == "Top User"
+assert new_pet.get_own_v4().get_age() == 55
+for i, o in enumerate(new_pet.get_arr_own_v4()):
+    assert o.get_name() == f"ArrOwnerV4{i}"
+    assert o.get_age() == 120 + i
+for i, o in enumerate(new_pet.get_vec_own_v4()):
+    assert o.get_name() == f"VecOwnerV4{i}"
+    assert o.get_age() == 220 + i
+print("\u2713 Custom OwnerV2/OwnerV3/OwnerV4 members round-trip test passed!")
+
 print("\n✓ All basic tests passed!") 

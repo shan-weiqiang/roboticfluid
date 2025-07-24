@@ -1,5 +1,6 @@
 #include "roboticfluid_cpp/rf_pet/pet.hpp"
 #include "roboticfluid_cpp/common.hpp"
+#include "roboticfluid_cpp/owner_v4.hpp"
 #include <cstring>
 #include <new>
 #include <string>
@@ -76,6 +77,36 @@ std::string Pet::freeze() const {
   sz = static_cast<uint32_t>(vec_own.size());
   out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
   for (const auto &o : vec_own)
+    out.append(o.freeze());
+  // 14. rf_owner::OwnerV2 own_v2
+  out.append(own_v2.freeze());
+  // 15. std::array<rf_owner::OwnerV2, 10> arr_own_v2
+  for (const auto &o : arr_own_v2)
+    out.append(o.freeze());
+  // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
+  sz = static_cast<uint32_t>(vec_own_v2.size());
+  out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
+  for (const auto &o : vec_own_v2)
+    out.append(o.freeze());
+  // 17. rf_owner::nested::OwnerV3 own_v3
+  out.append(own_v3.freeze());
+  // 18. std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3
+  for (const auto &o : arr_own_v3)
+    out.append(o.freeze());
+  // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
+  sz = static_cast<uint32_t>(vec_own_v3.size());
+  out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
+  for (const auto &o : vec_own_v3)
+    out.append(o.freeze());
+  // 20. OwnerV4 own_v4
+  out.append(own_v4.freeze());
+  // 21. std::array<OwnerV4, 10> arr_own_v4
+  for (const auto &o : arr_own_v4)
+    out.append(o.freeze());
+  // 22. std::vector<OwnerV4> vec_own_v4
+  sz = static_cast<uint32_t>(vec_own_v4.size());
+  out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
+  for (const auto &o : vec_own_v4)
     out.append(o.freeze());
   // 14. PetType pet_type (POD, handled by block copy)
   // 15. std::array<PetType, 2> arr_pet_type (POD, handled by block copy)
@@ -198,14 +229,12 @@ void Pet::melt(const std::string &src) {
     size_t consumed = tmp.melt(
         std::string(src.data() + owner_start, src.size() - owner_start));
     new (&own) rf_owner::Owner(
-        std::move(tmp)); // placement new for deserialized object
+        std::move(tmp));
     offset += consumed;
   }
-
   // 12. std::array<rf_owner::Owner, 10> arr_own
   for (size_t i = 0; i < arr_own.size(); ++i) {
-    new (&arr_own[i]) rf_owner::Owner(); // placement new, in case melt is
-                                         // called multiple times
+    new (&arr_own[i]) rf_owner::Owner();
     size_t owner_start = offset;
     rf_owner::Owner tmp;
     size_t consumed = tmp.melt(
@@ -213,7 +242,6 @@ void Pet::melt(const std::string &src) {
     arr_own[i] = std::move(tmp);
     offset += consumed;
   }
-
   // 13. std::vector<rf_owner::Owner> vec_own
   std::memcpy(&sz, &src[offset], sizeof(sz));
   offset += sizeof(sz);
@@ -227,7 +255,102 @@ void Pet::melt(const std::string &src) {
     offset += consumed;
   }
   new (&vec_own) std::vector<rf_owner::Owner>(std::move(vec_own_tmp));
-
+  // 14. rf_owner::OwnerV2 own_v2
+  {
+    size_t owner_start = offset;
+    rf_owner::OwnerV2 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    new (&own_v2) rf_owner::OwnerV2(std::move(tmp));
+    offset += consumed;
+  }
+  // 15. std::array<rf_owner::OwnerV2, 10> arr_own_v2
+  for (size_t i = 0; i < arr_own_v2.size(); ++i) {
+    new (&arr_own_v2[i]) rf_owner::OwnerV2();
+    size_t owner_start = offset;
+    rf_owner::OwnerV2 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    arr_own_v2[i] = std::move(tmp);
+    offset += consumed;
+  }
+  // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
+  std::memcpy(&sz, &src[offset], sizeof(sz));
+  offset += sizeof(sz);
+  std::vector<rf_owner::OwnerV2> vec_own_v2_tmp(sz);
+  for (uint32_t i = 0; i < sz; ++i) {
+    size_t owner_start = offset;
+    rf_owner::OwnerV2 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    vec_own_v2_tmp[i] = std::move(tmp);
+    offset += consumed;
+  }
+  new (&vec_own_v2) std::vector<rf_owner::OwnerV2>(std::move(vec_own_v2_tmp));
+  // 17. rf_owner::nested::OwnerV3 own_v3
+  {
+    size_t owner_start = offset;
+    rf_owner::nested::OwnerV3 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    new (&own_v3) rf_owner::nested::OwnerV3(std::move(tmp));
+    offset += consumed;
+  }
+  // 18. std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3
+  for (size_t i = 0; i < arr_own_v3.size(); ++i) {
+    new (&arr_own_v3[i]) rf_owner::nested::OwnerV3();
+    size_t owner_start = offset;
+    rf_owner::nested::OwnerV3 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    arr_own_v3[i] = std::move(tmp);
+    offset += consumed;
+  }
+  // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
+  std::memcpy(&sz, &src[offset], sizeof(sz));
+  offset += sizeof(sz);
+  std::vector<rf_owner::nested::OwnerV3> vec_own_v3_tmp(sz);
+  for (uint32_t i = 0; i < sz; ++i) {
+    size_t owner_start = offset;
+    rf_owner::nested::OwnerV3 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    vec_own_v3_tmp[i] = std::move(tmp);
+    offset += consumed;
+  }
+  new (&vec_own_v3) std::vector<rf_owner::nested::OwnerV3>(std::move(vec_own_v3_tmp));
+  // 20. OwnerV4 own_v4
+  {
+    size_t owner_start = offset;
+    OwnerV4 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    new (&own_v4) OwnerV4(std::move(tmp));
+    offset += consumed;
+  }
+  // 21. std::array<OwnerV4, 10> arr_own_v4
+  for (size_t i = 0; i < arr_own_v4.size(); ++i) {
+    new (&arr_own_v4[i]) OwnerV4();
+    size_t owner_start = offset;
+    OwnerV4 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    arr_own_v4[i] = std::move(tmp);
+    offset += consumed;
+  }
+  // 22. std::vector<OwnerV4> vec_own_v4
+  std::memcpy(&sz, &src[offset], sizeof(sz));
+  offset += sizeof(sz);
+  std::vector<OwnerV4> vec_own_v4_tmp(sz);
+  for (uint32_t i = 0; i < sz; ++i) {
+    size_t owner_start = offset;
+    OwnerV4 tmp;
+    size_t consumed = tmp.melt(
+        std::string(src.data() + owner_start, src.size() - owner_start));
+    vec_own_v4_tmp[i] = std::move(tmp);
+    offset += consumed;
+  }
+  new (&vec_own_v4) std::vector<OwnerV4>(std::move(vec_own_v4_tmp));
   // 14. PetType pet_type (POD, handled by memcpy)
   // 15. std::array<PetType, 2> arr_pet_type (POD, handled by memcpy)
 
