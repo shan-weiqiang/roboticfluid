@@ -54,6 +54,8 @@ std::string rf_pet::Pet::freeze() const {
     for (const auto& pt : vec_pet_type) {
         oss.write(reinterpret_cast<const char*>(&pt), sizeof(pt));
     }
+    // Serialize arr_u8
+    oss.write(reinterpret_cast<const char*>(arr_u8.data()), arr_u8.size() * sizeof(uint8_t));
     return oss.str();
 }
 
@@ -91,4 +93,6 @@ void rf_pet::Pet::melt(const std::string& src) {
     for (auto& pt : vec_pet_type) {
         iss.read(reinterpret_cast<char*>(&pt), sizeof(pt));
     }
+    // Deserialize arr_u8
+    iss.read(reinterpret_cast<char*>(arr_u8.data()), arr_u8.size() * sizeof(uint8_t));
 } 

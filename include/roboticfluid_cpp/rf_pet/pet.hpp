@@ -53,6 +53,9 @@ public:
   // Vector for enum
   std::vector<PetType> vec_pet_type;
 
+  // New member: array of uint8_t
+  std::array<uint8_t, 100> arr_u8;
+
   // Methods (all public)
   void bark() { std::cout << s << " barks!\n"; }
 
@@ -125,6 +128,10 @@ public:
   void set_arr_pet_type(const std::array<PetType, 2> &val) { arr_pet_type = val; }
   const std::vector<PetType> &get_vec_pet_type() const { return vec_pet_type; }
   void set_vec_pet_type(const std::vector<PetType> &val) { vec_pet_type = val; }
+
+  // arr_u8 getter/setter
+  const std::array<uint8_t, 100> &get_arr_u8() const { return arr_u8; }
+  void set_arr_u8(const std::array<uint8_t, 100> &val) { arr_u8 = val; }
 
   // Serialization
   std::string freeze() const;        // Serialize and return string

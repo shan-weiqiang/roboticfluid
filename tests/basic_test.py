@@ -50,6 +50,10 @@ pet.set_vec_u64([30000, 40000])
 pet.set_vec_bval([False, True, True])
 pet.set_vec_s(["x", "y", "z"])
 
+# Set arr_u8
+pet.set_arr_u8([i for i in range(100)])
+print(f"Pet arr_u8: {pet.get_arr_u8()[:10]} ... (len={len(pet.get_arr_u8())})")
+
 print(f"Created pet: {pet.get_s()} (age: {pet.get_i32()}, weight: {pet.get_f()})")
 print(f"Pet owner: {pet.get_own().get_name()}")
 print(f"Pet tricks: {pet.get_vec_s()}")
@@ -78,6 +82,8 @@ new_pet = Pet()
 new_pet.melt(freezed)
 print(f"Melted s: {new_pet.get_s()}")
 print(f"Melted i32: {new_pet.get_i32()}")
+print(f"Melted arr_u8[:10]: {new_pet.get_arr_u8()[:10]}")
+assert new_pet.get_arr_u8() == [i for i in range(100)]
 
 print("\n=== Testing round-trip freezing/melting ===")
 pet.set_s("Fido")
