@@ -13,7 +13,9 @@ void init_type_owner_v3(pybind11::module_ &m) {
         .def("get_name", &OwnerV3::get_name)
         .def("set_name", &OwnerV3::set_name)
         .def("get_age", &OwnerV3::get_age)
-        .def("set_age", &OwnerV3::set_age);
+        .def("set_age", &OwnerV3::set_age)
+        .def("freeze", &OwnerV3::freeze)
+        .def("melt", &OwnerV3::melt);
 }
 
 } // namespace nested

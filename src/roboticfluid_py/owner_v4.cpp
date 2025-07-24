@@ -10,5 +10,7 @@ PYBIND11_MODULE(owner_v4, m) {
         .def("get_name", &OwnerV4::get_name)
         .def("set_name", &OwnerV4::set_name)
         .def("get_age", &OwnerV4::get_age)
-        .def("set_age", &OwnerV4::set_age);
+        .def("set_age", &OwnerV4::set_age)
+        .def("freeze", &OwnerV4::freeze)
+        .def("melt", &OwnerV4::melt);
 } 

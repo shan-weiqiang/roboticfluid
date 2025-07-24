@@ -12,7 +12,9 @@ void init_type_owner_v2(pybind11::module_ &m) {
         .def("get_name", &OwnerV2::get_name)
         .def("set_name", &OwnerV2::set_name)
         .def("get_age", &OwnerV2::get_age)
-        .def("set_age", &OwnerV2::set_age);
+        .def("set_age", &OwnerV2::set_age)
+        .def("freeze", &OwnerV2::freeze)
+        .def("melt", &OwnerV2::melt);
 }
 
 } // namespace rf_owner 

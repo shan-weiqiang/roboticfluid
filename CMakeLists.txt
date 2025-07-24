@@ -44,6 +44,9 @@ execute_process(
 add_library(roboticfluid_cpp SHARED
     src/roboticfluid_cpp/rf_pet/pet.cpp
     src/roboticfluid_cpp/rf_owner/owner.cpp
+    src/roboticfluid_cpp/rf_owner/owner_v2.cpp
+    src/roboticfluid_cpp/rf_owner/nested/owner_v3.cpp
+    src/roboticfluid_cpp/owner_v4.cpp
 )
 target_include_directories(roboticfluid_cpp PUBLIC include)
 set_target_properties(roboticfluid_cpp PROPERTIES
