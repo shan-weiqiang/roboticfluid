@@ -7,10 +7,10 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'build', 'robot
 
 try:
     from roboticfluid_py.rf_owner import Owner, OwnerV2
-    from roboticfluid_py.rf_pet import Pet
+    from roboticfluid_py.rf_pet import Pet, PetType
     from roboticfluid_py.rf_owner.nested import OwnerV3
     from roboticfluid_py import OwnerV4
-    print("✓ Successfully imported Pet, Owner, OwnerV2, OwnerV3, OwnerV4 classes")
+    print("✓ Successfully imported Pet, Owner, OwnerV2, OwnerV3, OwnerV4 classes and PetType enum")
 except ImportError as e:
     print(f"✗ Failed to import: {e}")
     sys.exit(1)
@@ -54,6 +54,14 @@ print(f"Created pet: {pet.get_s()} (age: {pet.get_i32()}, weight: {pet.get_f()})
 print(f"Pet owner: {pet.get_own().get_name()}")
 print(f"Pet tricks: {pet.get_vec_s()}")
 print(f"Pet favorite numbers: {pet.get_arr_i32()}")
+
+# Test enum functionality
+pet.set_pet_type(PetType.DOG)
+pet.set_arr_pet_type([PetType.CAT, PetType.BIRD])
+pet.set_vec_pet_type([PetType.FISH, PetType.HAMSTER, PetType.RABBIT])
+print(f"Pet type: {pet.get_pet_type()}")
+print(f"Pet type array: {pet.get_arr_pet_type()}")
+print(f"Pet type vector: {pet.get_vec_pet_type()}")
 
 # Test the bark method
 print("\nTesting bark method:")
@@ -119,6 +127,19 @@ for i, o in enumerate(vec_owners_new):
     assert o.get_name() == f"VecOwner{i}"
     assert o.get_age() == 200 + i
 print("✓ Custom Owner members round-trip test passed!")
+
+print("\n=== Testing PetType enum round-trip ===")
+pet = Pet()
+pet.set_pet_type(PetType.SNAKE)
+pet.set_arr_pet_type([PetType.LIZARD, PetType.FERRET])
+pet.set_vec_pet_type([PetType.GUINEA_PIG, PetType.DOG, PetType.CAT])
+freezed = pet.freeze()
+new_pet = Pet()
+new_pet.melt(freezed)
+assert new_pet.get_pet_type() == PetType.SNAKE
+assert new_pet.get_arr_pet_type() == [PetType.LIZARD, PetType.FERRET]
+assert new_pet.get_vec_pet_type() == [PetType.GUINEA_PIG, PetType.DOG, PetType.CAT]
+print("✓ PetType enum round-trip test passed!")
 
 print("\n=== Testing OwnerV2 ===")
 ownerv2 = OwnerV2()

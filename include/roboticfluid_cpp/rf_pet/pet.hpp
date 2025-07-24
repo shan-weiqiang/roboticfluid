@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "../rf_owner/owner.hpp"
+#include "pet_type.hpp"
 
 namespace rf_pet {
 
@@ -44,6 +45,13 @@ public:
   std::array<rf_owner::Owner, 10> arr_own;
   // Vector for custom
   std::vector<rf_owner::Owner> vec_own;
+
+  // Enum types
+  PetType pet_type;
+  // Arrays for enum
+  std::array<PetType, 2> arr_pet_type;
+  // Vector for enum
+  std::vector<PetType> vec_pet_type;
 
   // Methods (all public)
   void bark() { std::cout << s << " barks!\n"; }
@@ -109,6 +117,14 @@ public:
   }
   const std::vector<rf_owner::Owner> &get_vec_own() const { return vec_own; }
   void set_vec_own(const std::vector<rf_owner::Owner> &val) { vec_own = val; }
+
+  // Enum type getters/setters
+  PetType get_pet_type() const { return pet_type; }
+  void set_pet_type(PetType val) { pet_type = val; }
+  const std::array<PetType, 2> &get_arr_pet_type() const { return arr_pet_type; }
+  void set_arr_pet_type(const std::array<PetType, 2> &val) { arr_pet_type = val; }
+  const std::vector<PetType> &get_vec_pet_type() const { return vec_pet_type; }
+  void set_vec_pet_type(const std::vector<PetType> &val) { vec_pet_type = val; }
 
   // Serialization
   std::string freeze() const;        // Serialize and return string

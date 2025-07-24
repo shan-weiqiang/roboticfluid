@@ -69,6 +69,7 @@ set_target_properties(roboticfluid_rf_owner PROPERTIES
 pybind11_add_module(roboticfluid_rf_pet
     src/roboticfluid_py/rf_pet.cpp
     src/roboticfluid_py/rf_pet/pet.cpp
+    src/roboticfluid_py/rf_pet/pet_type.cpp
 )
 target_include_directories(roboticfluid_rf_pet PRIVATE include)
 target_link_libraries(roboticfluid_rf_pet PRIVATE roboticfluid_cpp)
@@ -92,5 +93,5 @@ set_target_properties(owner_v4 PROPERTIES
 install(TARGETS roboticfluid_cpp DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(TARGETS roboticfluid_rf_owner roboticfluid_rf_pet owner_v4 DESTINATION ${CMAKE_INSTALL_LIBDIR}/roboticfluid_py)
 install(DIRECTORY include/roboticfluid_cpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.hpp")
-install(DIRECTORY typings/roboticfluid_py DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.pyi")
+install(DIRECTORY include/roboticfluid_py DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.pyi")
 install(FILES src/roboticfluid_py/__init__.py DESTINATION ${CMAKE_INSTALL_LIBDIR}/roboticfluid_py) 

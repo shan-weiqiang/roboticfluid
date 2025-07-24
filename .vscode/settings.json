@@ -1,0 +1,5 @@
+{
+  "python.languageServer": "None",
+  "python.autoComplete.extraPaths": ["./include", "./build", "./build/roboticfluid/lib"],
+  "python.analysis.extraPaths": ["./include", "./build", "./build/roboticfluid/lib"]
+}

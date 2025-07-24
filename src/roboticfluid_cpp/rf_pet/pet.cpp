@@ -42,6 +42,18 @@ std::string rf_pet::Pet::freeze() const {
         write_string(oss, o.name);
         oss.write(reinterpret_cast<const char*>(&o.age), sizeof(o.age));
     }
+    // Serialize enum types
+    oss.write(reinterpret_cast<const char*>(&pet_type), sizeof(pet_type));
+    // Serialize arr_pet_type
+    for (const auto& pt : arr_pet_type) {
+        oss.write(reinterpret_cast<const char*>(&pt), sizeof(pt));
+    }
+    // Serialize vec_pet_type
+    sz = static_cast<uint32_t>(vec_pet_type.size());
+    oss.write(reinterpret_cast<const char*>(&sz), sizeof(sz));
+    for (const auto& pt : vec_pet_type) {
+        oss.write(reinterpret_cast<const char*>(&pt), sizeof(pt));
+    }
     return oss.str();
 }
 
@@ -66,5 +78,17 @@ void rf_pet::Pet::melt(const std::string& src) {
     for (auto& o : vec_own) {
         read_string(iss, o.name);
         iss.read(reinterpret_cast<char*>(&o.age), sizeof(o.age));
+    }
+    // Deserialize enum types
+    iss.read(reinterpret_cast<char*>(&pet_type), sizeof(pet_type));
+    // Deserialize arr_pet_type
+    for (auto& pt : arr_pet_type) {
+        iss.read(reinterpret_cast<char*>(&pt), sizeof(pt));
+    }
+    // Deserialize vec_pet_type
+    iss.read(reinterpret_cast<char*>(&sz), sizeof(sz));
+    vec_pet_type.resize(sz);
+    for (auto& pt : vec_pet_type) {
+        iss.read(reinterpret_cast<char*>(&pt), sizeof(pt));
     }
 } 

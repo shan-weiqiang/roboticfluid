@@ -1,10 +1,25 @@
 from typing import Any, List
-from roboticfluid.rf_owner import Owner
+from roboticfluid_py.rf_owner import Owner
+
+class PetType:
+    DOG: int
+    CAT: int
+    BIRD: int
+    FISH: int
+    HAMSTER: int
+    RABBIT: int
+    SNAKE: int
+    LIZARD: int
+    FERRET: int
+    GUINEA_PIG: int
 
 class Pet:
     own: Owner
     arr_own: List[Owner]
     vec_own: List[Owner]
+    pet_type: PetType
+    arr_pet_type: List[PetType]
+    vec_pet_type: List[PetType]
     d: float
     f: float
     i32: int
@@ -40,6 +55,12 @@ class Pet:
     def set_arr_own(self, val: List[Owner]) -> None: ...
     def get_vec_own(self) -> List[Owner]: ...
     def set_vec_own(self, val: List[Owner]) -> None: ...
+    def get_pet_type(self) -> PetType: ...
+    def set_pet_type(self, val: PetType) -> None: ...
+    def get_arr_pet_type(self) -> List[PetType]: ...
+    def set_arr_pet_type(self, val: List[PetType]) -> None: ...
+    def get_vec_pet_type(self) -> List[PetType]: ...
+    def set_vec_pet_type(self, val: List[PetType]) -> None: ...
     def get_d(self) -> float: ...
     def set_d(self, val: float) -> None: ...
     def get_f(self) -> float: ...
