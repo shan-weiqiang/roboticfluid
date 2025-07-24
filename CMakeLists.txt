@@ -43,6 +43,7 @@ execute_process(
 # C++ Library target for roboticfluid types
 add_library(roboticfluid_cpp SHARED
     src/roboticfluid_cpp/rf_pet/pet.cpp
+    src/roboticfluid_cpp/rf_owner/owner.cpp
 )
 target_include_directories(roboticfluid_cpp PUBLIC include)
 set_target_properties(roboticfluid_cpp PROPERTIES
@@ -88,6 +89,13 @@ set_target_properties(owner_v4 PROPERTIES
     OUTPUT_NAME "owner_v4"
     SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
+
+# Add C++ test for freeze/melt debugging
+add_executable(basic_test tests/basic_test.cpp)
+target_include_directories(basic_test PRIVATE include)
+target_link_libraries(basic_test PRIVATE roboticfluid_cpp)
+set_target_properties(basic_test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+
 
 # Install rules
 install(TARGETS roboticfluid_cpp DESTINATION ${CMAKE_INSTALL_LIBDIR})

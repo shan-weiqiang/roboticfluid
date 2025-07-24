@@ -74,7 +74,9 @@ pet.bark()
 # Test freezing
 print("\n=== Testing freezing ===")
 freezed = pet.freeze()
-print(f"Freezed pet: {freezed}")
+# Ensure freeze returns bytes (not str)
+assert isinstance(freezed, bytes), "freeze() should return bytes"
+print(f"Freezed pet: {freezed[:16]}... (type: {type(freezed)})")  # Only print first 16 bytes for brevity
 
 # Test melting
 print("\n=== Testing melting ===")
