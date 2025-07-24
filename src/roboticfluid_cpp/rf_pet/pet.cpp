@@ -1,27 +1,11 @@
 #include "roboticfluid_cpp/rf_pet/pet.hpp"
+#include "roboticfluid_cpp/common.hpp"
 #include <cstring>
 #include <new>
 #include <string>
 
 using namespace rf_owner;
 using namespace rf_pet;
-
-// Helper to write a length-prefixed string
-static void write_string(std::string &out, const std::string &s) {
-  uint32_t len = static_cast<uint32_t>(s.size());
-  out.append(reinterpret_cast<const char *>(&len), sizeof(len));
-  out.append(s.data(), len);
-}
-
-// Helper to read a length-prefixed string
-static void read_string(const std::string &src, size_t &offset,
-                        std::string &s) {
-  uint32_t len = 0;
-  std::memcpy(&len, &src[offset], sizeof(len));
-  offset += sizeof(len);
-  s.assign(&src[offset], len);
-  offset += len;
-}
 
 std::string Pet::freeze() const {
   // 1. Block copy the entire object (shallow copy, including pointers in
@@ -31,10 +15,10 @@ std::string Pet::freeze() const {
 
   // 2. Serialize all dynamic members in the exact order of appearance
   // 1. std::string s
-  write_string(out, s);
+  rf_common::write_string(out, s);
   // 2. std::array<std::string, 2> arr_s
   for (const auto &s_ : arr_s)
-    write_string(out, s_);
+    rf_common::write_string(out, s_);
   // 3. std::vector<double> vec_d
   uint32_t sz = static_cast<uint32_t>(vec_d.size());
   out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
@@ -82,7 +66,7 @@ std::string Pet::freeze() const {
   sz = static_cast<uint32_t>(vec_s.size());
   out.append(reinterpret_cast<const char *>(&sz), sizeof(sz));
   for (const auto &s_ : vec_s)
-    write_string(out, s_);
+    rf_common::write_string(out, s_);
   // 11. rf_owner::Owner own
   out.append(own.freeze());
   // 12. std::array<rf_owner::Owner, 10> arr_own
@@ -113,13 +97,13 @@ void Pet::melt(const std::string &src) {
 
   // 1. std::string s
   std::string s_tmp;
-  read_string(src, offset, s_tmp);
+  rf_common::read_string(src, offset, s_tmp);
   new (&s) std::string(std::move(s_tmp));
 
   // 2. std::array<std::string, 2> arr_s
   for (size_t i = 0; i < arr_s.size(); ++i) {
     std::string arr_s_tmp;
-    read_string(src, offset, arr_s_tmp);
+    rf_common::read_string(src, offset, arr_s_tmp);
     new (&arr_s[i]) std::string(std::move(arr_s_tmp));
   }
 
@@ -202,7 +186,7 @@ void Pet::melt(const std::string &src) {
   std::vector<std::string> vec_s_tmp(sz);
   for (uint32_t i = 0; i < sz; ++i) {
     std::string s_tmp;
-    read_string(src, offset, s_tmp);
+    rf_common::read_string(src, offset, s_tmp);
     new (&vec_s_tmp[i]) std::string(std::move(s_tmp));
   }
   new (&vec_s) std::vector<std::string>(std::move(vec_s_tmp));

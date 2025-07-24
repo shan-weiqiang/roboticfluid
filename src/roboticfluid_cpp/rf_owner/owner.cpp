@@ -1,32 +1,16 @@
 #include "roboticfluid_cpp/rf_owner/owner.hpp"
+#include "roboticfluid_cpp/common.hpp"
 #include <cstring>
 #include <string>
 
 namespace rf_owner {
-
-// Helper to write a length-prefixed string
-static void write_string(std::string &out, const std::string &s) {
-  uint32_t len = static_cast<uint32_t>(s.size());
-  out.append(reinterpret_cast<const char *>(&len), sizeof(len));
-  out.append(s.data(), len);
-}
-
-// Helper to read a length-prefixed string
-static void read_string(const std::string &src, size_t &offset,
-                        std::string &s) {
-  uint32_t len = 0;
-  std::memcpy(&len, &src[offset], sizeof(len));
-  offset += sizeof(len);
-  s.assign(&src[offset], len);
-  offset += len;
-}
 
 std::string Owner::freeze() const {
   // Block copy the entire object (shallow copy, including pointer in name)
   std::string out(sizeof(Owner), '\0');
   std::memcpy(&out[0], this, sizeof(Owner));
   // Serialize dynamic member: std::string name
-  write_string(out, name);
+  rf_common::write_string(out, name);
   // int age is POD, already handled by block copy
   return out;
 }
@@ -37,7 +21,7 @@ size_t Owner::melt(const std::string &src) {
   size_t offset = sizeof(Owner);
   // std::string name
   std::string name_tmp;
-  read_string(src, offset, name_tmp);
+  rf_common::read_string(src, offset, name_tmp);
   new (&name) std::string(std::move(name_tmp));
   // int age is POD, already handled by memcpy
   return offset;
