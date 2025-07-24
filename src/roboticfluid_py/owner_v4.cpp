@@ -11,6 +11,8 @@ PYBIND11_MODULE(owner_v4, m) {
         .def("set_name", &OwnerV4::set_name)
         .def("get_age", &OwnerV4::get_age)
         .def("set_age", &OwnerV4::set_age)
-        .def("freeze", &OwnerV4::freeze)
-        .def("melt", &OwnerV4::melt);
+        .def("freeze", [](const OwnerV4& self) { return pybind11::bytes(self.freeze()); })
+        .def("melt", [](OwnerV4& self, const pybind11::bytes& src) {
+            return self.melt(std::string(src));
+        });
 } 

@@ -14,4 +14,4 @@ make install
 cd ..
 
 echo "\n=== Running basic functionality test ==="
-PYTHONPATH=build python3 tests/basic_test.py
+./tests/run_all_python_tests.sh
