@@ -5,14 +5,14 @@
 
 namespace rf_owner {
 
-std::string OwnerV2::freeze() const {
+std::string OwnerV2::dump() const {
   std::string out(sizeof(OwnerV2), '\0');
   std::memcpy(&out[0], this, sizeof(OwnerV2));
   rf_common::write_string(out, name);
   return out;
 }
 
-size_t OwnerV2::melt(const std::string &src) {
+size_t OwnerV2::load(const std::string &src) {
   this->~OwnerV2();
   std::memcpy(this, src.data(), sizeof(OwnerV2));
   size_t offset = sizeof(OwnerV2);

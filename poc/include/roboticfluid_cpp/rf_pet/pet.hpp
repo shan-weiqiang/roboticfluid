@@ -186,8 +186,8 @@ public:
   void set_arr_u8(const std::array<uint8_t, 100> &val) { arr_u8 = val; }
 
   // Serialization
-  std::string freeze() const;        // Serialize and return string
-  void melt(const std::string &src); // Deserialize from src
+  std::string dump() const;        // Serialize and return string
+  void load(const std::string &src); // Deserialize from src
 };
 
 } // namespace rf_pet

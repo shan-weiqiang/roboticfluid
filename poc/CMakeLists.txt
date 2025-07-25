@@ -93,7 +93,7 @@ set_target_properties(owner_v4 PROPERTIES
     SUFFIX "${PYTHON_EXT_SUFFIX}"
 )
 
-# Add C++ test for freeze/melt debugging
+# Add C++ test for dump/load debugging
 add_executable(basic_test tests/basic_test.cpp)
 target_include_directories(basic_test PRIVATE include)
 target_link_libraries(basic_test PRIVATE roboticfluid_cpp)

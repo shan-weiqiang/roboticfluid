@@ -49,9 +49,9 @@ void init_type_pet(pybind11::module_ &m) {
         .def_readwrite("vec_bval", &Pet::vec_bval)
         .def_readwrite("vec_s", &Pet::vec_s)
         .def("bark", &Pet::bark)
-        .def("freeze", [](const Pet& pet) { return pybind11::bytes(pet.freeze()); })
-        .def("melt", [](Pet& pet, const pybind11::bytes& src) {
-            pet.melt(std::string(src));
+        .def("dump", [](const Pet& pet) { return pybind11::bytes(pet.dump()); })
+        .def("load", [](Pet& pet, const pybind11::bytes& src) {
+            pet.load(std::string(src));
         })
         .def("get_own", &Pet::get_own)
         .def("set_own", &Pet::set_own)

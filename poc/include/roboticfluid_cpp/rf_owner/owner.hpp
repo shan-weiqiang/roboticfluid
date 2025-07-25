@@ -18,8 +18,8 @@ public:
   void set_age(int val) { age = val; }
 
   // Serialization
-  std::string freeze() const;
-  size_t melt(const std::string& src);
+  std::string dump() const;
+  size_t load(const std::string& src);
 };
 
 } // namespace rf_owner 

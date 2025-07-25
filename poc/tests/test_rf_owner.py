@@ -32,18 +32,18 @@ class TestOwner(unittest.TestCase):
     def test_freeze_and_melt(self):
         self.owner.set_name("Alice")
         self.owner.set_age(42)
-        freezed = self.owner.freeze()
+        freezed = self.owner.dump()
         new_owner = Owner()
-        new_owner.melt(freezed)
+        new_owner.load(freezed)
         self.assertEqual(new_owner.get_name(), "Alice")
         self.assertEqual(new_owner.get_age(), 42)
 
         # Edge case: empty name, zero age
         self.owner.set_name("")
         self.owner.set_age(0)
-        freezed = self.owner.freeze()
+        freezed = self.owner.dump()
         new_owner = Owner()
-        new_owner.melt(freezed)
+        new_owner.load(freezed)
         self.assertEqual(new_owner.get_name(), "")
         self.assertEqual(new_owner.get_age(), 0)
 

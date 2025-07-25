@@ -5,7 +5,7 @@
 
 namespace rf_owner {
 
-std::string Owner::freeze() const {
+std::string Owner::dump() const {
   // Block copy the entire object (shallow copy, including pointer in name)
   std::string out(sizeof(Owner), '\0');
   std::memcpy(&out[0], this, sizeof(Owner));
@@ -15,7 +15,7 @@ std::string Owner::freeze() const {
   return out;
 }
 
-size_t Owner::melt(const std::string &src) {
+size_t Owner::load(const std::string &src) {
   this->~Owner();
   std::memcpy(this, src.data(), sizeof(Owner));
   size_t offset = sizeof(Owner);

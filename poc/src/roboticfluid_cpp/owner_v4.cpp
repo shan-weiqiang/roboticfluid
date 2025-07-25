@@ -3,14 +3,14 @@
 #include <cstring>
 #include <string>
 
-std::string OwnerV4::freeze() const {
+std::string OwnerV4::dump() const {
   std::string out(sizeof(OwnerV4), '\0');
   std::memcpy(&out[0], this, sizeof(OwnerV4));
   rf_common::write_string(out, name);
   return out;
 }
 
-size_t OwnerV4::melt(const std::string &src) {
+size_t OwnerV4::load(const std::string &src) {
   this->~OwnerV4();
   std::memcpy(this, src.data(), sizeof(OwnerV4));
   size_t offset = sizeof(OwnerV4);

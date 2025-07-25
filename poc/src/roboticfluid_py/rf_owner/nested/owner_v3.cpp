@@ -14,9 +14,9 @@ void init_type_owner_v3(pybind11::module_ &m) {
         .def("set_name", &OwnerV3::set_name)
         .def("get_age", &OwnerV3::get_age)
         .def("set_age", &OwnerV3::set_age)
-        .def("freeze", [](const OwnerV3& self) { return pybind11::bytes(self.freeze()); })
-        .def("melt", [](OwnerV3& self, const pybind11::bytes& src) {
-            return self.melt(std::string(src));
+        .def("dump", [](const OwnerV3& self) { return pybind11::bytes(self.dump()); })
+        .def("load", [](OwnerV3& self, const pybind11::bytes& src) {
+            return self.load(std::string(src));
         });
 }
 
