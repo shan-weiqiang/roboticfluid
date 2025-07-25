@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package benchmark.pb;
+
+// Enum for PetType
+enum PetType {
+  DOG = 0;
+  CAT = 1;
+  BIRD = 2;
+  FISH = 3;
+  HAMSTER = 4;
+  RABBIT = 5;
+  SNAKE = 6;
+  LIZARD = 7;
+  FERRET = 8;
+  GUINEA_PIG = 9;
+}
+
+// Owner definitions
+message Owner {
+  string name = 1;
+  int32 age = 2;
+}
+
+message OwnerV2 {
+  string name = 1;
+  int32 age = 2;
+}
+
+message OwnerV3 {
+  string name = 1;
+  int32 age = 2;
+}
+
+message OwnerV4 {
+  string name = 1;
+  int32 age = 2;
+}
+
+// Pet definition
+message Pet {
+  double d = 1;
+  float f = 2;
+  int32 i32 = 3;
+  int64 i64 = 4;
+  uint32 u32 = 5;
+  uint64 u64 = 6;
+  bool bval = 7;
+  string s = 8;
+
+  repeated double arr_d = 9; // size 2
+  repeated float arr_f = 10; // size 2
+  repeated int32 arr_i32 = 11; // size 2
+  repeated int64 arr_i64 = 12; // size 2
+  repeated uint32 arr_u32 = 13; // size 2
+  repeated uint64 arr_u64 = 14; // size 2
+  repeated bool arr_bval = 15; // size 2
+  repeated string arr_s = 16; // size 2
+
+  repeated double vec_d = 17;
+  repeated float vec_f = 18;
+  repeated int32 vec_i32 = 19;
+  repeated int64 vec_i64 = 20;
+  repeated uint32 vec_u32 = 21;
+  repeated uint64 vec_u64 = 22;
+  repeated bool vec_bval = 23;
+  repeated string vec_s = 24;
+
+  Owner own = 25;
+  repeated Owner arr_own = 26; // size 10
+  repeated Owner vec_own = 27;
+
+  OwnerV2 own_v2 = 28;
+  repeated OwnerV2 arr_own_v2 = 29; // size 10
+  repeated OwnerV2 vec_own_v2 = 30;
+
+  OwnerV3 own_v3 = 31;
+  repeated OwnerV3 arr_own_v3 = 32; // size 10
+  repeated OwnerV3 vec_own_v3 = 33;
+
+  OwnerV4 own_v4 = 34;
+  repeated OwnerV4 arr_own_v4 = 35; // size 10
+  repeated OwnerV4 vec_own_v4 = 36;
+
+  PetType pet_type = 37;
+  repeated PetType arr_pet_type = 38; // size 2
+  repeated PetType vec_pet_type = 39;
+
+  bytes arr_u8 = 40; // 100 bytes
+} 
