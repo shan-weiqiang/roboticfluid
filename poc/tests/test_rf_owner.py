@@ -13,9 +13,9 @@ class TestOwner(unittest.TestCase):
 
     def test_set_and_get_name(self):
         self.owner.set_name("John Doe")
-        self.assertEqual(self.owner.get_name(), "John Doe")
+        self.assertEqual(self.owner.get_name().decode('utf-8'), "John Doe")
         self.owner.set_name("")
-        self.assertEqual(self.owner.get_name(), "")
+        self.assertEqual(self.owner.get_name().decode('utf-8'), "")
 
     def test_set_and_get_age(self):
         self.owner.set_age(25)
@@ -35,7 +35,7 @@ class TestOwner(unittest.TestCase):
         freezed = self.owner.dump()
         new_owner = Owner()
         new_owner.load(freezed)
-        self.assertEqual(new_owner.get_name(), "Alice")
+        self.assertEqual(new_owner.get_name().decode('utf-8'), "Alice")
         self.assertEqual(new_owner.get_age(), 42)
 
         # Edge case: empty name, zero age
@@ -44,7 +44,7 @@ class TestOwner(unittest.TestCase):
         freezed = self.owner.dump()
         new_owner = Owner()
         new_owner.load(freezed)
-        self.assertEqual(new_owner.get_name(), "")
+        self.assertEqual(new_owner.get_name().decode('utf-8'), "")
         self.assertEqual(new_owner.get_age(), 0)
 
 

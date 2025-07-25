@@ -9,7 +9,7 @@ void init_type_owner(pybind11::module_ &m) {
         .def(pybind11::init<>())
         .def_readwrite("name", &Owner::name)
         .def_readwrite("age", &Owner::age)
-        .def("get_name", &Owner::get_name)
+        .def("get_name", [](const Owner& self) { return pybind11::bytes(self.get_name()); })
         .def("set_name", &Owner::set_name)
         .def("get_age", &Owner::get_age)
         .def("set_age", &Owner::set_age)

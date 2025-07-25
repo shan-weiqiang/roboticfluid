@@ -121,7 +121,7 @@ class TestPet(unittest.TestCase):
     def test_set_and_get_owner(self):
         self.pet.set_own(self.owner)
         own = self.pet.get_own()
-        self.assertEqual(own.get_name(), "Alice")
+        self.assertEqual(own.get_name().decode('utf-8'), "Alice")
         self.assertEqual(own.get_age(), 30)
 
     def test_set_and_get_arrays(self):
@@ -176,7 +176,7 @@ class TestPet(unittest.TestCase):
         self.assertEqual(new_pet.get_s(), "Fido")
         self.assertEqual(new_pet.get_i32(), 42)
         self.assertAlmostEqual(new_pet.get_f(), 12.5)
-        self.assertEqual(new_pet.get_own().get_name(), "Alice")
+        self.assertEqual(new_pet.get_own().get_name().decode('utf-8'), "Alice")
 
     def test_set_and_get_owner_arrays(self):
         from roboticfluid_py.rf_owner import Owner
@@ -195,7 +195,7 @@ class TestPet(unittest.TestCase):
         arr_owners_new = self.pet.get_arr_own()
         self.assertEqual(len(arr_owners_new), 10)
         for i, o in enumerate(arr_owners_new):
-            self.assertEqual(o.get_name(), f"ArrOwner{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwner{i}")
             self.assertEqual(o.get_age(), 100 + i)
 
     def test_set_and_get_owner_vectors(self):
@@ -210,7 +210,7 @@ class TestPet(unittest.TestCase):
         vec_owners_new = self.pet.get_vec_own()
         self.assertEqual(len(vec_owners_new), 2)
         for i, o in enumerate(vec_owners_new):
-            self.assertEqual(o.get_name(), f"VecOwner{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"VecOwner{i}")
             self.assertEqual(o.get_age(), 200 + i)
 
     def test_type_errors(self):
@@ -230,7 +230,7 @@ class TestPet(unittest.TestCase):
         o.set_age(11)
         self.pet.set_own(o)
         got = self.pet.get_own()
-        self.assertEqual(got.get_name(), "TestOwner")
+        self.assertEqual(got.get_name().decode('utf-8'), "TestOwner")
         self.assertEqual(got.get_age(), 11)
 
     def test_arr_own(self):
@@ -245,7 +245,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_arr_own()
         self.assertEqual(len(got), 10)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"ArrOwner{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwner{i}")
             self.assertEqual(o.get_age(), i)
 
     def test_vec_own(self):
@@ -260,7 +260,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_vec_own()
         self.assertEqual(len(got), 3)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"VecOwner{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"VecOwner{i}")
             self.assertEqual(o.get_age(), i+10)
 
     def test_own_v2(self):
@@ -270,7 +270,7 @@ class TestPet(unittest.TestCase):
         o.set_age(22)
         self.pet.set_own_v2(o)
         got = self.pet.get_own_v2()
-        self.assertEqual(got.get_name(), "TestOwnerV2")
+        self.assertEqual(got.get_name().decode('utf-8'), "TestOwnerV2")
         self.assertEqual(got.get_age(), 22)
 
     def test_arr_own_v2(self):
@@ -285,7 +285,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_arr_own_v2()
         self.assertEqual(len(got), 10)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"ArrOwnerV2_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV2_{i}")
             self.assertEqual(o.get_age(), i+20)
 
     def test_vec_own_v2(self):
@@ -300,7 +300,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_vec_own_v2()
         self.assertEqual(len(got), 4)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"VecOwnerV2_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"VecOwnerV2_{i}")
             self.assertEqual(o.get_age(), i+30)
 
     def test_own_v3(self):
@@ -310,7 +310,7 @@ class TestPet(unittest.TestCase):
         o.set_age(33)
         self.pet.set_own_v3(o)
         got = self.pet.get_own_v3()
-        self.assertEqual(got.get_name(), "TestOwnerV3")
+        self.assertEqual(got.get_name().decode('utf-8'), "TestOwnerV3")
         self.assertEqual(got.get_age(), 33)
 
     def test_arr_own_v3(self):
@@ -325,7 +325,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_arr_own_v3()
         self.assertEqual(len(got), 10)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"ArrOwnerV3_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV3_{i}")
             self.assertEqual(o.get_age(), i+40)
 
     def test_vec_own_v3(self):
@@ -340,7 +340,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_vec_own_v3()
         self.assertEqual(len(got), 5)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"VecOwnerV3_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"VecOwnerV3_{i}")
             self.assertEqual(o.get_age(), i+50)
 
     def test_own_v4(self):
@@ -350,7 +350,7 @@ class TestPet(unittest.TestCase):
         o.set_age(44)
         self.pet.set_own_v4(o)
         got = self.pet.get_own_v4()
-        self.assertEqual(got.get_name(), "TestOwnerV4")
+        self.assertEqual(got.get_name().decode('utf-8'), "TestOwnerV4")
         self.assertEqual(got.get_age(), 44)
 
     def test_arr_own_v4(self):
@@ -365,7 +365,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_arr_own_v4()
         self.assertEqual(len(got), 10)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"ArrOwnerV4_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV4_{i}")
             self.assertEqual(o.get_age(), i+60)
 
     def test_vec_own_v4(self):
@@ -380,7 +380,7 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_vec_own_v4()
         self.assertEqual(len(got), 6)
         for i, o in enumerate(got):
-            self.assertEqual(o.get_name(), f"VecOwnerV4_{i}")
+            self.assertEqual(o.get_name().decode('utf-8'), f"VecOwnerV4_{i}")
             self.assertEqual(o.get_age(), i+70)
 
     def test_pet_type(self):
