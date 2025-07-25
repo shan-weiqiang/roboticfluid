@@ -43,14 +43,14 @@ module benchmark {
     boolean bval;
     string s;
 
-    double arr_d[2];
-    float arr_f[2];
-    long arr_i32[2];
-    long long arr_i64[2];
-    unsigned long arr_u32[2];
-    unsigned long long arr_u64[2];
-    boolean arr_bval[2];
-    string arr_s[2];
+    double arr_d[10000];
+    float arr_f[10000];
+    long arr_i32[10000];
+    long long arr_i64[10000];
+    unsigned long arr_u32[10000];
+    unsigned long long arr_u64[10000];
+    boolean arr_bval[10000];
+    string arr_s[10000];
 
     sequence<double> vec_d;
     sequence<float> vec_f;
@@ -62,26 +62,26 @@ module benchmark {
     sequence<string> vec_s;
 
     Owner own;
-    Owner arr_own[10];
+    Owner arr_own[10000];
     sequence<Owner> vec_own;
 
     OwnerV2 own_v2;
-    OwnerV2 arr_own_v2[10];
+    OwnerV2 arr_own_v2[10000];
     sequence<OwnerV2> vec_own_v2;
 
     OwnerV3 own_v3;
-    OwnerV3 arr_own_v3[10];
+    OwnerV3 arr_own_v3[10000];
     sequence<OwnerV3> vec_own_v3;
 
     OwnerV4 own_v4;
-    OwnerV4 arr_own_v4[10];
+    OwnerV4 arr_own_v4[10000];
     sequence<OwnerV4> vec_own_v4;
 
     PetType pet_type;
-    PetType arr_pet_type[2];
+    PetType arr_pet_type[10000];
     sequence<PetType> vec_pet_type;
 
-    octet arr_u8[100];
+    octet arr_u8[10000];
   };
   };
 

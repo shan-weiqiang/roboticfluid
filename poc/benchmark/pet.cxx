@@ -38,7 +38,7 @@ using namespace eprosima::fastcdr::exception;
 #define benchmark_idl_Owner_max_cdr_typesize 264ULL;
 #define benchmark_idl_OwnerV2_max_cdr_typesize 264ULL;
 #define benchmark_idl_OwnerV3_max_cdr_typesize 264ULL;
-#define benchmark_idl_Pet_max_cdr_typesize 148384ULL;
+#define benchmark_idl_Pet_max_cdr_typesize 13717124ULL;
 #define benchmark_idl_OwnerV4_max_cdr_typesize 264ULL;
 
 #define benchmark_idl_Owner_max_key_cdr_typesize 0ULL;
@@ -823,19 +823,19 @@ benchmark::idl::Pet::Pet()
     // string m_s
     m_s ="";
     // double m_arr_d
-    memset(&m_arr_d, 0, (2) * 8);
+    memset(&m_arr_d, 0, (10000) * 8);
     // float m_arr_f
-    memset(&m_arr_f, 0, (2) * 4);
+    memset(&m_arr_f, 0, (10000) * 4);
     // long m_arr_i32
-    memset(&m_arr_i32, 0, (2) * 4);
+    memset(&m_arr_i32, 0, (10000) * 4);
     // long long m_arr_i64
-    memset(&m_arr_i64, 0, (2) * 8);
+    memset(&m_arr_i64, 0, (10000) * 8);
     // unsigned long m_arr_u32
-    memset(&m_arr_u32, 0, (2) * 4);
+    memset(&m_arr_u32, 0, (10000) * 4);
     // unsigned long long m_arr_u64
-    memset(&m_arr_u64, 0, (2) * 8);
+    memset(&m_arr_u64, 0, (10000) * 8);
     // boolean m_arr_bval
-    memset(&m_arr_bval, 0, (2) * 1);
+    memset(&m_arr_bval, 0, (10000) * 1);
     // string m_arr_s
 
     // sequence<double> m_vec_d
@@ -881,11 +881,11 @@ benchmark::idl::Pet::Pet()
     // benchmark::idl::PetType m_pet_type
     m_pet_type = benchmark::idl::DOG;
     // benchmark::idl::PetType m_arr_pet_type
-    memset(&m_arr_pet_type, 0, (2) * 4);
+    memset(&m_arr_pet_type, 0, (10000) * 4);
     // sequence<benchmark::idl::PetType> m_vec_pet_type
 
     // octet m_arr_u8
-    memset(&m_arr_u8, 0, (100) * 1);
+    memset(&m_arr_u8, 0, (10000) * 1);
 
 }
 
@@ -1170,19 +1170,19 @@ size_t benchmark::idl::Pet::getCdrSerializedSize(
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4) + data.s().size() + 1;
 
-    current_alignment += ((2) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+    current_alignment += ((10000) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
-    current_alignment += ((2) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += ((10000) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
-    current_alignment += ((2) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += ((10000) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
-    current_alignment += ((2) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+    current_alignment += ((10000) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
-    current_alignment += ((2) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += ((10000) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
-    current_alignment += ((2) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+    current_alignment += ((10000) * 8) + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
-    current_alignment += ((2) * 1) + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
+    current_alignment += ((10000) * 1) + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
     for(size_t a = 0; a < data.arr_s().size(); ++a)
@@ -1316,7 +1316,7 @@ size_t benchmark::idl::Pet::getCdrSerializedSize(
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
 
-    current_alignment += ((2) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += ((10000) * 4) + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
@@ -1327,7 +1327,7 @@ size_t benchmark::idl::Pet::getCdrSerializedSize(
 
 
 
-    current_alignment += ((100) * 1) + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
+    current_alignment += ((10000) * 1) + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
     return current_alignment - initial_alignment;
@@ -1714,7 +1714,7 @@ std::string& benchmark::idl::Pet::s()
  * @param _arr_d New value to be copied in member arr_d
  */
 void benchmark::idl::Pet::arr_d(
-        const std::array<double, 2>& _arr_d)
+        const std::array<double, 10000>& _arr_d)
 {
     m_arr_d = _arr_d;
 }
@@ -1724,7 +1724,7 @@ void benchmark::idl::Pet::arr_d(
  * @param _arr_d New value to be moved in member arr_d
  */
 void benchmark::idl::Pet::arr_d(
-        std::array<double, 2>&& _arr_d)
+        std::array<double, 10000>&& _arr_d)
 {
     m_arr_d = std::move(_arr_d);
 }
@@ -1733,7 +1733,7 @@ void benchmark::idl::Pet::arr_d(
  * @brief This function returns a constant reference to member arr_d
  * @return Constant reference to member arr_d
  */
-const std::array<double, 2>& benchmark::idl::Pet::arr_d() const
+const std::array<double, 10000>& benchmark::idl::Pet::arr_d() const
 {
     return m_arr_d;
 }
@@ -1742,7 +1742,7 @@ const std::array<double, 2>& benchmark::idl::Pet::arr_d() const
  * @brief This function returns a reference to member arr_d
  * @return Reference to member arr_d
  */
-std::array<double, 2>& benchmark::idl::Pet::arr_d()
+std::array<double, 10000>& benchmark::idl::Pet::arr_d()
 {
     return m_arr_d;
 }
@@ -1751,7 +1751,7 @@ std::array<double, 2>& benchmark::idl::Pet::arr_d()
  * @param _arr_f New value to be copied in member arr_f
  */
 void benchmark::idl::Pet::arr_f(
-        const std::array<float, 2>& _arr_f)
+        const std::array<float, 10000>& _arr_f)
 {
     m_arr_f = _arr_f;
 }
@@ -1761,7 +1761,7 @@ void benchmark::idl::Pet::arr_f(
  * @param _arr_f New value to be moved in member arr_f
  */
 void benchmark::idl::Pet::arr_f(
-        std::array<float, 2>&& _arr_f)
+        std::array<float, 10000>&& _arr_f)
 {
     m_arr_f = std::move(_arr_f);
 }
@@ -1770,7 +1770,7 @@ void benchmark::idl::Pet::arr_f(
  * @brief This function returns a constant reference to member arr_f
  * @return Constant reference to member arr_f
  */
-const std::array<float, 2>& benchmark::idl::Pet::arr_f() const
+const std::array<float, 10000>& benchmark::idl::Pet::arr_f() const
 {
     return m_arr_f;
 }
@@ -1779,7 +1779,7 @@ const std::array<float, 2>& benchmark::idl::Pet::arr_f() const
  * @brief This function returns a reference to member arr_f
  * @return Reference to member arr_f
  */
-std::array<float, 2>& benchmark::idl::Pet::arr_f()
+std::array<float, 10000>& benchmark::idl::Pet::arr_f()
 {
     return m_arr_f;
 }
@@ -1788,7 +1788,7 @@ std::array<float, 2>& benchmark::idl::Pet::arr_f()
  * @param _arr_i32 New value to be copied in member arr_i32
  */
 void benchmark::idl::Pet::arr_i32(
-        const std::array<int32_t, 2>& _arr_i32)
+        const std::array<int32_t, 10000>& _arr_i32)
 {
     m_arr_i32 = _arr_i32;
 }
@@ -1798,7 +1798,7 @@ void benchmark::idl::Pet::arr_i32(
  * @param _arr_i32 New value to be moved in member arr_i32
  */
 void benchmark::idl::Pet::arr_i32(
-        std::array<int32_t, 2>&& _arr_i32)
+        std::array<int32_t, 10000>&& _arr_i32)
 {
     m_arr_i32 = std::move(_arr_i32);
 }
@@ -1807,7 +1807,7 @@ void benchmark::idl::Pet::arr_i32(
  * @brief This function returns a constant reference to member arr_i32
  * @return Constant reference to member arr_i32
  */
-const std::array<int32_t, 2>& benchmark::idl::Pet::arr_i32() const
+const std::array<int32_t, 10000>& benchmark::idl::Pet::arr_i32() const
 {
     return m_arr_i32;
 }
@@ -1816,7 +1816,7 @@ const std::array<int32_t, 2>& benchmark::idl::Pet::arr_i32() const
  * @brief This function returns a reference to member arr_i32
  * @return Reference to member arr_i32
  */
-std::array<int32_t, 2>& benchmark::idl::Pet::arr_i32()
+std::array<int32_t, 10000>& benchmark::idl::Pet::arr_i32()
 {
     return m_arr_i32;
 }
@@ -1825,7 +1825,7 @@ std::array<int32_t, 2>& benchmark::idl::Pet::arr_i32()
  * @param _arr_i64 New value to be copied in member arr_i64
  */
 void benchmark::idl::Pet::arr_i64(
-        const std::array<int64_t, 2>& _arr_i64)
+        const std::array<int64_t, 10000>& _arr_i64)
 {
     m_arr_i64 = _arr_i64;
 }
@@ -1835,7 +1835,7 @@ void benchmark::idl::Pet::arr_i64(
  * @param _arr_i64 New value to be moved in member arr_i64
  */
 void benchmark::idl::Pet::arr_i64(
-        std::array<int64_t, 2>&& _arr_i64)
+        std::array<int64_t, 10000>&& _arr_i64)
 {
     m_arr_i64 = std::move(_arr_i64);
 }
@@ -1844,7 +1844,7 @@ void benchmark::idl::Pet::arr_i64(
  * @brief This function returns a constant reference to member arr_i64
  * @return Constant reference to member arr_i64
  */
-const std::array<int64_t, 2>& benchmark::idl::Pet::arr_i64() const
+const std::array<int64_t, 10000>& benchmark::idl::Pet::arr_i64() const
 {
     return m_arr_i64;
 }
@@ -1853,7 +1853,7 @@ const std::array<int64_t, 2>& benchmark::idl::Pet::arr_i64() const
  * @brief This function returns a reference to member arr_i64
  * @return Reference to member arr_i64
  */
-std::array<int64_t, 2>& benchmark::idl::Pet::arr_i64()
+std::array<int64_t, 10000>& benchmark::idl::Pet::arr_i64()
 {
     return m_arr_i64;
 }
@@ -1862,7 +1862,7 @@ std::array<int64_t, 2>& benchmark::idl::Pet::arr_i64()
  * @param _arr_u32 New value to be copied in member arr_u32
  */
 void benchmark::idl::Pet::arr_u32(
-        const std::array<uint32_t, 2>& _arr_u32)
+        const std::array<uint32_t, 10000>& _arr_u32)
 {
     m_arr_u32 = _arr_u32;
 }
@@ -1872,7 +1872,7 @@ void benchmark::idl::Pet::arr_u32(
  * @param _arr_u32 New value to be moved in member arr_u32
  */
 void benchmark::idl::Pet::arr_u32(
-        std::array<uint32_t, 2>&& _arr_u32)
+        std::array<uint32_t, 10000>&& _arr_u32)
 {
     m_arr_u32 = std::move(_arr_u32);
 }
@@ -1881,7 +1881,7 @@ void benchmark::idl::Pet::arr_u32(
  * @brief This function returns a constant reference to member arr_u32
  * @return Constant reference to member arr_u32
  */
-const std::array<uint32_t, 2>& benchmark::idl::Pet::arr_u32() const
+const std::array<uint32_t, 10000>& benchmark::idl::Pet::arr_u32() const
 {
     return m_arr_u32;
 }
@@ -1890,7 +1890,7 @@ const std::array<uint32_t, 2>& benchmark::idl::Pet::arr_u32() const
  * @brief This function returns a reference to member arr_u32
  * @return Reference to member arr_u32
  */
-std::array<uint32_t, 2>& benchmark::idl::Pet::arr_u32()
+std::array<uint32_t, 10000>& benchmark::idl::Pet::arr_u32()
 {
     return m_arr_u32;
 }
@@ -1899,7 +1899,7 @@ std::array<uint32_t, 2>& benchmark::idl::Pet::arr_u32()
  * @param _arr_u64 New value to be copied in member arr_u64
  */
 void benchmark::idl::Pet::arr_u64(
-        const std::array<uint64_t, 2>& _arr_u64)
+        const std::array<uint64_t, 10000>& _arr_u64)
 {
     m_arr_u64 = _arr_u64;
 }
@@ -1909,7 +1909,7 @@ void benchmark::idl::Pet::arr_u64(
  * @param _arr_u64 New value to be moved in member arr_u64
  */
 void benchmark::idl::Pet::arr_u64(
-        std::array<uint64_t, 2>&& _arr_u64)
+        std::array<uint64_t, 10000>&& _arr_u64)
 {
     m_arr_u64 = std::move(_arr_u64);
 }
@@ -1918,7 +1918,7 @@ void benchmark::idl::Pet::arr_u64(
  * @brief This function returns a constant reference to member arr_u64
  * @return Constant reference to member arr_u64
  */
-const std::array<uint64_t, 2>& benchmark::idl::Pet::arr_u64() const
+const std::array<uint64_t, 10000>& benchmark::idl::Pet::arr_u64() const
 {
     return m_arr_u64;
 }
@@ -1927,7 +1927,7 @@ const std::array<uint64_t, 2>& benchmark::idl::Pet::arr_u64() const
  * @brief This function returns a reference to member arr_u64
  * @return Reference to member arr_u64
  */
-std::array<uint64_t, 2>& benchmark::idl::Pet::arr_u64()
+std::array<uint64_t, 10000>& benchmark::idl::Pet::arr_u64()
 {
     return m_arr_u64;
 }
@@ -1936,7 +1936,7 @@ std::array<uint64_t, 2>& benchmark::idl::Pet::arr_u64()
  * @param _arr_bval New value to be copied in member arr_bval
  */
 void benchmark::idl::Pet::arr_bval(
-        const std::array<bool, 2>& _arr_bval)
+        const std::array<bool, 10000>& _arr_bval)
 {
     m_arr_bval = _arr_bval;
 }
@@ -1946,7 +1946,7 @@ void benchmark::idl::Pet::arr_bval(
  * @param _arr_bval New value to be moved in member arr_bval
  */
 void benchmark::idl::Pet::arr_bval(
-        std::array<bool, 2>&& _arr_bval)
+        std::array<bool, 10000>&& _arr_bval)
 {
     m_arr_bval = std::move(_arr_bval);
 }
@@ -1955,7 +1955,7 @@ void benchmark::idl::Pet::arr_bval(
  * @brief This function returns a constant reference to member arr_bval
  * @return Constant reference to member arr_bval
  */
-const std::array<bool, 2>& benchmark::idl::Pet::arr_bval() const
+const std::array<bool, 10000>& benchmark::idl::Pet::arr_bval() const
 {
     return m_arr_bval;
 }
@@ -1964,7 +1964,7 @@ const std::array<bool, 2>& benchmark::idl::Pet::arr_bval() const
  * @brief This function returns a reference to member arr_bval
  * @return Reference to member arr_bval
  */
-std::array<bool, 2>& benchmark::idl::Pet::arr_bval()
+std::array<bool, 10000>& benchmark::idl::Pet::arr_bval()
 {
     return m_arr_bval;
 }
@@ -1973,7 +1973,7 @@ std::array<bool, 2>& benchmark::idl::Pet::arr_bval()
  * @param _arr_s New value to be copied in member arr_s
  */
 void benchmark::idl::Pet::arr_s(
-        const std::array<std::string, 2>& _arr_s)
+        const std::array<std::string, 10000>& _arr_s)
 {
     m_arr_s = _arr_s;
 }
@@ -1983,7 +1983,7 @@ void benchmark::idl::Pet::arr_s(
  * @param _arr_s New value to be moved in member arr_s
  */
 void benchmark::idl::Pet::arr_s(
-        std::array<std::string, 2>&& _arr_s)
+        std::array<std::string, 10000>&& _arr_s)
 {
     m_arr_s = std::move(_arr_s);
 }
@@ -1992,7 +1992,7 @@ void benchmark::idl::Pet::arr_s(
  * @brief This function returns a constant reference to member arr_s
  * @return Constant reference to member arr_s
  */
-const std::array<std::string, 2>& benchmark::idl::Pet::arr_s() const
+const std::array<std::string, 10000>& benchmark::idl::Pet::arr_s() const
 {
     return m_arr_s;
 }
@@ -2001,7 +2001,7 @@ const std::array<std::string, 2>& benchmark::idl::Pet::arr_s() const
  * @brief This function returns a reference to member arr_s
  * @return Reference to member arr_s
  */
-std::array<std::string, 2>& benchmark::idl::Pet::arr_s()
+std::array<std::string, 10000>& benchmark::idl::Pet::arr_s()
 {
     return m_arr_s;
 }
@@ -2343,7 +2343,7 @@ benchmark::idl::Owner& benchmark::idl::Pet::own()
  * @param _arr_own New value to be copied in member arr_own
  */
 void benchmark::idl::Pet::arr_own(
-        const std::array<benchmark::idl::Owner, 10>& _arr_own)
+        const std::array<benchmark::idl::Owner, 10000>& _arr_own)
 {
     m_arr_own = _arr_own;
 }
@@ -2353,7 +2353,7 @@ void benchmark::idl::Pet::arr_own(
  * @param _arr_own New value to be moved in member arr_own
  */
 void benchmark::idl::Pet::arr_own(
-        std::array<benchmark::idl::Owner, 10>&& _arr_own)
+        std::array<benchmark::idl::Owner, 10000>&& _arr_own)
 {
     m_arr_own = std::move(_arr_own);
 }
@@ -2362,7 +2362,7 @@ void benchmark::idl::Pet::arr_own(
  * @brief This function returns a constant reference to member arr_own
  * @return Constant reference to member arr_own
  */
-const std::array<benchmark::idl::Owner, 10>& benchmark::idl::Pet::arr_own() const
+const std::array<benchmark::idl::Owner, 10000>& benchmark::idl::Pet::arr_own() const
 {
     return m_arr_own;
 }
@@ -2371,7 +2371,7 @@ const std::array<benchmark::idl::Owner, 10>& benchmark::idl::Pet::arr_own() cons
  * @brief This function returns a reference to member arr_own
  * @return Reference to member arr_own
  */
-std::array<benchmark::idl::Owner, 10>& benchmark::idl::Pet::arr_own()
+std::array<benchmark::idl::Owner, 10000>& benchmark::idl::Pet::arr_own()
 {
     return m_arr_own;
 }
@@ -2454,7 +2454,7 @@ benchmark::idl::OwnerV2& benchmark::idl::Pet::own_v2()
  * @param _arr_own_v2 New value to be copied in member arr_own_v2
  */
 void benchmark::idl::Pet::arr_own_v2(
-        const std::array<benchmark::idl::OwnerV2, 10>& _arr_own_v2)
+        const std::array<benchmark::idl::OwnerV2, 10000>& _arr_own_v2)
 {
     m_arr_own_v2 = _arr_own_v2;
 }
@@ -2464,7 +2464,7 @@ void benchmark::idl::Pet::arr_own_v2(
  * @param _arr_own_v2 New value to be moved in member arr_own_v2
  */
 void benchmark::idl::Pet::arr_own_v2(
-        std::array<benchmark::idl::OwnerV2, 10>&& _arr_own_v2)
+        std::array<benchmark::idl::OwnerV2, 10000>&& _arr_own_v2)
 {
     m_arr_own_v2 = std::move(_arr_own_v2);
 }
@@ -2473,7 +2473,7 @@ void benchmark::idl::Pet::arr_own_v2(
  * @brief This function returns a constant reference to member arr_own_v2
  * @return Constant reference to member arr_own_v2
  */
-const std::array<benchmark::idl::OwnerV2, 10>& benchmark::idl::Pet::arr_own_v2() const
+const std::array<benchmark::idl::OwnerV2, 10000>& benchmark::idl::Pet::arr_own_v2() const
 {
     return m_arr_own_v2;
 }
@@ -2482,7 +2482,7 @@ const std::array<benchmark::idl::OwnerV2, 10>& benchmark::idl::Pet::arr_own_v2()
  * @brief This function returns a reference to member arr_own_v2
  * @return Reference to member arr_own_v2
  */
-std::array<benchmark::idl::OwnerV2, 10>& benchmark::idl::Pet::arr_own_v2()
+std::array<benchmark::idl::OwnerV2, 10000>& benchmark::idl::Pet::arr_own_v2()
 {
     return m_arr_own_v2;
 }
@@ -2565,7 +2565,7 @@ benchmark::idl::OwnerV3& benchmark::idl::Pet::own_v3()
  * @param _arr_own_v3 New value to be copied in member arr_own_v3
  */
 void benchmark::idl::Pet::arr_own_v3(
-        const std::array<benchmark::idl::OwnerV3, 10>& _arr_own_v3)
+        const std::array<benchmark::idl::OwnerV3, 10000>& _arr_own_v3)
 {
     m_arr_own_v3 = _arr_own_v3;
 }
@@ -2575,7 +2575,7 @@ void benchmark::idl::Pet::arr_own_v3(
  * @param _arr_own_v3 New value to be moved in member arr_own_v3
  */
 void benchmark::idl::Pet::arr_own_v3(
-        std::array<benchmark::idl::OwnerV3, 10>&& _arr_own_v3)
+        std::array<benchmark::idl::OwnerV3, 10000>&& _arr_own_v3)
 {
     m_arr_own_v3 = std::move(_arr_own_v3);
 }
@@ -2584,7 +2584,7 @@ void benchmark::idl::Pet::arr_own_v3(
  * @brief This function returns a constant reference to member arr_own_v3
  * @return Constant reference to member arr_own_v3
  */
-const std::array<benchmark::idl::OwnerV3, 10>& benchmark::idl::Pet::arr_own_v3() const
+const std::array<benchmark::idl::OwnerV3, 10000>& benchmark::idl::Pet::arr_own_v3() const
 {
     return m_arr_own_v3;
 }
@@ -2593,7 +2593,7 @@ const std::array<benchmark::idl::OwnerV3, 10>& benchmark::idl::Pet::arr_own_v3()
  * @brief This function returns a reference to member arr_own_v3
  * @return Reference to member arr_own_v3
  */
-std::array<benchmark::idl::OwnerV3, 10>& benchmark::idl::Pet::arr_own_v3()
+std::array<benchmark::idl::OwnerV3, 10000>& benchmark::idl::Pet::arr_own_v3()
 {
     return m_arr_own_v3;
 }
@@ -2676,7 +2676,7 @@ benchmark::idl::OwnerV4& benchmark::idl::Pet::own_v4()
  * @param _arr_own_v4 New value to be copied in member arr_own_v4
  */
 void benchmark::idl::Pet::arr_own_v4(
-        const std::array<benchmark::idl::OwnerV4, 10>& _arr_own_v4)
+        const std::array<benchmark::idl::OwnerV4, 10000>& _arr_own_v4)
 {
     m_arr_own_v4 = _arr_own_v4;
 }
@@ -2686,7 +2686,7 @@ void benchmark::idl::Pet::arr_own_v4(
  * @param _arr_own_v4 New value to be moved in member arr_own_v4
  */
 void benchmark::idl::Pet::arr_own_v4(
-        std::array<benchmark::idl::OwnerV4, 10>&& _arr_own_v4)
+        std::array<benchmark::idl::OwnerV4, 10000>&& _arr_own_v4)
 {
     m_arr_own_v4 = std::move(_arr_own_v4);
 }
@@ -2695,7 +2695,7 @@ void benchmark::idl::Pet::arr_own_v4(
  * @brief This function returns a constant reference to member arr_own_v4
  * @return Constant reference to member arr_own_v4
  */
-const std::array<benchmark::idl::OwnerV4, 10>& benchmark::idl::Pet::arr_own_v4() const
+const std::array<benchmark::idl::OwnerV4, 10000>& benchmark::idl::Pet::arr_own_v4() const
 {
     return m_arr_own_v4;
 }
@@ -2704,7 +2704,7 @@ const std::array<benchmark::idl::OwnerV4, 10>& benchmark::idl::Pet::arr_own_v4()
  * @brief This function returns a reference to member arr_own_v4
  * @return Reference to member arr_own_v4
  */
-std::array<benchmark::idl::OwnerV4, 10>& benchmark::idl::Pet::arr_own_v4()
+std::array<benchmark::idl::OwnerV4, 10000>& benchmark::idl::Pet::arr_own_v4()
 {
     return m_arr_own_v4;
 }
@@ -2778,7 +2778,7 @@ benchmark::idl::PetType& benchmark::idl::Pet::pet_type()
  * @param _arr_pet_type New value to be copied in member arr_pet_type
  */
 void benchmark::idl::Pet::arr_pet_type(
-        const std::array<benchmark::idl::PetType, 2>& _arr_pet_type)
+        const std::array<benchmark::idl::PetType, 10000>& _arr_pet_type)
 {
     m_arr_pet_type = _arr_pet_type;
 }
@@ -2788,7 +2788,7 @@ void benchmark::idl::Pet::arr_pet_type(
  * @param _arr_pet_type New value to be moved in member arr_pet_type
  */
 void benchmark::idl::Pet::arr_pet_type(
-        std::array<benchmark::idl::PetType, 2>&& _arr_pet_type)
+        std::array<benchmark::idl::PetType, 10000>&& _arr_pet_type)
 {
     m_arr_pet_type = std::move(_arr_pet_type);
 }
@@ -2797,7 +2797,7 @@ void benchmark::idl::Pet::arr_pet_type(
  * @brief This function returns a constant reference to member arr_pet_type
  * @return Constant reference to member arr_pet_type
  */
-const std::array<benchmark::idl::PetType, 2>& benchmark::idl::Pet::arr_pet_type() const
+const std::array<benchmark::idl::PetType, 10000>& benchmark::idl::Pet::arr_pet_type() const
 {
     return m_arr_pet_type;
 }
@@ -2806,7 +2806,7 @@ const std::array<benchmark::idl::PetType, 2>& benchmark::idl::Pet::arr_pet_type(
  * @brief This function returns a reference to member arr_pet_type
  * @return Reference to member arr_pet_type
  */
-std::array<benchmark::idl::PetType, 2>& benchmark::idl::Pet::arr_pet_type()
+std::array<benchmark::idl::PetType, 10000>& benchmark::idl::Pet::arr_pet_type()
 {
     return m_arr_pet_type;
 }
@@ -2852,7 +2852,7 @@ std::vector<benchmark::idl::PetType>& benchmark::idl::Pet::vec_pet_type()
  * @param _arr_u8 New value to be copied in member arr_u8
  */
 void benchmark::idl::Pet::arr_u8(
-        const std::array<uint8_t, 100>& _arr_u8)
+        const std::array<uint8_t, 10000>& _arr_u8)
 {
     m_arr_u8 = _arr_u8;
 }
@@ -2862,7 +2862,7 @@ void benchmark::idl::Pet::arr_u8(
  * @param _arr_u8 New value to be moved in member arr_u8
  */
 void benchmark::idl::Pet::arr_u8(
-        std::array<uint8_t, 100>&& _arr_u8)
+        std::array<uint8_t, 10000>&& _arr_u8)
 {
     m_arr_u8 = std::move(_arr_u8);
 }
@@ -2871,7 +2871,7 @@ void benchmark::idl::Pet::arr_u8(
  * @brief This function returns a constant reference to member arr_u8
  * @return Constant reference to member arr_u8
  */
-const std::array<uint8_t, 100>& benchmark::idl::Pet::arr_u8() const
+const std::array<uint8_t, 10000>& benchmark::idl::Pet::arr_u8() const
 {
     return m_arr_u8;
 }
@@ -2880,7 +2880,7 @@ const std::array<uint8_t, 100>& benchmark::idl::Pet::arr_u8() const
  * @brief This function returns a reference to member arr_u8
  * @return Reference to member arr_u8
  */
-std::array<uint8_t, 100>& benchmark::idl::Pet::arr_u8()
+std::array<uint8_t, 10000>& benchmark::idl::Pet::arr_u8()
 {
     return m_arr_u8;
 }

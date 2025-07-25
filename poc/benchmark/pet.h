@@ -977,201 +977,201 @@ namespace benchmark {
              * @param _arr_d New value to be copied in member arr_d
              */
             eProsima_user_DllExport void arr_d(
-                    const std::array<double, 2>& _arr_d);
+                    const std::array<double, 10000>& _arr_d);
 
             /*!
              * @brief This function moves the value in member arr_d
              * @param _arr_d New value to be moved in member arr_d
              */
             eProsima_user_DllExport void arr_d(
-                    std::array<double, 2>&& _arr_d);
+                    std::array<double, 10000>&& _arr_d);
 
             /*!
              * @brief This function returns a constant reference to member arr_d
              * @return Constant reference to member arr_d
              */
-            eProsima_user_DllExport const std::array<double, 2>& arr_d() const;
+            eProsima_user_DllExport const std::array<double, 10000>& arr_d() const;
 
             /*!
              * @brief This function returns a reference to member arr_d
              * @return Reference to member arr_d
              */
-            eProsima_user_DllExport std::array<double, 2>& arr_d();
+            eProsima_user_DllExport std::array<double, 10000>& arr_d();
             /*!
              * @brief This function copies the value in member arr_f
              * @param _arr_f New value to be copied in member arr_f
              */
             eProsima_user_DllExport void arr_f(
-                    const std::array<float, 2>& _arr_f);
+                    const std::array<float, 10000>& _arr_f);
 
             /*!
              * @brief This function moves the value in member arr_f
              * @param _arr_f New value to be moved in member arr_f
              */
             eProsima_user_DllExport void arr_f(
-                    std::array<float, 2>&& _arr_f);
+                    std::array<float, 10000>&& _arr_f);
 
             /*!
              * @brief This function returns a constant reference to member arr_f
              * @return Constant reference to member arr_f
              */
-            eProsima_user_DllExport const std::array<float, 2>& arr_f() const;
+            eProsima_user_DllExport const std::array<float, 10000>& arr_f() const;
 
             /*!
              * @brief This function returns a reference to member arr_f
              * @return Reference to member arr_f
              */
-            eProsima_user_DllExport std::array<float, 2>& arr_f();
+            eProsima_user_DllExport std::array<float, 10000>& arr_f();
             /*!
              * @brief This function copies the value in member arr_i32
              * @param _arr_i32 New value to be copied in member arr_i32
              */
             eProsima_user_DllExport void arr_i32(
-                    const std::array<int32_t, 2>& _arr_i32);
+                    const std::array<int32_t, 10000>& _arr_i32);
 
             /*!
              * @brief This function moves the value in member arr_i32
              * @param _arr_i32 New value to be moved in member arr_i32
              */
             eProsima_user_DllExport void arr_i32(
-                    std::array<int32_t, 2>&& _arr_i32);
+                    std::array<int32_t, 10000>&& _arr_i32);
 
             /*!
              * @brief This function returns a constant reference to member arr_i32
              * @return Constant reference to member arr_i32
              */
-            eProsima_user_DllExport const std::array<int32_t, 2>& arr_i32() const;
+            eProsima_user_DllExport const std::array<int32_t, 10000>& arr_i32() const;
 
             /*!
              * @brief This function returns a reference to member arr_i32
              * @return Reference to member arr_i32
              */
-            eProsima_user_DllExport std::array<int32_t, 2>& arr_i32();
+            eProsima_user_DllExport std::array<int32_t, 10000>& arr_i32();
             /*!
              * @brief This function copies the value in member arr_i64
              * @param _arr_i64 New value to be copied in member arr_i64
              */
             eProsima_user_DllExport void arr_i64(
-                    const std::array<int64_t, 2>& _arr_i64);
+                    const std::array<int64_t, 10000>& _arr_i64);
 
             /*!
              * @brief This function moves the value in member arr_i64
              * @param _arr_i64 New value to be moved in member arr_i64
              */
             eProsima_user_DllExport void arr_i64(
-                    std::array<int64_t, 2>&& _arr_i64);
+                    std::array<int64_t, 10000>&& _arr_i64);
 
             /*!
              * @brief This function returns a constant reference to member arr_i64
              * @return Constant reference to member arr_i64
              */
-            eProsima_user_DllExport const std::array<int64_t, 2>& arr_i64() const;
+            eProsima_user_DllExport const std::array<int64_t, 10000>& arr_i64() const;
 
             /*!
              * @brief This function returns a reference to member arr_i64
              * @return Reference to member arr_i64
              */
-            eProsima_user_DllExport std::array<int64_t, 2>& arr_i64();
+            eProsima_user_DllExport std::array<int64_t, 10000>& arr_i64();
             /*!
              * @brief This function copies the value in member arr_u32
              * @param _arr_u32 New value to be copied in member arr_u32
              */
             eProsima_user_DllExport void arr_u32(
-                    const std::array<uint32_t, 2>& _arr_u32);
+                    const std::array<uint32_t, 10000>& _arr_u32);
 
             /*!
              * @brief This function moves the value in member arr_u32
              * @param _arr_u32 New value to be moved in member arr_u32
              */
             eProsima_user_DllExport void arr_u32(
-                    std::array<uint32_t, 2>&& _arr_u32);
+                    std::array<uint32_t, 10000>&& _arr_u32);
 
             /*!
              * @brief This function returns a constant reference to member arr_u32
              * @return Constant reference to member arr_u32
              */
-            eProsima_user_DllExport const std::array<uint32_t, 2>& arr_u32() const;
+            eProsima_user_DllExport const std::array<uint32_t, 10000>& arr_u32() const;
 
             /*!
              * @brief This function returns a reference to member arr_u32
              * @return Reference to member arr_u32
              */
-            eProsima_user_DllExport std::array<uint32_t, 2>& arr_u32();
+            eProsima_user_DllExport std::array<uint32_t, 10000>& arr_u32();
             /*!
              * @brief This function copies the value in member arr_u64
              * @param _arr_u64 New value to be copied in member arr_u64
              */
             eProsima_user_DllExport void arr_u64(
-                    const std::array<uint64_t, 2>& _arr_u64);
+                    const std::array<uint64_t, 10000>& _arr_u64);
 
             /*!
              * @brief This function moves the value in member arr_u64
              * @param _arr_u64 New value to be moved in member arr_u64
              */
             eProsima_user_DllExport void arr_u64(
-                    std::array<uint64_t, 2>&& _arr_u64);
+                    std::array<uint64_t, 10000>&& _arr_u64);
 
             /*!
              * @brief This function returns a constant reference to member arr_u64
              * @return Constant reference to member arr_u64
              */
-            eProsima_user_DllExport const std::array<uint64_t, 2>& arr_u64() const;
+            eProsima_user_DllExport const std::array<uint64_t, 10000>& arr_u64() const;
 
             /*!
              * @brief This function returns a reference to member arr_u64
              * @return Reference to member arr_u64
              */
-            eProsima_user_DllExport std::array<uint64_t, 2>& arr_u64();
+            eProsima_user_DllExport std::array<uint64_t, 10000>& arr_u64();
             /*!
              * @brief This function copies the value in member arr_bval
              * @param _arr_bval New value to be copied in member arr_bval
              */
             eProsima_user_DllExport void arr_bval(
-                    const std::array<bool, 2>& _arr_bval);
+                    const std::array<bool, 10000>& _arr_bval);
 
             /*!
              * @brief This function moves the value in member arr_bval
              * @param _arr_bval New value to be moved in member arr_bval
              */
             eProsima_user_DllExport void arr_bval(
-                    std::array<bool, 2>&& _arr_bval);
+                    std::array<bool, 10000>&& _arr_bval);
 
             /*!
              * @brief This function returns a constant reference to member arr_bval
              * @return Constant reference to member arr_bval
              */
-            eProsima_user_DllExport const std::array<bool, 2>& arr_bval() const;
+            eProsima_user_DllExport const std::array<bool, 10000>& arr_bval() const;
 
             /*!
              * @brief This function returns a reference to member arr_bval
              * @return Reference to member arr_bval
              */
-            eProsima_user_DllExport std::array<bool, 2>& arr_bval();
+            eProsima_user_DllExport std::array<bool, 10000>& arr_bval();
             /*!
              * @brief This function copies the value in member arr_s
              * @param _arr_s New value to be copied in member arr_s
              */
             eProsima_user_DllExport void arr_s(
-                    const std::array<std::string, 2>& _arr_s);
+                    const std::array<std::string, 10000>& _arr_s);
 
             /*!
              * @brief This function moves the value in member arr_s
              * @param _arr_s New value to be moved in member arr_s
              */
             eProsima_user_DllExport void arr_s(
-                    std::array<std::string, 2>&& _arr_s);
+                    std::array<std::string, 10000>&& _arr_s);
 
             /*!
              * @brief This function returns a constant reference to member arr_s
              * @return Constant reference to member arr_s
              */
-            eProsima_user_DllExport const std::array<std::string, 2>& arr_s() const;
+            eProsima_user_DllExport const std::array<std::string, 10000>& arr_s() const;
 
             /*!
              * @brief This function returns a reference to member arr_s
              * @return Reference to member arr_s
              */
-            eProsima_user_DllExport std::array<std::string, 2>& arr_s();
+            eProsima_user_DllExport std::array<std::string, 10000>& arr_s();
             /*!
              * @brief This function copies the value in member vec_d
              * @param _vec_d New value to be copied in member vec_d
@@ -1402,26 +1402,26 @@ namespace benchmark {
              * @param _arr_own New value to be copied in member arr_own
              */
             eProsima_user_DllExport void arr_own(
-                    const std::array<benchmark::idl::Owner, 10>& _arr_own);
+                    const std::array<benchmark::idl::Owner, 10000>& _arr_own);
 
             /*!
              * @brief This function moves the value in member arr_own
              * @param _arr_own New value to be moved in member arr_own
              */
             eProsima_user_DllExport void arr_own(
-                    std::array<benchmark::idl::Owner, 10>&& _arr_own);
+                    std::array<benchmark::idl::Owner, 10000>&& _arr_own);
 
             /*!
              * @brief This function returns a constant reference to member arr_own
              * @return Constant reference to member arr_own
              */
-            eProsima_user_DllExport const std::array<benchmark::idl::Owner, 10>& arr_own() const;
+            eProsima_user_DllExport const std::array<benchmark::idl::Owner, 10000>& arr_own() const;
 
             /*!
              * @brief This function returns a reference to member arr_own
              * @return Reference to member arr_own
              */
-            eProsima_user_DllExport std::array<benchmark::idl::Owner, 10>& arr_own();
+            eProsima_user_DllExport std::array<benchmark::idl::Owner, 10000>& arr_own();
             /*!
              * @brief This function copies the value in member vec_own
              * @param _vec_own New value to be copied in member vec_own
@@ -1477,26 +1477,26 @@ namespace benchmark {
              * @param _arr_own_v2 New value to be copied in member arr_own_v2
              */
             eProsima_user_DllExport void arr_own_v2(
-                    const std::array<benchmark::idl::OwnerV2, 10>& _arr_own_v2);
+                    const std::array<benchmark::idl::OwnerV2, 10000>& _arr_own_v2);
 
             /*!
              * @brief This function moves the value in member arr_own_v2
              * @param _arr_own_v2 New value to be moved in member arr_own_v2
              */
             eProsima_user_DllExport void arr_own_v2(
-                    std::array<benchmark::idl::OwnerV2, 10>&& _arr_own_v2);
+                    std::array<benchmark::idl::OwnerV2, 10000>&& _arr_own_v2);
 
             /*!
              * @brief This function returns a constant reference to member arr_own_v2
              * @return Constant reference to member arr_own_v2
              */
-            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV2, 10>& arr_own_v2() const;
+            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV2, 10000>& arr_own_v2() const;
 
             /*!
              * @brief This function returns a reference to member arr_own_v2
              * @return Reference to member arr_own_v2
              */
-            eProsima_user_DllExport std::array<benchmark::idl::OwnerV2, 10>& arr_own_v2();
+            eProsima_user_DllExport std::array<benchmark::idl::OwnerV2, 10000>& arr_own_v2();
             /*!
              * @brief This function copies the value in member vec_own_v2
              * @param _vec_own_v2 New value to be copied in member vec_own_v2
@@ -1552,26 +1552,26 @@ namespace benchmark {
              * @param _arr_own_v3 New value to be copied in member arr_own_v3
              */
             eProsima_user_DllExport void arr_own_v3(
-                    const std::array<benchmark::idl::OwnerV3, 10>& _arr_own_v3);
+                    const std::array<benchmark::idl::OwnerV3, 10000>& _arr_own_v3);
 
             /*!
              * @brief This function moves the value in member arr_own_v3
              * @param _arr_own_v3 New value to be moved in member arr_own_v3
              */
             eProsima_user_DllExport void arr_own_v3(
-                    std::array<benchmark::idl::OwnerV3, 10>&& _arr_own_v3);
+                    std::array<benchmark::idl::OwnerV3, 10000>&& _arr_own_v3);
 
             /*!
              * @brief This function returns a constant reference to member arr_own_v3
              * @return Constant reference to member arr_own_v3
              */
-            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV3, 10>& arr_own_v3() const;
+            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV3, 10000>& arr_own_v3() const;
 
             /*!
              * @brief This function returns a reference to member arr_own_v3
              * @return Reference to member arr_own_v3
              */
-            eProsima_user_DllExport std::array<benchmark::idl::OwnerV3, 10>& arr_own_v3();
+            eProsima_user_DllExport std::array<benchmark::idl::OwnerV3, 10000>& arr_own_v3();
             /*!
              * @brief This function copies the value in member vec_own_v3
              * @param _vec_own_v3 New value to be copied in member vec_own_v3
@@ -1627,26 +1627,26 @@ namespace benchmark {
              * @param _arr_own_v4 New value to be copied in member arr_own_v4
              */
             eProsima_user_DllExport void arr_own_v4(
-                    const std::array<benchmark::idl::OwnerV4, 10>& _arr_own_v4);
+                    const std::array<benchmark::idl::OwnerV4, 10000>& _arr_own_v4);
 
             /*!
              * @brief This function moves the value in member arr_own_v4
              * @param _arr_own_v4 New value to be moved in member arr_own_v4
              */
             eProsima_user_DllExport void arr_own_v4(
-                    std::array<benchmark::idl::OwnerV4, 10>&& _arr_own_v4);
+                    std::array<benchmark::idl::OwnerV4, 10000>&& _arr_own_v4);
 
             /*!
              * @brief This function returns a constant reference to member arr_own_v4
              * @return Constant reference to member arr_own_v4
              */
-            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV4, 10>& arr_own_v4() const;
+            eProsima_user_DllExport const std::array<benchmark::idl::OwnerV4, 10000>& arr_own_v4() const;
 
             /*!
              * @brief This function returns a reference to member arr_own_v4
              * @return Reference to member arr_own_v4
              */
-            eProsima_user_DllExport std::array<benchmark::idl::OwnerV4, 10>& arr_own_v4();
+            eProsima_user_DllExport std::array<benchmark::idl::OwnerV4, 10000>& arr_own_v4();
             /*!
              * @brief This function copies the value in member vec_own_v4
              * @param _vec_own_v4 New value to be copied in member vec_own_v4
@@ -1696,26 +1696,26 @@ namespace benchmark {
              * @param _arr_pet_type New value to be copied in member arr_pet_type
              */
             eProsima_user_DllExport void arr_pet_type(
-                    const std::array<benchmark::idl::PetType, 2>& _arr_pet_type);
+                    const std::array<benchmark::idl::PetType, 10000>& _arr_pet_type);
 
             /*!
              * @brief This function moves the value in member arr_pet_type
              * @param _arr_pet_type New value to be moved in member arr_pet_type
              */
             eProsima_user_DllExport void arr_pet_type(
-                    std::array<benchmark::idl::PetType, 2>&& _arr_pet_type);
+                    std::array<benchmark::idl::PetType, 10000>&& _arr_pet_type);
 
             /*!
              * @brief This function returns a constant reference to member arr_pet_type
              * @return Constant reference to member arr_pet_type
              */
-            eProsima_user_DllExport const std::array<benchmark::idl::PetType, 2>& arr_pet_type() const;
+            eProsima_user_DllExport const std::array<benchmark::idl::PetType, 10000>& arr_pet_type() const;
 
             /*!
              * @brief This function returns a reference to member arr_pet_type
              * @return Reference to member arr_pet_type
              */
-            eProsima_user_DllExport std::array<benchmark::idl::PetType, 2>& arr_pet_type();
+            eProsima_user_DllExport std::array<benchmark::idl::PetType, 10000>& arr_pet_type();
             /*!
              * @brief This function copies the value in member vec_pet_type
              * @param _vec_pet_type New value to be copied in member vec_pet_type
@@ -1746,26 +1746,26 @@ namespace benchmark {
              * @param _arr_u8 New value to be copied in member arr_u8
              */
             eProsima_user_DllExport void arr_u8(
-                    const std::array<uint8_t, 100>& _arr_u8);
+                    const std::array<uint8_t, 10000>& _arr_u8);
 
             /*!
              * @brief This function moves the value in member arr_u8
              * @param _arr_u8 New value to be moved in member arr_u8
              */
             eProsima_user_DllExport void arr_u8(
-                    std::array<uint8_t, 100>&& _arr_u8);
+                    std::array<uint8_t, 10000>&& _arr_u8);
 
             /*!
              * @brief This function returns a constant reference to member arr_u8
              * @return Constant reference to member arr_u8
              */
-            eProsima_user_DllExport const std::array<uint8_t, 100>& arr_u8() const;
+            eProsima_user_DllExport const std::array<uint8_t, 10000>& arr_u8() const;
 
             /*!
              * @brief This function returns a reference to member arr_u8
              * @return Reference to member arr_u8
              */
-            eProsima_user_DllExport std::array<uint8_t, 100>& arr_u8();
+            eProsima_user_DllExport std::array<uint8_t, 10000>& arr_u8();
 
             /*!
             * @brief This function returns the maximum serialized size of an object
@@ -1834,14 +1834,14 @@ namespace benchmark {
             uint64_t m_u64;
             bool m_bval;
             std::string m_s;
-            std::array<double, 2> m_arr_d;
-            std::array<float, 2> m_arr_f;
-            std::array<int32_t, 2> m_arr_i32;
-            std::array<int64_t, 2> m_arr_i64;
-            std::array<uint32_t, 2> m_arr_u32;
-            std::array<uint64_t, 2> m_arr_u64;
-            std::array<bool, 2> m_arr_bval;
-            std::array<std::string, 2> m_arr_s;
+            std::array<double, 10000> m_arr_d;
+            std::array<float, 10000> m_arr_f;
+            std::array<int32_t, 10000> m_arr_i32;
+            std::array<int64_t, 10000> m_arr_i64;
+            std::array<uint32_t, 10000> m_arr_u32;
+            std::array<uint64_t, 10000> m_arr_u64;
+            std::array<bool, 10000> m_arr_bval;
+            std::array<std::string, 10000> m_arr_s;
             std::vector<double> m_vec_d;
             std::vector<float> m_vec_f;
             std::vector<int32_t> m_vec_i32;
@@ -1851,21 +1851,21 @@ namespace benchmark {
             std::vector<bool> m_vec_bval;
             std::vector<std::string> m_vec_s;
             benchmark::idl::Owner m_own;
-            std::array<benchmark::idl::Owner, 10> m_arr_own;
+            std::array<benchmark::idl::Owner, 10000> m_arr_own;
             std::vector<benchmark::idl::Owner> m_vec_own;
             benchmark::idl::OwnerV2 m_own_v2;
-            std::array<benchmark::idl::OwnerV2, 10> m_arr_own_v2;
+            std::array<benchmark::idl::OwnerV2, 10000> m_arr_own_v2;
             std::vector<benchmark::idl::OwnerV2> m_vec_own_v2;
             benchmark::idl::OwnerV3 m_own_v3;
-            std::array<benchmark::idl::OwnerV3, 10> m_arr_own_v3;
+            std::array<benchmark::idl::OwnerV3, 10000> m_arr_own_v3;
             std::vector<benchmark::idl::OwnerV3> m_vec_own_v3;
             benchmark::idl::OwnerV4 m_own_v4;
-            std::array<benchmark::idl::OwnerV4, 10> m_arr_own_v4;
+            std::array<benchmark::idl::OwnerV4, 10000> m_arr_own_v4;
             std::vector<benchmark::idl::OwnerV4> m_vec_own_v4;
             benchmark::idl::PetType m_pet_type;
-            std::array<benchmark::idl::PetType, 2> m_arr_pet_type;
+            std::array<benchmark::idl::PetType, 10000> m_arr_pet_type;
             std::vector<benchmark::idl::PetType> m_vec_pet_type;
-            std::array<uint8_t, 100> m_arr_u8;
+            std::array<uint8_t, 10000> m_arr_u8;
 
         };
     } // namespace idl

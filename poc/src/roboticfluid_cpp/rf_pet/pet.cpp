@@ -21,7 +21,7 @@ void Pet::dump(std::vector<uint8_t>& out) const {
     // 2. Serialize all dynamic members in the exact order of appearance
     // 1. std::string s
     rf_common::write_string(out, s);
-    // 2. std::array<std::string, 2> arr_s
+    // 2. std::array<std::string, 10000> arr_s
     for (const auto &s_ : arr_s)
         rf_common::write_string(out, s_);
     // 3. std::vector<double> vec_d
@@ -68,7 +68,7 @@ void Pet::dump(std::vector<uint8_t>& out) const {
         rf_common::write_string(out, s_);
     // 11. rf_owner::Owner own
     own.dump(out);
-    // 12. std::array<rf_owner::Owner, 10> arr_own
+    // 12. std::array<rf_owner::Owner, 10000> arr_own
     for (const auto &o : arr_own)
         o.dump(out);
     // 13. std::vector<rf_owner::Owner> vec_own
@@ -78,7 +78,7 @@ void Pet::dump(std::vector<uint8_t>& out) const {
         o.dump(out);
     // 14. rf_owner::OwnerV2 own_v2
     own_v2.dump(out);
-    // 15. std::array<rf_owner::OwnerV2, 10> arr_own_v2
+    // 15. std::array<rf_owner::OwnerV2, 10000> arr_own_v2
     for (const auto &o : arr_own_v2)
         o.dump(out);
     // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
@@ -88,7 +88,7 @@ void Pet::dump(std::vector<uint8_t>& out) const {
         o.dump(out);
     // 17. rf_owner::nested::OwnerV3 own_v3
     own_v3.dump(out);
-    // 18. std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3
+    // 18. std::array<rf_owner::nested::OwnerV3, 10000> arr_own_v3
     for (const auto &o : arr_own_v3)
         o.dump(out);
     // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
@@ -98,7 +98,7 @@ void Pet::dump(std::vector<uint8_t>& out) const {
         o.dump(out);
     // 20. OwnerV4 own_v4
     own_v4.dump(out);
-    // 21. std::array<OwnerV4, 10> arr_own_v4
+    // 21. std::array<OwnerV4, 10000> arr_own_v4
     for (const auto &o : arr_own_v4)
         o.dump(out);
     // 22. std::vector<OwnerV4> vec_own_v4
@@ -107,13 +107,13 @@ void Pet::dump(std::vector<uint8_t>& out) const {
     for (const auto &o : vec_own_v4)
         o.dump(out);
     // 14. PetType pet_type (POD, handled by block copy)
-    // 15. std::array<PetType, 2> arr_pet_type (POD, handled by block copy)
+    // 15. std::array<PetType, 10000> arr_pet_type (POD, handled by block copy)
     // 16. std::vector<PetType> vec_pet_type
     sz = static_cast<uint32_t>(vec_pet_type.size());
     out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
     if (sz)
         out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_pet_type.data()), reinterpret_cast<const uint8_t*>(vec_pet_type.data()) + sz * sizeof(vec_pet_type[0]));
-    // 17. std::array<uint8_t, 100> arr_u8 (POD, handled by block copy)
+    // 17. std::array<uint8_t, 10000> arr_u8 (POD, handled by block copy)
 }
 
 // Convenience overload for top-level load

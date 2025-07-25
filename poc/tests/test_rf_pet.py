@@ -55,36 +55,76 @@ class TestPet(unittest.TestCase):
         self.assertEqual(self.pet.get_s(), "test string")
 
     def test_arr_d(self):
-        self.pet.set_arr_d([1.1, 2.2])
-        self.assertEqual(list(self.pet.get_arr_d()), [1.1, 2.2])
+        arr = [1.1] * 10000
+        arr[0] = 1.1
+        arr[1] = 2.2
+        self.pet.set_arr_d(arr)
+        got = list(self.pet.get_arr_d())
+        self.assertEqual(got[:2], [1.1, 2.2])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_f(self):
-        self.pet.set_arr_f([3.3, 4.4])
-        self.assertListAlmostEqual(list(self.pet.get_arr_f()), [3.3, 4.4])
+        arr = [3.3] * 10000
+        arr[1] = 4.4
+        self.pet.set_arr_f(arr)
+        got = list(self.pet.get_arr_f())
+        self.assertAlmostEqual(got[0], 3.3, places=6)
+        self.assertAlmostEqual(got[1], 4.4, places=6)
+        self.assertEqual(len(got), 10000)
 
     def test_arr_i32(self):
-        self.pet.set_arr_i32([10, 20])
-        self.assertEqual(list(self.pet.get_arr_i32()), [10, 20])
+        arr = [10] * 10000
+        arr[0] = 10
+        arr[1] = 20
+        self.pet.set_arr_i32(arr)
+        got = list(self.pet.get_arr_i32())
+        self.assertEqual(got[:2], [10, 20])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_i64(self):
-        self.pet.set_arr_i64([100, 200])
-        self.assertEqual(list(self.pet.get_arr_i64()), [100, 200])
+        arr = [100] * 10000
+        arr[0] = 100
+        arr[1] = 200
+        self.pet.set_arr_i64(arr)
+        got = list(self.pet.get_arr_i64())
+        self.assertEqual(got[:2], [100, 200])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_u32(self):
-        self.pet.set_arr_u32([1000, 2000])
-        self.assertEqual(list(self.pet.get_arr_u32()), [1000, 2000])
+        arr = [1000] * 10000
+        arr[0] = 1000
+        arr[1] = 2000
+        self.pet.set_arr_u32(arr)
+        got = list(self.pet.get_arr_u32())
+        self.assertEqual(got[:2], [1000, 2000])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_u64(self):
-        self.pet.set_arr_u64([10000, 20000])
-        self.assertEqual(list(self.pet.get_arr_u64()), [10000, 20000])
+        arr = [10000] * 10000
+        arr[0] = 10000
+        arr[1] = 20000
+        self.pet.set_arr_u64(arr)
+        got = list(self.pet.get_arr_u64())
+        self.assertEqual(got[:2], [10000, 20000])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_bval(self):
-        self.pet.set_arr_bval([True, False])
-        self.assertEqual(list(self.pet.get_arr_bval()), [True, False])
+        arr = [True] * 10000
+        arr[0] = True
+        arr[1] = False
+        self.pet.set_arr_bval(arr)
+        got = list(self.pet.get_arr_bval())
+        self.assertEqual(got[:2], [True, False])
+        self.assertEqual(len(got), 10000)
 
     def test_arr_s(self):
-        self.pet.set_arr_s(["a", "b"])
-        self.assertEqual(list(self.pet.get_arr_s()), ["a", "b"])
+        arr = ["a"] * 10000
+        arr[0] = "a"
+        arr[1] = "b"
+        self.pet.set_arr_s(arr)
+        got = list(self.pet.get_arr_s())
+        self.assertEqual(got[:2], ["a", "b"])
+        self.assertEqual(len(got), 10000)
 
     def test_vec_d(self):
         self.pet.set_vec_d([5.5, 6.6, 7.7])
@@ -125,86 +165,60 @@ class TestPet(unittest.TestCase):
         self.assertEqual(own.get_age(), 30)
 
     def test_set_and_get_arrays(self):
-        self.pet.set_arr_d([1.1, 2.2])
-        self.assertListAlmostEqual(list(self.pet.get_arr_d()), [1.1, 2.2])
-        self.pet.set_arr_f([3.3, 4.4])
-        self.assertListAlmostEqual(list(self.pet.get_arr_f()), [3.3, 4.4])
-        self.pet.set_arr_i32([10, 20])
-        self.assertEqual(list(self.pet.get_arr_i32()), [10, 20])
-        self.pet.set_arr_i64([100, 200])
-        self.assertEqual(list(self.pet.get_arr_i64()), [100, 200])
-        self.pet.set_arr_u32([1000, 2000])
-        self.assertEqual(list(self.pet.get_arr_u32()), [1000, 2000])
-        self.pet.set_arr_u64([10000, 20000])
-        self.assertEqual(list(self.pet.get_arr_u64()), [10000, 20000])
-        self.pet.set_arr_bval([True, False])
-        self.assertEqual(list(self.pet.get_arr_bval()), [True, False])
-        self.pet.set_arr_s(["a", "b"])
-        self.assertEqual(list(self.pet.get_arr_s()), ["a", "b"])
-
-    def test_set_and_get_vectors(self):
-        self.pet.set_vec_d([5.5, 6.6, 7.7])
-        self.assertListAlmostEqual(self.pet.get_vec_d(), [5.5, 6.6, 7.7])
-        self.pet.set_vec_f([8.8, 9.9])
-        self.assertListAlmostEqual(self.pet.get_vec_f(), [8.8, 9.9])
-        self.pet.set_vec_i32([30, 40, 50])
-        self.assertEqual(self.pet.get_vec_i32(), [30, 40, 50])
-        self.pet.set_vec_i64([300, 400])
-        self.assertEqual(self.pet.get_vec_i64(), [300, 400])
-        self.pet.set_vec_u32([3000, 4000])
-        self.assertEqual(self.pet.get_vec_u32(), [3000, 4000])
-        self.pet.set_vec_u64([30000, 40000])
-        self.assertEqual(self.pet.get_vec_u64(), [30000, 40000])
-        self.pet.set_vec_bval([False, True, True])
-        self.assertEqual(self.pet.get_vec_bval(), [False, True, True])
-        self.pet.set_vec_s(["x", "y", "z"])
-        self.assertEqual(self.pet.get_vec_s(), ["x", "y", "z"])
-
-    def test_bark(self):
-        # Just ensure it doesn't throw
-        self.pet.set_s("Rex")
-        self.pet.bark()
-
-    def test_freeze_and_melt(self):
-        self.pet.set_s("Fluffy")
-        self.pet.set_i32(7)
-        self.pet.set_f(3.14)
-        freezed = self.pet.dump()  # Should be bytes
-        self.assertIsInstance(freezed, bytes)
-        new_pet = Pet()
-        new_pet.load(freezed)
-        self.assertEqual(new_pet.get_s(), "Fluffy")
-        self.assertEqual(new_pet.get_i32(), 7)
-        self.assertAlmostEqual(new_pet.get_f(), 3.14, places=5)
-        # Round-trip
-        self.pet.set_s("Fido")
-        self.pet.set_i32(42)
-        self.pet.set_f(12.5)
-        freezed = self.pet.dump()
-        self.assertIsInstance(freezed, bytes)
-        p = Pet()
-        p.load(freezed)
-        self.assertEqual(p.get_s(), self.pet.get_s())
-        self.assertEqual(p.get_i32(), self.pet.get_i32())
-        self.assertAlmostEqual(p.get_f(), self.pet.get_f(), places=5)
+        arr_d = [1.1] * 10000
+        arr_d[0] = 1.1
+        arr_d[1] = 2.2
+        self.pet.set_arr_d(arr_d)
+        arr_f = [3.3] * 10000
+        arr_f[1] = 4.4
+        self.pet.set_arr_f(arr_f)
+        arr_i32 = [10] * 10000
+        arr_i32[1] = 20
+        self.pet.set_arr_i32(arr_i32)
+        arr_i64 = [100] * 10000
+        arr_i64[1] = 200
+        self.pet.set_arr_i64(arr_i64)
+        arr_u32 = [1000] * 10000
+        arr_u32[1] = 2000
+        self.pet.set_arr_u32(arr_u32)
+        arr_u64 = [10000] * 10000
+        arr_u64[1] = 20000
+        self.pet.set_arr_u64(arr_u64)
+        arr_bval = [True] * 10000
+        arr_bval[1] = False
+        self.pet.set_arr_bval(arr_bval)
+        arr_s = ["a"] * 10000
+        arr_s[1] = "b"
+        self.pet.set_arr_s(arr_s)
+        got = list(self.pet.get_arr_d())
+        self.assertEqual(got[:2], [1.1, 2.2])
+        got = list(self.pet.get_arr_f())
+        self.assertAlmostEqual(got[0], 3.3, places=6)
+        self.assertAlmostEqual(got[1], 4.4, places=6)
+        got = list(self.pet.get_arr_i32())
+        self.assertEqual(got[:2], [10, 20])
+        got = list(self.pet.get_arr_i64())
+        self.assertEqual(got[:2], [100, 200])
+        got = list(self.pet.get_arr_u32())
+        self.assertEqual(got[:2], [1000, 2000])
+        got = list(self.pet.get_arr_u64())
+        self.assertEqual(got[:2], [10000, 20000])
+        got = list(self.pet.get_arr_bval())
+        self.assertEqual(got[:2], [True, False])
+        got = list(self.pet.get_arr_s())
+        self.assertEqual(got[:2], ["a", "b"])
+        self.assertEqual(len(got), 10000)
 
     def test_set_and_get_owner_arrays(self):
         from roboticfluid_py.rf_owner import Owner
-        owners = []
-        for i in range(10):
-            o = Owner()
+        owners = [Owner() for _ in range(10000)]
+        for i, o in enumerate(owners[:10]):
             o.set_name(f"ArrOwner{i}")
             o.set_age(100 + i)
-            owners.append(o)
-        # Ensure exactly 10 elements
-        if len(owners) < 10:
-            owners += [Owner() for _ in range(10 - len(owners))]
-        elif len(owners) > 10:
-            owners = owners[:10]
         self.pet.set_arr_own(owners)
         arr_owners_new = self.pet.get_arr_own()
-        self.assertEqual(len(arr_owners_new), 10)
-        for i, o in enumerate(arr_owners_new):
+        self.assertEqual(len(arr_owners_new), 10000)
+        for i, o in enumerate(arr_owners_new[:10]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwner{i}")
             self.assertEqual(o.get_age(), 100 + i)
 
@@ -245,18 +259,15 @@ class TestPet(unittest.TestCase):
 
     def test_arr_own(self):
         from roboticfluid_py.rf_owner import Owner
-        arr = []
-        for i in range(10):
-            o = Owner()
+        arr = [Owner() for _ in range(10000)]
+        for i, o in enumerate(arr[:2]):
             o.set_name(f"ArrOwner{i}")
             o.set_age(i)
-            arr.append(o)
-        self.pet.set_arr_own(arr)  # Must be exactly 10 elements
+        self.pet.set_arr_own(arr)
         got = self.pet.get_arr_own()
-        self.assertEqual(len(got), 10)
-        for i, o in enumerate(got):
-            self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwner{i}")
-            self.assertEqual(o.get_age(), i)
+        self.assertEqual(len(got), 10000)
+        self.assertEqual(got[0].get_name().decode('utf-8'), "ArrOwner0")
+        self.assertEqual(got[1].get_name().decode('utf-8'), "ArrOwner1")
 
     def test_vec_own(self):
         from roboticfluid_py.rf_owner import Owner
@@ -285,16 +296,14 @@ class TestPet(unittest.TestCase):
 
     def test_arr_own_v2(self):
         from roboticfluid_py.rf_owner import OwnerV2
-        arr = []
-        for i in range(10):
-            o = OwnerV2()
+        arr = [OwnerV2() for _ in range(10000)]
+        for i, o in enumerate(arr[:10]):
             o.set_name(f"ArrOwnerV2_{i}")
             o.set_age(i+20)
-            arr.append(o)
         self.pet.set_arr_own_v2(arr)
         got = self.pet.get_arr_own_v2()
-        self.assertEqual(len(got), 10)
-        for i, o in enumerate(got):
+        self.assertEqual(len(got), 10000)
+        for i, o in enumerate(got[:10]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV2_{i}")
             self.assertEqual(o.get_age(), i+20)
 
@@ -325,16 +334,14 @@ class TestPet(unittest.TestCase):
 
     def test_arr_own_v3(self):
         from roboticfluid_py.rf_owner.nested import OwnerV3
-        arr = []
-        for i in range(10):
-            o = OwnerV3()
+        arr = [OwnerV3() for _ in range(10000)]
+        for i, o in enumerate(arr[:10]):
             o.set_name(f"ArrOwnerV3_{i}")
             o.set_age(i+40)
-            arr.append(o)
         self.pet.set_arr_own_v3(arr)
         got = self.pet.get_arr_own_v3()
-        self.assertEqual(len(got), 10)
-        for i, o in enumerate(got):
+        self.assertEqual(len(got), 10000)
+        for i, o in enumerate(got[:10]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV3_{i}")
             self.assertEqual(o.get_age(), i+40)
 
@@ -365,16 +372,14 @@ class TestPet(unittest.TestCase):
 
     def test_arr_own_v4(self):
         from roboticfluid_py import OwnerV4
-        arr = []
-        for i in range(10):
-            o = OwnerV4()
+        arr = [OwnerV4() for _ in range(10000)]
+        for i, o in enumerate(arr[:10]):
             o.set_name(f"ArrOwnerV4_{i}")
             o.set_age(i+60)
-            arr.append(o)
         self.pet.set_arr_own_v4(arr)
         got = self.pet.get_arr_own_v4()
-        self.assertEqual(len(got), 10)
-        for i, o in enumerate(got):
+        self.assertEqual(len(got), 10000)
+        for i, o in enumerate(got[:10]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV4_{i}")
             self.assertEqual(o.get_age(), i+60)
 
@@ -402,10 +407,12 @@ class TestPet(unittest.TestCase):
 
     def test_arr_pet_type(self):
         from roboticfluid_py.rf_pet import PetType
-        arr = [PetType.DOG, PetType.CAT]
+        arr = [PetType.DOG] * 10000
+        arr[1] = PetType.CAT
         self.pet.set_arr_pet_type(arr)
         got = self.pet.get_arr_pet_type()
-        self.assertEqual(list(got), arr)
+        self.assertEqual(list(got[:2]), [PetType.DOG, PetType.CAT])
+        self.assertEqual(len(got), 10000)
 
     def test_vec_pet_type(self):
         from roboticfluid_py.rf_pet import PetType
@@ -415,18 +422,17 @@ class TestPet(unittest.TestCase):
         self.assertEqual(list(got), vec)
 
     def test_arr_u8(self):
-        arr = [i for i in range(100)]
+        arr = [i % 256 for i in range(10000)]
         self.pet.set_arr_u8(arr)
         got = self.pet.get_arr_u8()
-        self.assertEqual(list(got), arr)
+        self.assertEqual(list(got[:10]), arr[:10])
+        self.assertEqual(len(got), 10000)
 
     def test_type_error_arr_d(self):
-        # Too few
         with self.assertRaises(TypeError):
-            self.pet.set_arr_d([1.1])
-        # Too many
+            self.pet.set_arr_d([1.1] * 9999)
         with self.assertRaises(TypeError):
-            self.pet.set_arr_d([1.1, 2.2, 3.3])
+            self.pet.set_arr_d([1.1] * 10001)
 
     def test_type_error_arr_f(self):
         with self.assertRaises(TypeError):

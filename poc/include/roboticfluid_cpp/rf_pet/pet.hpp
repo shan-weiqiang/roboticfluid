@@ -23,15 +23,15 @@ public:
   uint64_t u64;
   bool bval;
   std::string s;
-  // Arrays for each basic type (size 2)
-  std::array<double, 2> arr_d;
-  std::array<float, 2> arr_f;
-  std::array<int32_t, 2> arr_i32;
-  std::array<int64_t, 2> arr_i64;
-  std::array<uint32_t, 2> arr_u32;
-  std::array<uint64_t, 2> arr_u64;
-  std::array<bool, 2> arr_bval;
-  std::array<std::string, 2> arr_s;
+  // Arrays for each basic type (size 10000)
+  std::array<double, 10000> arr_d;
+  std::array<float, 10000> arr_f;
+  std::array<int32_t, 10000> arr_i32;
+  std::array<int64_t, 10000> arr_i64;
+  std::array<uint32_t, 10000> arr_u32;
+  std::array<uint64_t, 10000> arr_u64;
+  std::array<bool, 10000> arr_bval;
+  std::array<std::string, 10000> arr_s;
   // Vectors for each basic type
   std::vector<double> vec_d;
   std::vector<float> vec_f;
@@ -45,30 +45,30 @@ public:
   // Custom types
   // Owner
   rf_owner::Owner own;
-  std::array<rf_owner::Owner, 10> arr_own;
+  std::array<rf_owner::Owner, 10000> arr_own;
   std::vector<rf_owner::Owner> vec_own;
   // OwnerV2
   rf_owner::OwnerV2 own_v2;
-  std::array<rf_owner::OwnerV2, 10> arr_own_v2;
+  std::array<rf_owner::OwnerV2, 10000> arr_own_v2;
   std::vector<rf_owner::OwnerV2> vec_own_v2;
   // OwnerV3
   rf_owner::nested::OwnerV3 own_v3;
-  std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3;
+  std::array<rf_owner::nested::OwnerV3, 10000> arr_own_v3;
   std::vector<rf_owner::nested::OwnerV3> vec_own_v3;
   // OwnerV4
   OwnerV4 own_v4;
-  std::array<OwnerV4, 10> arr_own_v4;
+  std::array<OwnerV4, 10000> arr_own_v4;
   std::vector<OwnerV4> vec_own_v4;
 
   // Enum types
   PetType pet_type;
   // Arrays for enum
-  std::array<PetType, 2> arr_pet_type;
+  std::array<PetType, 10000> arr_pet_type;
   // Vector for enum
   std::vector<PetType> vec_pet_type;
 
   // New member: array of uint8_t
-  std::array<uint8_t, 100> arr_u8;
+  std::array<uint8_t, 10000> arr_u8;
 
   // Methods (all public)
   void bark() { std::cout << s << " barks!\n"; }
@@ -91,22 +91,22 @@ public:
   const std::string &get_s() const { return s; }
   void set_s(const std::string &val) { s = val; }
   // Arrays
-  const std::array<double, 2> &get_arr_d() const { return arr_d; }
-  void set_arr_d(const std::array<double, 2> &val) { arr_d = val; }
-  const std::array<float, 2> &get_arr_f() const { return arr_f; }
-  void set_arr_f(const std::array<float, 2> &val) { arr_f = val; }
-  const std::array<int32_t, 2> &get_arr_i32() const { return arr_i32; }
-  void set_arr_i32(const std::array<int32_t, 2> &val) { arr_i32 = val; }
-  const std::array<int64_t, 2> &get_arr_i64() const { return arr_i64; }
-  void set_arr_i64(const std::array<int64_t, 2> &val) { arr_i64 = val; }
-  const std::array<uint32_t, 2> &get_arr_u32() const { return arr_u32; }
-  void set_arr_u32(const std::array<uint32_t, 2> &val) { arr_u32 = val; }
-  const std::array<uint64_t, 2> &get_arr_u64() const { return arr_u64; }
-  void set_arr_u64(const std::array<uint64_t, 2> &val) { arr_u64 = val; }
-  const std::array<bool, 2> &get_arr_bval() const { return arr_bval; }
-  void set_arr_bval(const std::array<bool, 2> &val) { arr_bval = val; }
-  const std::array<std::string, 2> &get_arr_s() const { return arr_s; }
-  void set_arr_s(const std::array<std::string, 2> &val) { arr_s = val; }
+  const std::array<double, 10000> &get_arr_d() const { return arr_d; }
+  void set_arr_d(const std::array<double, 10000> &val) { arr_d = val; }
+  const std::array<float, 10000> &get_arr_f() const { return arr_f; }
+  void set_arr_f(const std::array<float, 10000> &val) { arr_f = val; }
+  const std::array<int32_t, 10000> &get_arr_i32() const { return arr_i32; }
+  void set_arr_i32(const std::array<int32_t, 10000> &val) { arr_i32 = val; }
+  const std::array<int64_t, 10000> &get_arr_i64() const { return arr_i64; }
+  void set_arr_i64(const std::array<int64_t, 10000> &val) { arr_i64 = val; }
+  const std::array<uint32_t, 10000> &get_arr_u32() const { return arr_u32; }
+  void set_arr_u32(const std::array<uint32_t, 10000> &val) { arr_u32 = val; }
+  const std::array<uint64_t, 10000> &get_arr_u64() const { return arr_u64; }
+  void set_arr_u64(const std::array<uint64_t, 10000> &val) { arr_u64 = val; }
+  const std::array<bool, 10000> &get_arr_bval() const { return arr_bval; }
+  void set_arr_bval(const std::array<bool, 10000> &val) { arr_bval = val; }
+  const std::array<std::string, 10000> &get_arr_s() const { return arr_s; }
+  void set_arr_s(const std::array<std::string, 10000> &val) { arr_s = val; }
   // Vectors
   const std::vector<double> &get_vec_d() const { return vec_d; }
   void set_vec_d(const std::vector<double> &val) { vec_d = val; }
@@ -128,17 +128,17 @@ public:
   // Custom type getters/setters
   const rf_owner::Owner &get_own() const { return own; }
   void set_own(const rf_owner::Owner &val) { own = val; }
-  void set_arr_own(const std::array<rf_owner::Owner, 10> &val) {
+  void set_arr_own(const std::array<rf_owner::Owner, 10000> &val) {
     arr_own = val;
   }
   const std::vector<rf_owner::Owner> &get_vec_own() const { return vec_own; }
   void set_vec_own(const std::vector<rf_owner::Owner> &val) { vec_own = val; }
   const rf_owner::OwnerV2 &get_own_v2() const { return own_v2; }
   void set_own_v2(const rf_owner::OwnerV2 &val) { own_v2 = val; }
-  const std::array<rf_owner::OwnerV2, 10> &get_arr_own_v2() const {
+  const std::array<rf_owner::OwnerV2, 10000> &get_arr_own_v2() const {
     return arr_own_v2;
   }
-  void set_arr_own_v2(const std::array<rf_owner::OwnerV2, 10> &val) {
+  void set_arr_own_v2(const std::array<rf_owner::OwnerV2, 10000> &val) {
     arr_own_v2 = val;
   }
   const std::vector<rf_owner::OwnerV2> &get_vec_own_v2() const {
@@ -149,10 +149,10 @@ public:
   }
   const rf_owner::nested::OwnerV3 &get_own_v3() const { return own_v3; }
   void set_own_v3(const rf_owner::nested::OwnerV3 &val) { own_v3 = val; }
-  const std::array<rf_owner::nested::OwnerV3, 10> &get_arr_own_v3() const {
+  const std::array<rf_owner::nested::OwnerV3, 10000> &get_arr_own_v3() const {
     return arr_own_v3;
   }
-  void set_arr_own_v3(const std::array<rf_owner::nested::OwnerV3, 10> &val) {
+  void set_arr_own_v3(const std::array<rf_owner::nested::OwnerV3, 10000> &val) {
     arr_own_v3 = val;
   }
   const std::vector<rf_owner::nested::OwnerV3> &get_vec_own_v3() const {
@@ -163,27 +163,27 @@ public:
   }
   const OwnerV4 &get_own_v4() const { return own_v4; }
   void set_own_v4(const OwnerV4 &val) { own_v4 = val; }
-  const std::array<OwnerV4, 10> &get_arr_own_v4() const { return arr_own_v4; }
-  void set_arr_own_v4(const std::array<OwnerV4, 10> &val) { arr_own_v4 = val; }
+  const std::array<OwnerV4, 10000> &get_arr_own_v4() const { return arr_own_v4; }
+  void set_arr_own_v4(const std::array<OwnerV4, 10000> &val) { arr_own_v4 = val; }
   const std::vector<OwnerV4> &get_vec_own_v4() const { return vec_own_v4; }
   void set_vec_own_v4(const std::vector<OwnerV4> &val) { vec_own_v4 = val; }
-  const std::array<rf_owner::Owner, 10> &get_arr_own() const { return arr_own; }
+  const std::array<rf_owner::Owner, 10000> &get_arr_own() const { return arr_own; }
 
   // Enum type getters/setters
   PetType get_pet_type() const { return pet_type; }
   void set_pet_type(PetType val) { pet_type = val; }
-  const std::array<PetType, 2> &get_arr_pet_type() const {
+  const std::array<PetType, 10000> &get_arr_pet_type() const {
     return arr_pet_type;
   }
-  void set_arr_pet_type(const std::array<PetType, 2> &val) {
+  void set_arr_pet_type(const std::array<PetType, 10000> &val) {
     arr_pet_type = val;
   }
   const std::vector<PetType> &get_vec_pet_type() const { return vec_pet_type; }
   void set_vec_pet_type(const std::vector<PetType> &val) { vec_pet_type = val; }
 
   // arr_u8 getter/setter
-  const std::array<uint8_t, 100> &get_arr_u8() const { return arr_u8; }
-  void set_arr_u8(const std::array<uint8_t, 100> &val) { arr_u8 = val; }
+  const std::array<uint8_t, 10000> &get_arr_u8() const { return arr_u8; }
+  void set_arr_u8(const std::array<uint8_t, 10000> &val) { arr_u8 = val; }
 
   // Serialization
   void dump(std::vector<uint8_t>& out) const;
@@ -195,7 +195,7 @@ public:
     std::string s_tmp;
     rf_common::read_string(src, offset, s_tmp);
     new (&s) std::string(std::move(s_tmp));
-    // 2. std::array<std::string, 2> arr_s
+    // 2. std::array<std::string, 10000> arr_s
     for (size_t i = 0; i < arr_s.size(); ++i) {
         std::string arr_s_tmp;
         rf_common::read_string(src, offset, arr_s_tmp);
@@ -274,7 +274,7 @@ public:
     for (uint32_t i = 0; i < sz; ++i) {
         std::string s_tmp;
         rf_common::read_string(src, offset, s_tmp);
-        new (&vec_s_tmp[i]) std::string(std::move(s_tmp));
+        vec_s_tmp[i] = std::move(s_tmp);
     }
     new (&vec_s) std::vector<std::string>(std::move(vec_s_tmp));
     // 11. rf_owner::Owner own
@@ -283,7 +283,7 @@ public:
         tmp.load(src, offset);
         new (&own) rf_owner::Owner(std::move(tmp));
     }
-    // 12. std::array<rf_owner::Owner, 10> arr_own
+    // 12. std::array<rf_owner::Owner, 10000> arr_own
     for (size_t i = 0; i < arr_own.size(); ++i) {
         new (&arr_own[i]) rf_owner::Owner();
         rf_owner::Owner tmp;
@@ -306,7 +306,7 @@ public:
         tmp.load(src, offset);
         new (&own_v2) rf_owner::OwnerV2(std::move(tmp));
     }
-    // 15. std::array<rf_owner::OwnerV2, 10> arr_own_v2
+    // 15. std::array<rf_owner::OwnerV2, 10000> arr_own_v2
     for (size_t i = 0; i < arr_own_v2.size(); ++i) {
         new (&arr_own_v2[i]) rf_owner::OwnerV2();
         rf_owner::OwnerV2 tmp;
@@ -329,7 +329,7 @@ public:
         tmp.load(src, offset);
         new (&own_v3) rf_owner::nested::OwnerV3(std::move(tmp));
     }
-    // 18. std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3
+    // 18. std::array<rf_owner::nested::OwnerV3, 10000> arr_own_v3
     for (size_t i = 0; i < arr_own_v3.size(); ++i) {
         new (&arr_own_v3[i]) rf_owner::nested::OwnerV3();
         rf_owner::nested::OwnerV3 tmp;
@@ -352,7 +352,7 @@ public:
         tmp.load(src, offset);
         new (&own_v4) OwnerV4(std::move(tmp));
     }
-    // 21. std::array<OwnerV4, 10> arr_own_v4
+    // 21. std::array<OwnerV4, 10000> arr_own_v4
     for (size_t i = 0; i < arr_own_v4.size(); ++i) {
         new (&arr_own_v4[i]) OwnerV4();
         OwnerV4 tmp;
@@ -370,7 +370,7 @@ public:
     }
     new (&vec_own_v4) std::vector<OwnerV4>(std::move(vec_own_v4_tmp));
     // 14. PetType pet_type (POD, handled by memcpy)
-    // 15. std::array<PetType, 2> arr_pet_type (POD, handled by memcpy)
+    // 15. std::array<PetType, 10000> arr_pet_type (POD, handled by memcpy)
 
     // 16. std::vector<PetType> vec_pet_type
     std::memcpy(&sz, &src[offset], sizeof(sz));
@@ -381,7 +381,7 @@ public:
         offset += sz * sizeof(vec_pet_type_tmp[0]);
     }
     new (&vec_pet_type) std::vector<PetType>(std::move(vec_pet_type_tmp));
-    // 17. std::array<uint8_t, 100> arr_u8 (POD, handled by memcpy)
+    // 17. std::array<uint8_t, 10000> arr_u8 (POD, handled by memcpy)
     return offset;
   }
   void load(const std::vector<uint8_t>& src);
