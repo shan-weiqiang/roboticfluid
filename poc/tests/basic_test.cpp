@@ -76,11 +76,12 @@ int main() {
 
     // Test freezing
     std::cout << "\n=== Testing freezing ===\n";
-    std::string freezed = pet.dump();
+    std::vector<uint8_t> freezed;
+    pet.dump(freezed);
     std::cout << "Freezed pet: ";
     for (size_t i = 0; i < std::min<size_t>(16, freezed.size()); ++i)
-        std::cout << std::hex << (unsigned int)(unsigned char)freezed[i] << " ";
-    std::cout << "... (type: std::string, size: " << std::dec << freezed.size() << ")\n";
+        std::cout << std::hex << (unsigned int)freezed[i] << " ";
+    std::cout << "... (type: std::vector<uint8_t>, size: " << std::dec << freezed.size() << ")\n";
 
     // Test melting
     std::cout << "\n=== Testing melting ===\n";
@@ -100,8 +101,11 @@ int main() {
     pet.set_i32(42);
     pet.set_f(12.5);
 
-    freezed = pet.dump();
-    std::cout << "Freezed: " << freezed.substr(0, 16) << "...\n";
+    pet.dump(freezed);
+    std::cout << "Freezed: ";
+    for (size_t i = 0; i < std::min<size_t>(16, freezed.size()); ++i)
+        std::cout << std::hex << (unsigned int)freezed[i] << " ";
+    std::cout << "...\n";
     Pet p;
     p.load(freezed);
     std::cout << "Melted s: " << p.get_s() << "\n";

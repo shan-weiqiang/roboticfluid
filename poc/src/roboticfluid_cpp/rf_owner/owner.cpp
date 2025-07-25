@@ -2,29 +2,22 @@
 #include "roboticfluid_cpp/common.hpp"
 #include <cstring>
 #include <string>
+#include <vector>
 
 namespace rf_owner {
 
-std::string Owner::dump() const {
-  // Block copy the entire object (shallow copy, including pointer in name)
-  std::string out(sizeof(Owner), '\0');
-  std::memcpy(&out[0], this, sizeof(Owner));
-  // Serialize dynamic member: std::string name
-  rf_common::write_string(out, name);
-  // int age is POD, already handled by block copy
-  return out;
+void Owner::dump(std::vector<uint8_t>& out) const {
+    size_t old_size = out.size();
+    if (out.capacity() - out.size() < sizeof(Owner))
+        out.reserve(out.size() + sizeof(Owner));
+    out.resize(old_size + sizeof(Owner));
+    std::memcpy(out.data() + old_size, this, sizeof(Owner));
+    rf_common::write_string(out, name);
 }
 
-size_t Owner::load(const std::string &src) {
-  this->~Owner();
-  std::memcpy(this, src.data(), sizeof(Owner));
-  size_t offset = sizeof(Owner);
-  // std::string name
-  std::string name_tmp;
-  rf_common::read_string(src, offset, name_tmp);
-  new (&name) std::string(std::move(name_tmp));
-  // int age is POD, already handled by memcpy
-  return offset;
+void Owner::load(const std::vector<uint8_t>& src) {
+    size_t offset = 0;
+    load(src, offset);
 }
 
 } // namespace rf_owner

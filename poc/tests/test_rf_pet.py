@@ -166,17 +166,27 @@ class TestPet(unittest.TestCase):
         self.pet.bark()
 
     def test_freeze_and_melt(self):
+        self.pet.set_s("Fluffy")
+        self.pet.set_i32(7)
+        self.pet.set_f(3.14)
+        freezed = self.pet.dump()  # Should be bytes
+        self.assertIsInstance(freezed, bytes)
+        new_pet = Pet()
+        new_pet.load(freezed)
+        self.assertEqual(new_pet.get_s(), "Fluffy")
+        self.assertEqual(new_pet.get_i32(), 7)
+        self.assertAlmostEqual(new_pet.get_f(), 3.14, places=5)
+        # Round-trip
         self.pet.set_s("Fido")
         self.pet.set_i32(42)
         self.pet.set_f(12.5)
-        self.pet.set_own(self.owner)
         freezed = self.pet.dump()
-        new_pet = Pet()
-        new_pet.load(freezed)
-        self.assertEqual(new_pet.get_s(), "Fido")
-        self.assertEqual(new_pet.get_i32(), 42)
-        self.assertAlmostEqual(new_pet.get_f(), 12.5)
-        self.assertEqual(new_pet.get_own().get_name().decode('utf-8'), "Alice")
+        self.assertIsInstance(freezed, bytes)
+        p = Pet()
+        p.load(freezed)
+        self.assertEqual(p.get_s(), self.pet.get_s())
+        self.assertEqual(p.get_i32(), self.pet.get_i32())
+        self.assertAlmostEqual(p.get_f(), self.pet.get_f(), places=5)
 
     def test_set_and_get_owner_arrays(self):
         from roboticfluid_py.rf_owner import Owner

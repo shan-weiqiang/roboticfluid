@@ -186,8 +186,205 @@ public:
   void set_arr_u8(const std::array<uint8_t, 100> &val) { arr_u8 = val; }
 
   // Serialization
-  std::string dump() const;        // Serialize and return string
-  void load(const std::string &src); // Deserialize from src
+  void dump(std::vector<uint8_t>& out) const;
+  inline size_t load(const std::vector<uint8_t>& src, size_t& offset){
+    this->~Pet();
+    std::memcpy(this, src.data() + offset, sizeof(Pet));
+    offset += sizeof(Pet);
+    // 1. std::string s
+    std::string s_tmp;
+    rf_common::read_string(src, offset, s_tmp);
+    new (&s) std::string(std::move(s_tmp));
+    // 2. std::array<std::string, 2> arr_s
+    for (size_t i = 0; i < arr_s.size(); ++i) {
+        std::string arr_s_tmp;
+        rf_common::read_string(src, offset, arr_s_tmp);
+        new (&arr_s[i]) std::string(std::move(arr_s_tmp));
+    }
+    // 3. std::vector<double> vec_d
+    uint32_t sz;
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<double> vec_d_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_d_tmp.data(), &src[offset], sz * sizeof(vec_d_tmp[0]));
+        offset += sz * sizeof(vec_d_tmp[0]);
+    }
+    new (&vec_d) std::vector<double>(std::move(vec_d_tmp));
+    // 4. std::vector<float> vec_f
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<float> vec_f_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_f_tmp.data(), &src[offset], sz * sizeof(vec_f_tmp[0]));
+        offset += sz * sizeof(vec_f_tmp[0]);
+    }
+    new (&vec_f) std::vector<float>(std::move(vec_f_tmp));
+    // 5. std::vector<int32_t> vec_i32
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<int32_t> vec_i32_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_i32_tmp.data(), &src[offset], sz * sizeof(vec_i32_tmp[0]));
+        offset += sz * sizeof(vec_i32_tmp[0]);
+    }
+    new (&vec_i32) std::vector<int32_t>(std::move(vec_i32_tmp));
+    // 6. std::vector<int64_t> vec_i64
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<int64_t> vec_i64_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_i64_tmp.data(), &src[offset], sz * sizeof(vec_i64_tmp[0]));
+        offset += sz * sizeof(vec_i64_tmp[0]);
+    }
+    new (&vec_i64) std::vector<int64_t>(std::move(vec_i64_tmp));
+    // 7. std::vector<uint32_t> vec_u32
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<uint32_t> vec_u32_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_u32_tmp.data(), &src[offset], sz * sizeof(vec_u32_tmp[0]));
+        offset += sz * sizeof(vec_u32_tmp[0]);
+    }
+    new (&vec_u32) std::vector<uint32_t>(std::move(vec_u32_tmp));
+    // 8. std::vector<uint64_t> vec_u64
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<uint64_t> vec_u64_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_u64_tmp.data(), &src[offset], sz * sizeof(vec_u64_tmp[0]));
+        offset += sz * sizeof(vec_u64_tmp[0]);
+    }
+    new (&vec_u64) std::vector<uint64_t>(std::move(vec_u64_tmp));
+    // 9. std::vector<bool> vec_bval
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<bool> vec_bval_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        uint8_t bv;
+        std::memcpy(&bv, &src[offset], sizeof(bv));
+        offset += sizeof(bv);
+        vec_bval_tmp[i] = (bv != 0);
+    }
+    new (&vec_bval) std::vector<bool>(std::move(vec_bval_tmp));
+    // 10. std::vector<std::string> vec_s
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<std::string> vec_s_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        std::string s_tmp;
+        rf_common::read_string(src, offset, s_tmp);
+        new (&vec_s_tmp[i]) std::string(std::move(s_tmp));
+    }
+    new (&vec_s) std::vector<std::string>(std::move(vec_s_tmp));
+    // 11. rf_owner::Owner own
+    {
+        rf_owner::Owner tmp;
+        tmp.load(src, offset);
+        new (&own) rf_owner::Owner(std::move(tmp));
+    }
+    // 12. std::array<rf_owner::Owner, 10> arr_own
+    for (size_t i = 0; i < arr_own.size(); ++i) {
+        new (&arr_own[i]) rf_owner::Owner();
+        rf_owner::Owner tmp;
+        tmp.load(src, offset);
+        arr_own[i] = std::move(tmp);
+    }
+    // 13. std::vector<rf_owner::Owner> vec_own
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<rf_owner::Owner> vec_own_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        rf_owner::Owner tmp;
+        tmp.load(src, offset);
+        vec_own_tmp[i] = std::move(tmp);
+    }
+    new (&vec_own) std::vector<rf_owner::Owner>(std::move(vec_own_tmp));
+    // 14. rf_owner::OwnerV2 own_v2
+    {
+        rf_owner::OwnerV2 tmp;
+        tmp.load(src, offset);
+        new (&own_v2) rf_owner::OwnerV2(std::move(tmp));
+    }
+    // 15. std::array<rf_owner::OwnerV2, 10> arr_own_v2
+    for (size_t i = 0; i < arr_own_v2.size(); ++i) {
+        new (&arr_own_v2[i]) rf_owner::OwnerV2();
+        rf_owner::OwnerV2 tmp;
+        tmp.load(src, offset);
+        arr_own_v2[i] = std::move(tmp);
+    }
+    // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<rf_owner::OwnerV2> vec_own_v2_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        rf_owner::OwnerV2 tmp;
+        tmp.load(src, offset);
+        vec_own_v2_tmp[i] = std::move(tmp);
+    }
+    new (&vec_own_v2) std::vector<rf_owner::OwnerV2>(std::move(vec_own_v2_tmp));
+    // 17. rf_owner::nested::OwnerV3 own_v3
+    {
+        rf_owner::nested::OwnerV3 tmp;
+        tmp.load(src, offset);
+        new (&own_v3) rf_owner::nested::OwnerV3(std::move(tmp));
+    }
+    // 18. std::array<rf_owner::nested::OwnerV3, 10> arr_own_v3
+    for (size_t i = 0; i < arr_own_v3.size(); ++i) {
+        new (&arr_own_v3[i]) rf_owner::nested::OwnerV3();
+        rf_owner::nested::OwnerV3 tmp;
+        tmp.load(src, offset);
+        arr_own_v3[i] = std::move(tmp);
+    }
+    // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<rf_owner::nested::OwnerV3> vec_own_v3_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        rf_owner::nested::OwnerV3 tmp;
+        tmp.load(src, offset);
+        vec_own_v3_tmp[i] = std::move(tmp);
+    }
+    new (&vec_own_v3) std::vector<rf_owner::nested::OwnerV3>(std::move(vec_own_v3_tmp));
+    // 20. OwnerV4 own_v4
+    {
+        OwnerV4 tmp;
+        tmp.load(src, offset);
+        new (&own_v4) OwnerV4(std::move(tmp));
+    }
+    // 21. std::array<OwnerV4, 10> arr_own_v4
+    for (size_t i = 0; i < arr_own_v4.size(); ++i) {
+        new (&arr_own_v4[i]) OwnerV4();
+        OwnerV4 tmp;
+        tmp.load(src, offset);
+        arr_own_v4[i] = std::move(tmp);
+    }
+    // 22. std::vector<OwnerV4> vec_own_v4
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<OwnerV4> vec_own_v4_tmp(sz);
+    for (uint32_t i = 0; i < sz; ++i) {
+        OwnerV4 tmp;
+        tmp.load(src, offset);
+        vec_own_v4_tmp[i] = std::move(tmp);
+    }
+    new (&vec_own_v4) std::vector<OwnerV4>(std::move(vec_own_v4_tmp));
+    // 14. PetType pet_type (POD, handled by memcpy)
+    // 15. std::array<PetType, 2> arr_pet_type (POD, handled by memcpy)
+
+    // 16. std::vector<PetType> vec_pet_type
+    std::memcpy(&sz, &src[offset], sizeof(sz));
+    offset += sizeof(sz);
+    std::vector<PetType> vec_pet_type_tmp(sz);
+    if (sz) {
+        std::memcpy(vec_pet_type_tmp.data(), &src[offset], sz * sizeof(vec_pet_type_tmp[0]));
+        offset += sz * sizeof(vec_pet_type_tmp[0]);
+    }
+    new (&vec_pet_type) std::vector<PetType>(std::move(vec_pet_type_tmp));
+    // 17. std::array<uint8_t, 100> arr_u8 (POD, handled by memcpy)
+    return offset;
+  }
+  void load(const std::vector<uint8_t>& src);
 };
 
 } // namespace rf_pet

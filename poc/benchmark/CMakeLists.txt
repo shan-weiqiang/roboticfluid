@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 include(GNUInstallDirs)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O2")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O3")
 set(protobuf_SRC "../bin/protobuf-src")
 list(PREPEND CMAKE_PREFIX_PATH "${protobuf_SRC}/lib/cmake/protobuf")
 set(protobuf_INCLUDE "${protobuf_SRC}/include")

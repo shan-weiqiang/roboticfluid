@@ -11,8 +11,14 @@ PYBIND11_MODULE(owner_v4, m) {
         .def("set_name", &OwnerV4::set_name)
         .def("get_age", &OwnerV4::get_age)
         .def("set_age", &OwnerV4::set_age)
-        .def("dump", [](const OwnerV4& self) { return pybind11::bytes(self.dump()); })
+        .def("dump", [](const OwnerV4& self) {
+            std::vector<uint8_t> out;
+            self.dump(out);
+            return pybind11::bytes(reinterpret_cast<const char*>(out.data()), out.size());
+        })
         .def("load", [](OwnerV4& self, const pybind11::bytes& src) {
-            return self.load(std::string(src));
+            std::string s = static_cast<std::string>(src);
+            std::vector<uint8_t> buf(s.begin(), s.end());
+            self.load(buf);
         });
 } 
