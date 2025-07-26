@@ -212,13 +212,13 @@ class TestPet(unittest.TestCase):
     def test_set_and_get_owner_arrays(self):
         from roboticfluid_py.rf_owner import Owner
         owners = [Owner() for _ in range(10000)]
-        for i, o in enumerate(owners[:10]):
+        for i, o in enumerate(owners[:10000]):
             o.set_name(f"ArrOwner{i}")
             o.set_age(100 + i)
         self.pet.set_arr_own(owners)
         arr_owners_new = self.pet.get_arr_own()
         self.assertEqual(len(arr_owners_new), 10000)
-        for i, o in enumerate(arr_owners_new[:10]):
+        for i, o in enumerate(arr_owners_new[:10000]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwner{i}")
             self.assertEqual(o.get_age(), 100 + i)
 
@@ -260,7 +260,7 @@ class TestPet(unittest.TestCase):
     def test_arr_own(self):
         from roboticfluid_py.rf_owner import Owner
         arr = [Owner() for _ in range(10000)]
-        for i, o in enumerate(arr[:2]):
+        for i, o in enumerate(arr[:10000]):
             o.set_name(f"ArrOwner{i}")
             o.set_age(i)
         self.pet.set_arr_own(arr)
@@ -297,13 +297,13 @@ class TestPet(unittest.TestCase):
     def test_arr_own_v2(self):
         from roboticfluid_py.rf_owner import OwnerV2
         arr = [OwnerV2() for _ in range(10000)]
-        for i, o in enumerate(arr[:10]):
+        for i, o in enumerate(arr[:10000]):
             o.set_name(f"ArrOwnerV2_{i}")
             o.set_age(i+20)
         self.pet.set_arr_own_v2(arr)
         got = self.pet.get_arr_own_v2()
         self.assertEqual(len(got), 10000)
-        for i, o in enumerate(got[:10]):
+        for i, o in enumerate(got[:10000]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV2_{i}")
             self.assertEqual(o.get_age(), i+20)
 
@@ -335,13 +335,13 @@ class TestPet(unittest.TestCase):
     def test_arr_own_v3(self):
         from roboticfluid_py.rf_owner.nested import OwnerV3
         arr = [OwnerV3() for _ in range(10000)]
-        for i, o in enumerate(arr[:10]):
+        for i, o in enumerate(arr[:10000]):
             o.set_name(f"ArrOwnerV3_{i}")
             o.set_age(i+40)
         self.pet.set_arr_own_v3(arr)
         got = self.pet.get_arr_own_v3()
         self.assertEqual(len(got), 10000)
-        for i, o in enumerate(got[:10]):
+        for i, o in enumerate(got[:10000]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV3_{i}")
             self.assertEqual(o.get_age(), i+40)
 
@@ -373,13 +373,13 @@ class TestPet(unittest.TestCase):
     def test_arr_own_v4(self):
         from roboticfluid_py import OwnerV4
         arr = [OwnerV4() for _ in range(10000)]
-        for i, o in enumerate(arr[:10]):
+        for i, o in enumerate(arr[:10000]):
             o.set_name(f"ArrOwnerV4_{i}")
             o.set_age(i+60)
         self.pet.set_arr_own_v4(arr)
         got = self.pet.get_arr_own_v4()
         self.assertEqual(len(got), 10000)
-        for i, o in enumerate(got[:10]):
+        for i, o in enumerate(got[:10000]):
             self.assertEqual(o.get_name().decode('utf-8'), f"ArrOwnerV4_{i}")
             self.assertEqual(o.get_age(), i+60)
 
@@ -427,6 +427,276 @@ class TestPet(unittest.TestCase):
         got = self.pet.get_arr_u8()
         self.assertEqual(list(got[:10]), arr[:10])
         self.assertEqual(len(got), 10000)
+
+    def test_dump_load(self):
+        """Test dump and load functionality with comprehensive data"""
+        # Set up original pet with various data types
+        original_pet = Pet()
+        
+        # Basic types
+        original_pet.set_d(3.14159)
+        original_pet.set_f(2.71828)
+        original_pet.set_i32(42)
+        original_pet.set_i64(123456789012345)
+        original_pet.set_u32(987654321)
+        original_pet.set_u64(987654321098765)
+        original_pet.set_bval(True)
+        original_pet.set_s("Test Pet Name")
+        
+        # Arrays
+        original_pet.set_arr_d([1.1] * 10000)
+        original_pet.set_arr_f([3.3] * 10000)
+        original_pet.set_arr_i32([10] * 10000)
+        original_pet.set_arr_i64([100] * 10000)
+        original_pet.set_arr_u32([1000] * 10000)
+        original_pet.set_arr_u64([10000] * 10000)
+        original_pet.set_arr_bval([True] * 10000)
+        original_pet.set_arr_s(["array1"] * 10000)
+        original_pet.set_arr_u8([i % 256 for i in range(10000)])
+        
+        # Vectors
+        original_pet.set_vec_d([5.5, 6.6, 7.7])
+        original_pet.set_vec_f([8.8, 9.9])
+        original_pet.set_vec_i32([30, 40, 50])
+        original_pet.set_vec_i64([300, 400])
+        original_pet.set_vec_u32([3000, 4000])
+        original_pet.set_vec_u64([30000, 40000])
+        original_pet.set_vec_bval([False, True, True])
+        original_pet.set_vec_s(["vec1", "vec2", "vec3"])
+        
+        # Owner objects
+        owner = Owner()
+        owner.set_name("Test Owner")
+        owner.set_age(25)
+        original_pet.set_own(owner)
+        
+        # Owner arrays
+        owners = [Owner() for _ in range(10000)]
+        for i, o in enumerate(owners):
+            o.set_name(f"Owner{i}")
+            o.set_age(20 + i)
+        original_pet.set_arr_own(owners)
+        
+        # Owner vectors
+        vec_owners = []
+        for i in range(3):
+            o = Owner()
+            o.set_name(f"VecOwner{i}")
+            o.set_age(30 + i)
+            vec_owners.append(o)
+        original_pet.set_vec_own(vec_owners)
+        
+        # OwnerV2 objects
+        from roboticfluid_py.rf_owner import OwnerV2
+        owner_v2 = OwnerV2()
+        owner_v2.set_name("Test OwnerV2")
+        owner_v2.set_age(35)
+        original_pet.set_own_v2(owner_v2)
+        
+        # OwnerV2 arrays
+        owners_v2 = [OwnerV2() for _ in range(10000)]
+        for i, o in enumerate(owners_v2):
+            o.set_name(f"OwnerV2_{i}")
+            o.set_age(40 + i)
+        original_pet.set_arr_own_v2(owners_v2)
+        
+        # OwnerV2 vectors
+        vec_owners_v2 = []
+        for i in range(4):
+            o = OwnerV2()
+            o.set_name(f"VecOwnerV2_{i}")
+            o.set_age(50 + i)
+            vec_owners_v2.append(o)
+        original_pet.set_vec_own_v2(vec_owners_v2)
+        
+        # OwnerV3 objects
+        from roboticfluid_py.rf_owner.nested import OwnerV3
+        owner_v3 = OwnerV3()
+        owner_v3.set_name("Test OwnerV3")
+        owner_v3.set_age(45)
+        original_pet.set_own_v3(owner_v3)
+        
+        # OwnerV3 arrays
+        owners_v3 = [OwnerV3() for _ in range(10000)]
+        for i, o in enumerate(owners_v3):
+            o.set_name(f"OwnerV3_{i}")
+            o.set_age(60 + i)
+        original_pet.set_arr_own_v3(owners_v3)
+        
+        # OwnerV3 vectors
+        vec_owners_v3 = []
+        for i in range(5):
+            o = OwnerV3()
+            o.set_name(f"VecOwnerV3_{i}")
+            o.set_age(70 + i)
+            vec_owners_v3.append(o)
+        original_pet.set_vec_own_v3(vec_owners_v3)
+        
+        # OwnerV4 objects
+        from roboticfluid_py import OwnerV4
+        owner_v4 = OwnerV4()
+        owner_v4.set_name("Test OwnerV4")
+        owner_v4.set_age(55)
+        original_pet.set_own_v4(owner_v4)
+        
+        # OwnerV4 arrays
+        owners_v4 = [OwnerV4() for _ in range(10000)]
+        for i, o in enumerate(owners_v4):
+            o.set_name(f"OwnerV4_{i}")
+            o.set_age(80 + i)
+        original_pet.set_arr_own_v4(owners_v4)
+        
+        # OwnerV4 vectors
+        vec_owners_v4 = []
+        for i in range(6):
+            o = OwnerV4()
+            o.set_name(f"VecOwnerV4_{i}")
+            o.set_age(90 + i)
+            vec_owners_v4.append(o)
+        original_pet.set_vec_own_v4(vec_owners_v4)
+        
+        # PetType
+        from roboticfluid_py.rf_pet import PetType
+        original_pet.set_pet_type(PetType.CAT)
+        original_pet.set_arr_pet_type([PetType.DOG] * 10000)
+        original_pet.set_vec_pet_type([PetType.BIRD, PetType.FISH, PetType.HAMSTER])
+        
+        # Perform dump twice on original object
+        dump1 = original_pet.dump()
+        dump2 = original_pet.dump()
+        
+        # Verify both dumps are identical
+        self.assertEqual(dump1, dump2)
+        
+        # Create new pet object and load twice
+        new_pet = Pet()
+        new_pet.load(dump1)
+        new_pet.load(dump2)  # Load second time
+        
+        # Compare all members between original and new pet
+        # Basic types
+        self.assertEqual(original_pet.get_d(), new_pet.get_d())
+        self.assertAlmostEqual(original_pet.get_f(), new_pet.get_f(), places=6)
+        self.assertEqual(original_pet.get_i32(), new_pet.get_i32())
+        self.assertEqual(original_pet.get_i64(), new_pet.get_i64())
+        self.assertEqual(original_pet.get_u32(), new_pet.get_u32())
+        self.assertEqual(original_pet.get_u64(), new_pet.get_u64())
+        self.assertEqual(original_pet.get_bval(), new_pet.get_bval())
+        self.assertEqual(original_pet.get_s(), new_pet.get_s())
+        
+        # Arrays
+        self.assertListAlmostEqual(list(original_pet.get_arr_d()), list(new_pet.get_arr_d()))
+        self.assertListAlmostEqual(list(original_pet.get_arr_f()), list(new_pet.get_arr_f()))
+        self.assertEqual(list(original_pet.get_arr_i32()), list(new_pet.get_arr_i32()))
+        self.assertEqual(list(original_pet.get_arr_i64()), list(new_pet.get_arr_i64()))
+        self.assertEqual(list(original_pet.get_arr_u32()), list(new_pet.get_arr_u32()))
+        self.assertEqual(list(original_pet.get_arr_u64()), list(new_pet.get_arr_u64()))
+        self.assertEqual(list(original_pet.get_arr_bval()), list(new_pet.get_arr_bval()))
+        self.assertEqual(list(original_pet.get_arr_s()), list(new_pet.get_arr_s()))
+        self.assertEqual(list(original_pet.get_arr_u8()), list(new_pet.get_arr_u8()))
+        
+        # Vectors
+        self.assertEqual(original_pet.get_vec_d(), new_pet.get_vec_d())
+        self.assertListAlmostEqual(original_pet.get_vec_f(), new_pet.get_vec_f())
+        self.assertEqual(original_pet.get_vec_i32(), new_pet.get_vec_i32())
+        self.assertEqual(original_pet.get_vec_i64(), new_pet.get_vec_i64())
+        self.assertEqual(original_pet.get_vec_u32(), new_pet.get_vec_u32())
+        self.assertEqual(original_pet.get_vec_u64(), new_pet.get_vec_u64())
+        self.assertEqual(original_pet.get_vec_bval(), new_pet.get_vec_bval())
+        self.assertEqual(original_pet.get_vec_s(), new_pet.get_vec_s())
+        
+        # Owner objects
+        orig_own = original_pet.get_own()
+        new_own = new_pet.get_own()
+        self.assertEqual(orig_own.get_name().decode('utf-8'), new_own.get_name().decode('utf-8'))
+        self.assertEqual(orig_own.get_age(), new_own.get_age())
+        
+        # Owner arrays
+        orig_arr_own = original_pet.get_arr_own()
+        new_arr_own = new_pet.get_arr_own()
+        self.assertEqual(len(orig_arr_own), len(new_arr_own))
+        for i in range(len(orig_arr_own)):
+            self.assertEqual(orig_arr_own[i].get_name().decode('utf-8'), new_arr_own[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_arr_own[i].get_age(), new_arr_own[i].get_age())
+        
+        # Owner vectors
+        orig_vec_own = original_pet.get_vec_own()
+        new_vec_own = new_pet.get_vec_own()
+        self.assertEqual(len(orig_vec_own), len(new_vec_own))
+        for i in range(len(orig_vec_own)):
+            self.assertEqual(orig_vec_own[i].get_name().decode('utf-8'), new_vec_own[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_vec_own[i].get_age(), new_vec_own[i].get_age())
+        
+        # OwnerV2 objects
+        orig_own_v2 = original_pet.get_own_v2()
+        new_own_v2 = new_pet.get_own_v2()
+        self.assertEqual(orig_own_v2.get_name().decode('utf-8'), new_own_v2.get_name().decode('utf-8'))
+        self.assertEqual(orig_own_v2.get_age(), new_own_v2.get_age())
+        
+        # OwnerV2 arrays
+        orig_arr_own_v2 = original_pet.get_arr_own_v2()
+        new_arr_own_v2 = new_pet.get_arr_own_v2()
+        self.assertEqual(len(orig_arr_own_v2), len(new_arr_own_v2))
+        for i in range(len(orig_arr_own_v2)):
+            self.assertEqual(orig_arr_own_v2[i].get_name().decode('utf-8'), new_arr_own_v2[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_arr_own_v2[i].get_age(), new_arr_own_v2[i].get_age())
+        
+        # OwnerV2 vectors
+        orig_vec_own_v2 = original_pet.get_vec_own_v2()
+        new_vec_own_v2 = new_pet.get_vec_own_v2()
+        self.assertEqual(len(orig_vec_own_v2), len(new_vec_own_v2))
+        for i in range(len(orig_vec_own_v2)):
+            self.assertEqual(orig_vec_own_v2[i].get_name().decode('utf-8'), new_vec_own_v2[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_vec_own_v2[i].get_age(), new_vec_own_v2[i].get_age())
+        
+        # OwnerV3 objects
+        orig_own_v3 = original_pet.get_own_v3()
+        new_own_v3 = new_pet.get_own_v3()
+        self.assertEqual(orig_own_v3.get_name().decode('utf-8'), new_own_v3.get_name().decode('utf-8'))
+        self.assertEqual(orig_own_v3.get_age(), new_own_v3.get_age())
+        
+        # OwnerV3 arrays
+        orig_arr_own_v3 = original_pet.get_arr_own_v3()
+        new_arr_own_v3 = new_pet.get_arr_own_v3()
+        self.assertEqual(len(orig_arr_own_v3), len(new_arr_own_v3))
+        for i in range(len(orig_arr_own_v3)):
+            self.assertEqual(orig_arr_own_v3[i].get_name().decode('utf-8'), new_arr_own_v3[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_arr_own_v3[i].get_age(), new_arr_own_v3[i].get_age())
+        
+        # OwnerV3 vectors
+        orig_vec_own_v3 = original_pet.get_vec_own_v3()
+        new_vec_own_v3 = new_pet.get_vec_own_v3()
+        self.assertEqual(len(orig_vec_own_v3), len(new_vec_own_v3))
+        for i in range(len(orig_vec_own_v3)):
+            self.assertEqual(orig_vec_own_v3[i].get_name().decode('utf-8'), new_vec_own_v3[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_vec_own_v3[i].get_age(), new_vec_own_v3[i].get_age())
+        
+        # OwnerV4 objects
+        orig_own_v4 = original_pet.get_own_v4()
+        new_own_v4 = new_pet.get_own_v4()
+        self.assertEqual(orig_own_v4.get_name().decode('utf-8'), new_own_v4.get_name().decode('utf-8'))
+        self.assertEqual(orig_own_v4.get_age(), new_own_v4.get_age())
+        
+        # OwnerV4 arrays
+        orig_arr_own_v4 = original_pet.get_arr_own_v4()
+        new_arr_own_v4 = new_pet.get_arr_own_v4()
+        self.assertEqual(len(orig_arr_own_v4), len(new_arr_own_v4))
+        for i in range(len(orig_arr_own_v4)):
+            self.assertEqual(orig_arr_own_v4[i].get_name().decode('utf-8'), new_arr_own_v4[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_arr_own_v4[i].get_age(), new_arr_own_v4[i].get_age())
+        
+        # OwnerV4 vectors
+        orig_vec_own_v4 = original_pet.get_vec_own_v4()
+        new_vec_own_v4 = new_pet.get_vec_own_v4()
+        self.assertEqual(len(orig_vec_own_v4), len(new_vec_own_v4))
+        for i in range(len(orig_vec_own_v4)):
+            self.assertEqual(orig_vec_own_v4[i].get_name().decode('utf-8'), new_vec_own_v4[i].get_name().decode('utf-8'))
+            self.assertEqual(orig_vec_own_v4[i].get_age(), new_vec_own_v4[i].get_age())
+        
+        # PetType
+        self.assertEqual(original_pet.get_pet_type(), new_pet.get_pet_type())
+        self.assertEqual(list(original_pet.get_arr_pet_type()), list(new_pet.get_arr_pet_type()))
+        self.assertEqual(list(original_pet.get_vec_pet_type()), list(new_pet.get_vec_pet_type()))
 
     def test_type_error_arr_d(self):
         with self.assertRaises(TypeError):
@@ -481,28 +751,28 @@ class TestPet(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.pet.set_arr_own([Owner()])
         with self.assertRaises(TypeError):
-            self.pet.set_arr_own([Owner() for _ in range(11)])
+            self.pet.set_arr_own([Owner() for _ in range(10001)])
 
     def test_type_error_arr_own_v2(self):
         from roboticfluid_py.rf_owner import OwnerV2
         with self.assertRaises(TypeError):
             self.pet.set_arr_own_v2([OwnerV2()])
         with self.assertRaises(TypeError):
-            self.pet.set_arr_own_v2([OwnerV2() for _ in range(11)])
+            self.pet.set_arr_own_v2([OwnerV2() for _ in range(10001)])
 
     def test_type_error_arr_own_v3(self):
         from roboticfluid_py.rf_owner.nested import OwnerV3
         with self.assertRaises(TypeError):
             self.pet.set_arr_own_v3([OwnerV3()])
         with self.assertRaises(TypeError):
-            self.pet.set_arr_own_v3([OwnerV3() for _ in range(11)])
+            self.pet.set_arr_own_v3([OwnerV3() for _ in range(10001)])
 
     def test_type_error_arr_own_v4(self):
         from roboticfluid_py import OwnerV4
         with self.assertRaises(TypeError):
             self.pet.set_arr_own_v4([OwnerV4()])
         with self.assertRaises(TypeError):
-            self.pet.set_arr_own_v4([OwnerV4() for _ in range(11)])
+            self.pet.set_arr_own_v4([OwnerV4() for _ in range(10001)])
 
     def test_type_error_arr_pet_type(self):
         from roboticfluid_py.rf_pet import PetType
@@ -513,9 +783,9 @@ class TestPet(unittest.TestCase):
 
     def test_type_error_arr_u8(self):
         with self.assertRaises(TypeError):
-            self.pet.set_arr_u8([1]*99)
+            self.pet.set_arr_u8([1]*9999)
         with self.assertRaises(TypeError):
-            self.pet.set_arr_u8([1]*101)
+            self.pet.set_arr_u8([1]*10001)
 
 if __name__ == "__main__":
     unittest.main() 
