@@ -11,3 +11,5 @@ A serialization-free type system and it's compiler. This type system support bot
 # Benchmark
 
 ![alt text](poc/benchmark/benchmark_histogram_comparison.png)
+
+*Note: The benchmark source code can be found in the [benchmark](poc/benchmark/) directory.*
