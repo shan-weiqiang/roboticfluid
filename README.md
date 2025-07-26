@@ -5,3 +5,7 @@ A serialization-free type system and it's compiler. This type system support bot
 # Architecture
 
 ![`roboticfluid` architecture](assets/roboticfluid.png)
+
+# Benchmark
+
+![alt text](poc/benchmark/benchmark_histogram_comparison.png)
