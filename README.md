@@ -14,7 +14,7 @@ A fast serialization type system and it's compiler. This type system support bot
 
 # Supported Types
 
-The roboticfluid type system supports a wide range of data types, from basic primitives to complex custom types, with both fixed-size arrays and dynamic arrays. All types share the same memory layout between C++ and Python, enabling zero-copy data exchange.
+The roboticfluid type system supports a wide range of data types, from basic primitives to complex custom types, with both fixed-size arrays and dynamic arrays. All types share the same memory layout between C++ and Python, enabling zero-copy data exchange. The Python API provides type safety through compile-time type checking using pybind11.
 
 ## Type Categories
 
@@ -28,11 +28,11 @@ The roboticfluid type system supports a wide range of data types, from basic pri
 | Float (32-bit) | `float` | `float` | |
 | Float (64-bit) | `double` | `float` | |
 | Boolean | `bool` | `bool` | |
-| String | `std::string` | `bytes` | |
+| String | `std::string` | `bytes` | Python bytes equivalent to C++ string (no encoding info) |
 | **Enum Types** | | | |
 | Enum | `enum class` | `Enum` | |
 | **Custom Types** | | | |
-| Custom Class | `class` | `Class` | |
+| Custom Class | `class` | `Class` | Can contain any other types and be nested |
 | **Containers** | | | |
 | Fixed Array | `std::array<T, N>` | `list[N]` | N can be any basic type, string, enum, uint8_t, or custom type |
 | Dynamic Array | `std::vector<T>` | `list[N]` | N can be any basic type, string, enum, uint8_t, or custom type |
