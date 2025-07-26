@@ -187,10 +187,109 @@ public:
 
   // Serialization
   void dump(std::vector<uint8_t>& out) const;
-  inline size_t load(const std::vector<uint8_t>& src, size_t& offset){
-    this->~Pet();
-    std::memcpy(this, src.data() + offset, sizeof(Pet));
-    offset += sizeof(Pet);
+  // Internal method for array serialization - only dumps dynamic parts
+  inline void dump_dynamic_only(std::vector<uint8_t>& out) const {
+    // Only serialize the dynamic parts (std::string and std::vector members)
+    // POD parts are handled by memcpy in the main dump method
+    
+    // 1. std::string s
+    rf_common::write_string(out, s);
+    // 2. std::array<std::string, 10000> arr_s
+    for (const auto &s_ : arr_s)
+        rf_common::write_string(out, s_);
+    // 3. std::vector<double> vec_d
+    uint32_t sz = static_cast<uint32_t>(vec_d.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_d.data()), reinterpret_cast<const uint8_t*>(vec_d.data()) + sz * sizeof(vec_d[0]));
+    // 4. std::vector<float> vec_f
+    sz = static_cast<uint32_t>(vec_f.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_f.data()), reinterpret_cast<const uint8_t*>(vec_f.data()) + sz * sizeof(vec_f[0]));
+    // 5. std::vector<int32_t> vec_i32
+    sz = static_cast<uint32_t>(vec_i32.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_i32.data()), reinterpret_cast<const uint8_t*>(vec_i32.data()) + sz * sizeof(vec_i32[0]));
+    // 6. std::vector<int64_t> vec_i64
+    sz = static_cast<uint32_t>(vec_i64.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_i64.data()), reinterpret_cast<const uint8_t*>(vec_i64.data()) + sz * sizeof(vec_i64[0]));
+    // 7. std::vector<uint32_t> vec_u32
+    sz = static_cast<uint32_t>(vec_u32.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_u32.data()), reinterpret_cast<const uint8_t*>(vec_u32.data()) + sz * sizeof(vec_u32[0]));
+    // 8. std::vector<uint64_t> vec_u64
+    sz = static_cast<uint32_t>(vec_u64.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_u64.data()), reinterpret_cast<const uint8_t*>(vec_u64.data()) + sz * sizeof(vec_u64[0]));
+    // 9. std::vector<bool> vec_bval
+    sz = static_cast<uint32_t>(vec_bval.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (auto b : vec_bval) {
+        uint8_t bv = b ? 1 : 0;
+        out.push_back(bv);
+    }
+    // 10. std::vector<std::string> vec_s
+    sz = static_cast<uint32_t>(vec_s.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (const auto &s_ : vec_s)
+        rf_common::write_string(out, s_);
+    // 11. rf_owner::Owner own
+    own.dump(out);
+    // 12. std::array<rf_owner::Owner, 10000> arr_own
+    for (const auto &o : arr_own)
+        o.dump_dynamic_only(out);
+    // 13. std::vector<rf_owner::Owner> vec_own
+    sz = static_cast<uint32_t>(vec_own.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (const auto &o : vec_own)
+        o.dump(out);
+    // 14. rf_owner::OwnerV2 own_v2
+    own_v2.dump(out);
+    // 15. std::array<rf_owner::OwnerV2, 10000> arr_own_v2
+    for (const auto &o : arr_own_v2)
+        o.dump_dynamic_only(out);
+    // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
+    sz = static_cast<uint32_t>(vec_own_v2.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (const auto &o : vec_own_v2)
+        o.dump(out);
+    // 17. rf_owner::nested::OwnerV3 own_v3
+    own_v3.dump(out);
+    // 18. std::array<rf_owner::nested::OwnerV3, 10000> arr_own_v3
+    for (const auto &o : arr_own_v3)
+        o.dump_dynamic_only(out);
+    // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
+    sz = static_cast<uint32_t>(vec_own_v3.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (const auto &o : vec_own_v3)
+        o.dump(out);
+    // 20. OwnerV4 own_v4
+    own_v4.dump(out);
+    // 21. std::array<OwnerV4, 10000> arr_own_v4
+    for (const auto &o : arr_own_v4)
+        o.dump_dynamic_only(out);
+    // 22. std::vector<OwnerV4> vec_own_v4
+    sz = static_cast<uint32_t>(vec_own_v4.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    for (const auto &o : vec_own_v4)
+        o.dump(out);
+    // 23. std::vector<PetType> vec_pet_type
+    sz = static_cast<uint32_t>(vec_pet_type.size());
+    out.insert(out.end(), reinterpret_cast<const uint8_t*>(&sz), reinterpret_cast<const uint8_t*>(&sz) + sizeof(sz));
+    if (sz)
+        out.insert(out.end(), reinterpret_cast<const uint8_t*>(vec_pet_type.data()), reinterpret_cast<const uint8_t*>(vec_pet_type.data()) + sz * sizeof(vec_pet_type[0]));
+  }
+  // Internal method for array deserialization - only loads dynamic parts
+  inline size_t load_dynamic_only(const std::vector<uint8_t>& src, size_t& offset) {
+    // Only load the dynamic parts
+    // The POD parts are already loaded via memcpy
+    
     // 1. std::string s
     std::string s_tmp;
     rf_common::read_string(src, offset, s_tmp);
@@ -285,10 +384,9 @@ public:
     }
     // 12. std::array<rf_owner::Owner, 10000> arr_own
     for (size_t i = 0; i < arr_own.size(); ++i) {
-        new (&arr_own[i]) rf_owner::Owner();
-        rf_owner::Owner tmp;
-        tmp.load(src, offset);
-        arr_own[i] = std::move(tmp);
+        // Use load_dynamic_only since POD parts are already loaded via memcpy
+        // Don't call default constructor as it would zero out the POD content
+        arr_own[i].load_dynamic_only(src, offset);
     }
     // 13. std::vector<rf_owner::Owner> vec_own
     std::memcpy(&sz, &src[offset], sizeof(sz));
@@ -308,10 +406,9 @@ public:
     }
     // 15. std::array<rf_owner::OwnerV2, 10000> arr_own_v2
     for (size_t i = 0; i < arr_own_v2.size(); ++i) {
-        new (&arr_own_v2[i]) rf_owner::OwnerV2();
-        rf_owner::OwnerV2 tmp;
-        tmp.load(src, offset);
-        arr_own_v2[i] = std::move(tmp);
+        // Use load_dynamic_only since POD parts are already loaded via memcpy
+        // Don't call default constructor as it would zero out the POD content
+        arr_own_v2[i].load_dynamic_only(src, offset);
     }
     // 16. std::vector<rf_owner::OwnerV2> vec_own_v2
     std::memcpy(&sz, &src[offset], sizeof(sz));
@@ -331,10 +428,9 @@ public:
     }
     // 18. std::array<rf_owner::nested::OwnerV3, 10000> arr_own_v3
     for (size_t i = 0; i < arr_own_v3.size(); ++i) {
-        new (&arr_own_v3[i]) rf_owner::nested::OwnerV3();
-        rf_owner::nested::OwnerV3 tmp;
-        tmp.load(src, offset);
-        arr_own_v3[i] = std::move(tmp);
+        // Use load_dynamic_only since POD parts are already loaded via memcpy
+        // Don't call default constructor as it would zero out the POD content
+        arr_own_v3[i].load_dynamic_only(src, offset);
     }
     // 19. std::vector<rf_owner::nested::OwnerV3> vec_own_v3
     std::memcpy(&sz, &src[offset], sizeof(sz));
@@ -354,10 +450,9 @@ public:
     }
     // 21. std::array<OwnerV4, 10000> arr_own_v4
     for (size_t i = 0; i < arr_own_v4.size(); ++i) {
-        new (&arr_own_v4[i]) OwnerV4();
-        OwnerV4 tmp;
-        tmp.load(src, offset);
-        arr_own_v4[i] = std::move(tmp);
+        // Use load_dynamic_only since POD parts are already loaded via memcpy
+        // Don't call default constructor as it would zero out the POD content
+        arr_own_v4[i].load_dynamic_only(src, offset);
     }
     // 22. std::vector<OwnerV4> vec_own_v4
     std::memcpy(&sz, &src[offset], sizeof(sz));
@@ -369,10 +464,7 @@ public:
         vec_own_v4_tmp[i] = std::move(tmp);
     }
     new (&vec_own_v4) std::vector<OwnerV4>(std::move(vec_own_v4_tmp));
-    // 14. PetType pet_type (POD, handled by memcpy)
-    // 15. std::array<PetType, 10000> arr_pet_type (POD, handled by memcpy)
-
-    // 16. std::vector<PetType> vec_pet_type
+    // 23. std::vector<PetType> vec_pet_type
     std::memcpy(&sz, &src[offset], sizeof(sz));
     offset += sizeof(sz);
     std::vector<PetType> vec_pet_type_tmp(sz);
@@ -381,8 +473,14 @@ public:
         offset += sz * sizeof(vec_pet_type_tmp[0]);
     }
     new (&vec_pet_type) std::vector<PetType>(std::move(vec_pet_type_tmp));
-    // 17. std::array<uint8_t, 10000> arr_u8 (POD, handled by memcpy)
     return offset;
+  }
+  inline size_t load(const std::vector<uint8_t>& src, size_t& offset){
+    this->~Pet();
+    std::memcpy(this, src.data() + offset, sizeof(Pet));
+    offset += sizeof(Pet);
+    // Call load_dynamic_only to handle all dynamic members
+    return load_dynamic_only(src, offset);
   }
   void load(const std::vector<uint8_t>& src);
 };

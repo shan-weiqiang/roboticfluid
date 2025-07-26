@@ -12,7 +12,8 @@ void Owner::dump(std::vector<uint8_t>& out) const {
         out.reserve(out.size() + sizeof(Owner));
     out.resize(old_size + sizeof(Owner));
     std::memcpy(out.data() + old_size, this, sizeof(Owner));
-    rf_common::write_string(out, name);
+    // Call dump_dynamic_only to handle the dynamic parts
+    dump_dynamic_only(out);
 }
 
 void Owner::load(const std::vector<uint8_t>& src) {

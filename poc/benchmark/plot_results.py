@@ -128,7 +128,6 @@ ax1.set_xticklabels([f'{size:.6f}' for size in all_data_sizes], rotation=45, ha=
 if ax1.get_legend_handles_labels()[0]:  # Only show legend if there are plotted bars
     ax1.legend()
 ax1.grid(True, alpha=0.3)
-ax1.set_yscale('log')  # Use log scale for better visualization
 
 # Plot deserialization histogram (bottom)
 for i, (label, data) in enumerate(deserialize_hist_data.items()):
@@ -159,7 +158,6 @@ ax2.set_xticklabels([f'{size:.6f}' for size in all_data_sizes], rotation=45, ha=
 if ax2.get_legend_handles_labels()[0]:  # Only show legend if there are plotted bars
     ax2.legend()
 ax2.grid(True, alpha=0.3)
-ax2.set_yscale('log')  # Use log scale for better visualization
 
 plt.tight_layout()
 plt.savefig('benchmark_histogram_comparison.png', dpi=300, bbox_inches='tight')

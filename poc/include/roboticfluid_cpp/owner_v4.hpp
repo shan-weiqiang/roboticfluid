@@ -17,14 +17,26 @@ public:
   int get_age() const { return age; }
   void set_age(int val) { age = val; }
   void dump(std::vector<uint8_t>& out) const;
-  inline size_t load(const std::vector<uint8_t>& src, size_t& offset) {
-    this->~OwnerV4();
-    std::memcpy(this, src.data() + offset, sizeof(OwnerV4));
-    offset += sizeof(OwnerV4);
+  // Internal method for array serialization - only dumps dynamic parts
+  inline void dump_dynamic_only(std::vector<uint8_t>& out) const {
+    // Only serialize the dynamic parts (std::string name)
+    rf_common::write_string(out, name);
+  }
+  // Internal method for array deserialization - only loads dynamic parts
+  inline size_t load_dynamic_only(const std::vector<uint8_t>& src, size_t& offset) {
+    // Only load the dynamic parts (std::string name)
+    // The POD parts (age) are already loaded via memcpy
     std::string name_tmp;
     rf_common::read_string(src, offset, name_tmp);
     new (&name) std::string(std::move(name_tmp));
     return offset;
+  }
+  inline size_t load(const std::vector<uint8_t>& src, size_t& offset) {
+    this->~OwnerV4();
+    std::memcpy(this, src.data() + offset, sizeof(OwnerV4));
+    offset += sizeof(OwnerV4);
+    // Call load_dynamic_only to handle the dynamic parts
+    return load_dynamic_only(src, offset);
   }
   void load(const std::vector<uint8_t>& src);
 }; 
