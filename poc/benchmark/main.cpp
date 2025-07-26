@@ -301,6 +301,7 @@ int main() {
         bench.context("data_size_bytes", std::to_string(real_size));
         bench.context("data_size_mb", std::to_string(real_size / (1024.0 * 1024.0)));
         bench.context("data_size_human", human_readable_size(real_size));
+        bench.context("container_size", std::to_string(sz));  // sz is the container size
         bench.context("fastdds_size_bytes", std::to_string(fastdds_size));
         bench.context("protobuf_size_bytes", std::to_string(protobuf_size));
         bench.context("custom_size_bytes", std::to_string(custom_size));
@@ -340,8 +341,8 @@ int main() {
     std::cout << "Writing results to files..." << std::endl;
     
     // Custom CSV format with data size column
-    const char* custom_csv_template = R"DELIM("title";"name";"unit";"batch";"data_size_mb";"elapsed_ns";"total"
-{{#result}}"{{title}}";"{{name}}";"{{unit}}";{{batch}};{{context(data_size_mb)}};{{median(elapsed)}};{{sumProduct(iterations, elapsed)}}
+    const char* custom_csv_template = R"DELIM("title";"name";"unit";"batch";"data_size_mb";"container_size";"protobuf_size_bytes";"roboticfluid_size_bytes";"elapsed_ns";"total"
+{{#result}}"{{title}}";"{{name}}";"{{unit}}";{{batch}};{{context(data_size_mb)}};{{context(container_size)}};{{context(protobuf_size_bytes)}};{{context(custom_size_bytes)}};{{median(elapsed)}};{{sumProduct(iterations, elapsed)}}
 {{/result}})DELIM";
     
     bench.render(custom_csv_template, csv_file);
