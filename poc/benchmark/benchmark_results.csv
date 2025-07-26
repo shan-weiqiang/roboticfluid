@@ -1,0 +1,193 @@
+"title"    ; "name"                ; "unit"; "batch"; "data_size_mb"; "elapsed_ns" ; "total"
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.087528; 0.00068646709; 0.068646709
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.087528; 0.00084476583; 0.084476583
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.087528; 0.00136143958; 0.136143958
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.087528; 0.00586795501; 0.586795501
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.087528; 0.00101210333; 0.101210333
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.087528; 0.00145988291; 0.145988291
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.088631; 0.0007950425 ; 0.07950425
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.088631; 0.00085308916; 0.085308916
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.088631; 0.00134875792; 0.134875792
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.088631; 0.00588576334; 0.588576334
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.088631; 0.00104284167; 0.104284167
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.088631; 0.00147561041; 0.147561041
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.093552; 0.00082940375; 0.082940375
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.093552; 0.00088916375; 0.088916375
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.093552; 0.00135457583; 0.135457583
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.093552; 0.00585461125; 0.585461125
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.093552; 0.00098283917; 0.098283917
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.093552; 0.00140533208; 0.140533208
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.099701; 0.00081066958; 0.081066958
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.099701; 0.000962215  ; 0.0962215
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.099701; 0.0017370175 ; 0.17370175
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.099701; 0.006025715  ; 0.6025715
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.099701; 0.00098626   ; 0.098626
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.099701; 0.00139658876; 0.139658876
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.112003; 0.00081088833; 0.081088833
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.112003; 0.00087483708; 0.087483708
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.112003; 0.00136787292; 0.136787292
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.112003; 0.00597214251; 0.597214251
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.112003; 0.00099132125; 0.099132125
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.112003; 0.00141062042; 0.141062042
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.148911; 0.00081873375; 0.081873375
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.148911; 0.00091322625; 0.091322625
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.148911; 0.00143347459; 0.143347459
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.148911; 0.00645998167; 0.645998167
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.148911; 0.00103343791; 0.103343791
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.148911; 0.00151434459; 0.151434459
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.210423; 0.00087731125; 0.087731125
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.210423; 0.00101944083; 0.101944083
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.210423; 0.00155235958; 0.155235958
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.210423; 0.00665239709; 0.665239709
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.210423; 0.00115156875; 0.115156875
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.210423; 0.0016183375 ; 0.16183375
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.333447; 0.00094618583; 0.094618583
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.333447; 0.00118373084; 0.118373084
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.333447; 0.001708575  ; 0.1708575
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.333447; 0.0073245825 ; 0.73245825
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.333447; 0.00122069792; 0.122069792
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.333447; 0.00182659083; 0.182659083
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.456470; 0.00105563583; 0.105563583
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.456470; 0.00127161083; 0.127161083
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.456470; 0.00180566875; 0.180566875
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.456470; 0.00796927459; 0.796927459
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.456470; 0.00129520666; 0.129520666
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.456470; 0.00195190833; 0.195190833
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.579494; 0.00109925417; 0.109925417
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.579494; 0.0015671175 ; 0.15671175
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.579494; 0.00193756959; 0.193756959
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.579494; 0.00866121042; 0.866121042
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.579494; 0.0014049125 ; 0.14049125
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.579494; 0.00223974958; 0.223974958
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.702518; 0.00119855625; 0.119855625
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.702518; 0.00149332417; 0.149332417
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.702518; 0.00209297   ; 0.209297
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.702518; 0.00981396959; 0.981396959
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.702518; 0.00156213209; 0.156213209
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.702518; 0.00240992833; 0.240992833
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.825542; 0.00133223458; 0.133223458
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.825542; 0.00186471709; 0.186471709
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.825542; 0.00222268084; 0.222268084
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.825542; 0.01021741417; 1.021741417
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.825542; 0.00157959375; 0.157959375
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.825542; 0.00254768667; 0.254768667
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       1.948566; 0.00137226833; 0.137226833
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       1.948566; 0.0020674025 ; 0.20674025
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       1.948566; 0.00244184375; 0.244184375
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       1.948566; 0.01054531042; 1.054531042
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       1.948566; 0.00179801292; 0.179801292
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       1.948566; 0.00278583792; 0.278583792
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       2.071590; 0.00145934   ; 0.145934
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       2.071590; 0.00213190167; 0.213190167
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       2.071590; 0.00250025709; 0.250025709
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       2.071590; 0.01126621417; 1.126621417
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       2.071590; 0.00180543375; 0.180543375
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       2.071590; 0.00290358583; 0.290358583
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       2.194614; 0.00156067042; 0.156067042
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       2.194614; 0.00228204876; 0.228204876
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       2.194614; 0.00263254208; 0.263254208
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       2.194614; 0.01204056625; 1.204056625
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       2.194614; 0.00191189917; 0.191189917
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       2.194614; 0.00315236625; 0.315236625
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       2.317638; 0.00169242709; 0.169242709
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       2.317638; 0.00221571167; 0.221571167
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       2.317638; 0.00289285667; 0.289285667
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       2.317638; 0.01236616917; 1.236616917
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       2.317638; 0.00199571417; 0.199571417
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       2.317638; 0.00333015   ; 0.333015
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       2.932758; 0.00203237958; 0.203237958
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       2.932758; 0.00281071959; 0.281071959
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       2.932758; 0.00346721167; 0.346721167
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       2.932758; 0.01580063418; 1.580063418
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       2.932758; 0.00256373916; 0.256373916
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       2.932758; 0.00426715208; 0.426715208
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       3.547878; 0.00240215125; 0.240215125
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       3.547878; 0.00342471583; 0.342471583
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       3.547878; 0.00421889709; 0.421889709
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       3.547878; 0.01886908834; 1.886908834
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       3.547878; 0.0031311675 ; 0.31311675
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       3.547878; 0.00526403459; 0.526403459
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       4.162998; 0.00277060875; 0.277060875
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       4.162998; 0.00466654667; 0.466654667
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       4.162998; 0.00486119958; 0.486119958
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       4.162998; 0.02228494667; 2.228494667
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       4.162998; 0.00359384292; 0.359384292
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       4.162998; 0.00632031334; 0.632031334
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       4.778118; 0.0031703425 ; 0.31703425
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       4.778118; 0.00485266667; 0.485266667
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       4.778118; 0.00589302625; 0.589302625
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       4.778118; 0.02528977876; 2.528977876
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       4.778118; 0.00399205333; 0.399205333
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       4.778118; 0.00717189709; 0.717189709
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       5.393238; 0.00361346459; 0.361346459
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       5.393238; 0.00556037334; 0.556037334
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       5.393238; 0.00642638417; 0.642638417
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       5.393238; 0.02943750335; 2.943750335
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       5.393238; 0.0046793925 ; 0.46793925
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       5.393238; 0.00810133626; 0.810133626
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       6.008358; 0.00407382417; 0.407382417
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       6.008358; 0.00644691125; 0.644691125
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       6.008358; 0.00719930667; 0.719930667
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       6.008358; 0.03233785085; 3.233785085
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       6.008358; 0.00507309417; 0.507309417
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       6.008358; 0.00901264333; 0.901264333
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       6.623478; 0.00452959   ; 0.452959
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       6.623478; 0.00717503458; 0.717503458
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       6.623478; 0.00776178167; 0.776178167
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       6.623478; 0.03627523293; 3.627523293
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       6.623478; 0.00559375251; 0.559375251
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       6.623478; 0.00993947959; 0.993947959
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       7.238598; 0.0048464325 ; 0.48464325
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       7.238598; 0.00794031209; 0.794031209
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       7.238598; 0.00913639751; 0.913639751
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       7.238598; 0.03935466586; 3.935466586
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       7.238598; 0.00618477542; 0.618477542
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       7.238598; 0.01150937167; 1.150937167
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       7.853718; 0.00532202625; 0.532202625
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       7.853718; 0.0083642725 ; 0.83642725
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       7.853718; 0.00910167334; 0.910167334
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       7.853718; 0.04197464877; 4.197464877
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       7.853718; 0.00670017875; 0.670017875
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       7.853718; 0.01237368543; 1.237368543
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       8.468838; 0.00590434375; 0.590434375
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       8.468838; 0.00922449417; 0.922449417
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       8.468838; 0.01001309667; 1.001309667
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       8.468838; 0.04522375502; 4.522375502
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       8.468838; 0.00722264959; 0.722264959
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       8.468838; 0.01279765959; 1.279765959
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       9.083958; 0.00605147625; 0.605147625
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       9.083958; 0.00989638084; 0.989638084
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       9.083958; 0.01057280792; 1.057280792
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       9.083958; 0.04888012334; 4.888012334
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       9.083958; 0.00756757   ; 0.756757
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       9.083958; 0.01386989001; 1.386989001
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;       9.699078; 0.00645710709; 0.645710709
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;       9.699078; 0.01051130959; 1.051130959
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;       9.699078; 0.01131777209; 1.131777209
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;       9.699078; 0.05204167877; 5.204167877
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;       9.699078; 0.00806969292; 0.806969292
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;       9.699078; 0.01490265792; 1.490265792
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;      10.314198; 0.00690646917; 0.690646917
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;      10.314198; 0.01124382584; 1.124382584
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;      10.314198; 0.01198416376; 1.198416376
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;      10.314198; 0.05552670377; 5.552670377
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;      10.314198; 0.00866328167; 0.866328167
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;      10.314198; 0.01568616959; 1.568616959
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;      10.929317; 0.00731569834; 0.731569834
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;      10.929317; 0.01195346584; 1.195346584
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;      10.929317; 0.0125736975 ; 1.25736975
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;      10.929317; 0.05872444003; 5.872444003
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;      10.929317; 0.00912430958; 0.912430958
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;      10.929317; 0.01674372418; 1.674372418
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;      11.544437; 0.00766564   ; 0.766564
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;      11.544437; 0.01251335834; 1.251335834
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;      11.544437; 0.01343215167; 1.343215167
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;      11.544437; 0.06272128212; 6.272128212
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;      11.544437; 0.00964364708; 0.964364708
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;      11.544437; 0.01821312126; 1.821312126
+"benchmark"; "rototicfluid dump"   ; "op"  ;       1;      12.159557; 0.00832208959; 0.832208959
+"benchmark"; "roboticfluid load"   ; "op"  ;       1;      12.159557; 0.01385397125; 1.385397125
+"benchmark"; "Protobuf serialize"  ; "op"  ;       1;      12.159557; 0.01422857667; 1.422857667
+"benchmark"; "Protobuf deserialize"; "op"  ;       1;      12.159557; 0.06558391461; 6.558391461
+"benchmark"; "FastDDS serialize"   ; "op"  ;       1;      12.159557; 0.01020651792; 1.020651792
+"benchmark"; "FastDDS deserialize" ; "op"  ;       1;      12.159557; 0.01865600418; 1.865600418

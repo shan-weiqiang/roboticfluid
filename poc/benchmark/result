@@ -1,0 +1,93 @@
+Total data size to serialize: 4.78 MB (5011541 bytes)
+
+--- Benchmark for data size: 4.78 MB (5011541 bytes) ---
+
+|               ns/op |                op/s |    err% |     total | benchmark
+|--------------------:|--------------------:|--------:|----------:|:----------
+|          735,687.83 |            1,359.27 |    0.0% |      0.74 | `rototicfluid dump`
+|          777,204.12 |            1,286.66 |    0.0% |      0.78 | `roboticfluid load`
+|        1,341,593.46 |              745.38 |    0.0% |      1.34 | `Protobuf serialize`
+|        2,197,051.13 |              455.16 |    0.0% |      2.20 | `Protobuf deserialize`
+|        1,034,085.58 |              967.04 |    0.0% |      1.03 | `FastDDS serialize`
+|        1,023,283.29 |              977.25 |    0.0% |      1.02 | `FastDDS deserialize`
+Total data size to serialize: 5.07 MB (5320193 bytes)
+
+--- Benchmark for data size: 5.07 MB (5320193 bytes) ---
+|          761,940.83 |            1,312.44 |    0.0% |      0.76 | `rototicfluid dump`
+|          891,808.00 |            1,121.32 |    0.0% |      0.89 | `roboticfluid load`
+|        1,500,096.00 |              666.62 |    0.0% |      1.50 | `Protobuf serialize`
+|        2,449,748.62 |              408.21 |    0.0% |      2.45 | `Protobuf deserialize`
+|        1,123,365.50 |              890.18 |    0.0% |      1.12 | `FastDDS serialize`
+|        1,134,199.88 |              881.68 |    0.0% |      1.13 | `FastDDS deserialize`
+Total data size to serialize: 6.25 MB (6556225 bytes)
+
+--- Benchmark for data size: 6.25 MB (6556225 bytes) ---
+|        1,047,248.21 |              954.88 |    0.0% |      1.05 | `rototicfluid dump`
+|        1,612,664.46 |              620.09 |    0.0% |      1.61 | `roboticfluid load`
+|        2,034,999.54 |              491.40 |    0.0% |      2.03 | `Protobuf serialize`
+|        3,455,531.21 |              289.39 |    0.0% |      3.46 | `Protobuf deserialize`
+|        1,529,227.29 |              653.93 |    0.0% |      1.53 | `FastDDS serialize`
+|        1,556,746.62 |              642.37 |    0.0% |      1.56 | `FastDDS deserialize`
+Total data size to serialize: 6.84 MB (7174209 bytes)
+
+--- Benchmark for data size: 6.84 MB (7174209 bytes) ---
+|        1,200,498.13 |              832.99 |    0.0% |      1.20 | `rototicfluid dump`
+|        1,822,246.17 |              548.77 |    0.0% |      1.82 | `roboticfluid load`
+|        2,307,990.63 |              433.28 |    0.0% |      2.31 | `Protobuf serialize`
+|        3,960,072.75 |              252.52 |    0.0% |      3.96 | `Protobuf deserialize`
+|        1,740,995.04 |              574.38 |    0.0% |      1.74 | `FastDDS serialize`
+|        1,804,200.17 |              554.26 |    0.0% |      1.80 | `FastDDS deserialize`
+Total data size to serialize: 7.43 MB (7792193 bytes)
+
+--- Benchmark for data size: 7.43 MB (7792193 bytes) ---
+|        1,332,352.63 |              750.55 |    0.0% |      1.33 | `rototicfluid dump`
+|        2,082,729.46 |              480.14 |    0.0% |      2.08 | `roboticfluid load`
+|        2,611,965.71 |              382.85 |    0.0% |      2.61 | `Protobuf serialize`
+|        4,416,677.13 |              226.41 |    0.0% |      4.42 | `Protobuf deserialize`
+|        1,992,292.58 |              501.93 |    0.0% |      1.99 | `FastDDS serialize`
+|        2,016,463.17 |              495.92 |    0.0% |      2.02 | `FastDDS deserialize`
+Total data size to serialize: 13.62 MB (14281185 bytes)
+
+--- Benchmark for data size: 13.62 MB (14281185 bytes) ---
+|        2,856,978.83 |              350.02 |    0.0% |      2.86 | `rototicfluid dump`
+|        4,695,270.42 |              212.98 |    0.0% |      4.70 | `roboticfluid load`
+|        5,596,758.50 |              178.67 |    0.0% |      5.60 | `Protobuf serialize`
+|        9,556,370.67 |              104.64 |    0.0% |      9.56 | `Protobuf deserialize`
+|        4,099,313.84 |              243.94 |    0.0% |      4.10 | `FastDDS serialize`
+|        4,371,623.09 |              228.75 |    0.0% |      4.37 | `FastDDS deserialize`
+Total data size to serialize: 19.51 MB (20461217 bytes)
+
+--- Benchmark for data size: 19.51 MB (20461217 bytes) ---
+|        4,303,094.84 |              232.39 |    0.0% |      4.30 | `rototicfluid dump`
+|        7,391,589.25 |              135.29 |    0.0% |      7.39 | `roboticfluid load`
+|        8,555,558.00 |              116.88 |    0.0% |      8.56 | `Protobuf serialize`
+|       14,189,453.59 |               70.47 |    0.0% |     14.19 | `Protobuf deserialize`
+|        6,173,024.34 |              162.00 |    0.0% |      6.17 | `FastDDS serialize`
+|        6,521,070.00 |              153.35 |    0.0% |      6.52 | `FastDDS deserialize`
+Total data size to serialize: 25.41 MB (26641185 bytes)
+
+--- Benchmark for data size: 25.41 MB (26641185 bytes) ---
+|        5,753,340.38 |              173.81 |    0.0% |      5.75 | `rototicfluid dump`
+|        9,827,384.09 |              101.76 |    0.0% |      9.83 | `roboticfluid load`
+|       11,486,932.34 |               87.06 |    0.0% |     11.49 | `Protobuf serialize`
+|       19,029,477.30 |               52.55 |    0.0% |     19.03 | `Protobuf deserialize`
+|        8,252,084.67 |              121.18 |    0.0% |      8.25 | `FastDDS serialize`
+|        8,743,222.59 |              114.37 |    0.0% |      8.74 | `FastDDS deserialize`
+Total data size to serialize: 31.30 MB (32821217 bytes)
+
+--- Benchmark for data size: 31.30 MB (32821217 bytes) ---
+|        7,201,467.50 |              138.86 |    0.0% |      7.20 | `rototicfluid dump`
+|       12,767,897.51 |               78.32 |    0.0% |     12.77 | `roboticfluid load`
+|       14,333,967.21 |               69.76 |    0.0% |     14.33 | `Protobuf serialize`
+|       23,836,828.05 |               41.95 |    0.0% |     23.84 | `Protobuf deserialize`
+|       10,308,208.05 |               97.01 |    0.0% |     10.31 | `FastDDS serialize`
+|       10,925,445.84 |               91.53 |    0.0% |     10.93 | `FastDDS deserialize`
+Total data size to serialize: 34.25 MB (35911201 bytes)
+
+--- Benchmark for data size: 34.25 MB (35911201 bytes) ---
+|        7,860,325.59 |              127.22 |    0.0% |      7.86 | `rototicfluid dump`
+|       13,968,386.67 |               71.59 |    0.0% |     13.97 | `roboticfluid load`
+|       15,590,800.05 |               64.14 |    0.0% |     15.59 | `Protobuf serialize`
+|       26,083,241.18 |               38.34 |    0.0% |     26.08 | `Protobuf deserialize`
+|       11,279,184.13 |               88.66 |    0.0% |     11.28 | `FastDDS serialize`
+|       11,962,884.42 |               83.59 |    0.0% |     11.96 | `FastDDS deserialize`

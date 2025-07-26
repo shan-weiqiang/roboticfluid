@@ -3,6 +3,7 @@
 #include <string>
 #include <array>
 #include <random>
+#include <fstream>
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include "nanobench.h"
 
@@ -155,52 +156,6 @@ void fill_pet(rf_pet::Pet& pet, benchmark::pb::Pet& pb_pet, benchmark::idl::Pet&
     idl_pet.vec_pet_type(std::vector<benchmark::idl::PetType>(cfg.vec_size, static_cast<benchmark::idl::PetType>(rf_pet::PetType::FISH)));
 }
 
-// Helper to get the heap size of a string (capacity, not size, for upper bound)
-size_t string_mem(const std::string& s) {
-    return sizeof(std::string) + s.capacity();
-}
-
-// Helper to get the heap size of a vector<T>
-template<typename T>
-size_t vector_mem(const std::vector<T>& v) {
-    return sizeof(std::vector<T>) + v.capacity() * sizeof(T);
-}
-
-// Specialization for vector<string>
-template<>
-size_t vector_mem<std::string>(const std::vector<std::string>& v) {
-    size_t total = sizeof(std::vector<std::string>);
-    for (const auto& s : v) total += string_mem(s);
-    return total;
-}
-
-// Helper for array<string, N>
-template<size_t N>
-size_t array_string_mem(const std::array<std::string, N>& arr) {
-    size_t total = 0;
-    for (const auto& s : arr) total += string_mem(s);
-    return total;
-}
-
-// All Owner types are: std::string name; int age;
-template<typename OwnerT>
-size_t owner_mem(const OwnerT& o) {
-    return sizeof(OwnerT) + string_mem(o.name) - sizeof(std::string); // avoid double-counting string member
-}
-
-template<typename OwnerT, size_t N>
-size_t array_owner_mem(const std::array<OwnerT, N>& arr) {
-    size_t total = 0;
-    for (const auto& o : arr) total += owner_mem(o);
-    return total;
-}
-
-template<typename OwnerT>
-size_t vector_owner_mem(const std::vector<OwnerT>& v) {
-    size_t total = sizeof(std::vector<OwnerT>);
-    for (const auto& o : v) total += owner_mem(o);
-    return total;
-}
 
 // Human-readable size
 std::string human_readable_size(size_t bytes) {
@@ -216,52 +171,124 @@ std::string human_readable_size(size_t bytes) {
     return std::string(buf);
 }
 
-// Compute total memory used by rf_pet::Pet (including all heap allocations)
-size_t get_total_size(const rf_pet::Pet& pet) {
-    size_t total = sizeof(rf_pet::Pet);
-    // Strings
-    total += string_mem(pet.s) - sizeof(std::string);
-    total += array_string_mem(pet.arr_s);
-    total += vector_mem<std::string>(pet.vec_s);
-    // Vectors of basic types
-    total += vector_mem<double>(pet.vec_d);
-    total += vector_mem<float>(pet.vec_f);
-    total += vector_mem<int32_t>(pet.vec_i32);
-    total += vector_mem<int64_t>(pet.vec_i64);
-    total += vector_mem<uint32_t>(pet.vec_u32);
-    total += vector_mem<uint64_t>(pet.vec_u64);
-    total += vector_mem<bool>(pet.vec_bval);
-    // Owners
-    total += owner_mem(pet.own);
-    total += array_owner_mem(pet.arr_own);
-    total += vector_owner_mem(pet.vec_own);
-    total += owner_mem(pet.own_v2);
-    total += array_owner_mem(pet.arr_own_v2);
-    total += vector_owner_mem(pet.vec_own_v2);
-    total += owner_mem(pet.own_v3);
-    total += array_owner_mem(pet.arr_own_v3);
-    total += vector_owner_mem(pet.vec_own_v3);
-    total += owner_mem(pet.own_v4);
-    total += array_owner_mem(pet.arr_own_v4);
-    total += vector_owner_mem(pet.vec_own_v4);
-    // Enum vector
-    total += vector_mem<rf_pet::PetType>(pet.vec_pet_type);
-    // Done
-    return total;
+// Test correctness of roboticfluid serialization/deserialization
+bool test_correctness(const rf_pet::Pet& original_pet, const std::string& test_name) {
+    std::cout << "Testing roboticfluid correctness for " << test_name << "..." << std::endl;
+    
+    // Test 1: Dump -> Load -> Compare
+    std::vector<uint8_t> serialized;
+    serialized.reserve(20 * 1024 * 1024); // 20MB
+    
+    // Dump the original pet using roboticfluid
+    original_pet.dump(serialized);
+    std::cout << "  Roboticfluid serialized size: " << human_readable_size(serialized.size()) << std::endl;
+    
+    // Load into a new pet using roboticfluid
+    auto loaded_pet = std::make_unique<rf_pet::Pet>();
+    loaded_pet->load(serialized);
+    
+    // Compare original with loaded (check key fields)
+    bool test1_passed = true;
+    test1_passed &= (loaded_pet->d == original_pet.d);
+    test1_passed &= (loaded_pet->f == original_pet.f);
+    test1_passed &= (loaded_pet->i32 == original_pet.i32);
+    test1_passed &= (loaded_pet->i64 == original_pet.i64);
+    test1_passed &= (loaded_pet->u32 == original_pet.u32);
+    test1_passed &= (loaded_pet->u64 == original_pet.u64);
+    test1_passed &= (loaded_pet->bval == original_pet.bval);
+    test1_passed &= (loaded_pet->s == original_pet.s);
+    test1_passed &= (loaded_pet->vec_d.size() == original_pet.vec_d.size());
+    test1_passed &= (loaded_pet->vec_s.size() == original_pet.vec_s.size());
+    
+    std::cout << "  Test 1 (roboticfluid dump->load->compare): " << (test1_passed ? "PASSED" : "FAILED") << std::endl;
+    
+    // Test 2: Reuse same variable - Load again into loaded_pet
+    loaded_pet->load(serialized);
+    
+    // Compare with the original (check key fields)
+    bool test2_passed = true;
+    test2_passed &= (loaded_pet->d == original_pet.d);
+    test2_passed &= (loaded_pet->f == original_pet.f);
+    test2_passed &= (loaded_pet->i32 == original_pet.i32);
+    test2_passed &= (loaded_pet->i64 == original_pet.i64);
+    test2_passed &= (loaded_pet->u32 == original_pet.u32);
+    test2_passed &= (loaded_pet->u64 == original_pet.u64);
+    test2_passed &= (loaded_pet->bval == original_pet.bval);
+    test2_passed &= (loaded_pet->s == original_pet.s);
+    test2_passed &= (loaded_pet->vec_d.size() == original_pet.vec_d.size());
+    test2_passed &= (loaded_pet->vec_s.size() == original_pet.vec_s.size());
+    
+    std::cout << "  Test 2 (roboticfluid reuse same variable): " << (test2_passed ? "PASSED" : "FAILED") << std::endl;
+    
+    bool all_passed = test1_passed && test2_passed;
+    std::cout << "  Overall roboticfluid result: " << (all_passed ? "PASSED" : "FAILED") << std::endl;
+    std::cout << std::endl;
+    
+    return all_passed;
 }
+
 
 int main() {
     using namespace ankerl::nanobench;
-    std::vector<size_t> test_sizes = {1, 1000,5000, 7000, 9000, 30000, 50000, 70000, 90000, 100000};
+    
+    // Create output files
+    std::ofstream markdown_file("benchmark_results.md");
+    std::ofstream csv_file("benchmark_results.csv");
+    std::ofstream json_file("benchmark_results.json");
+    
+    // Create a bench instance that will collect all results
+    Bench bench;
+    bench.output(&markdown_file); // Redirect default output to markdown file
+    
+    std::vector<size_t> test_sizes = {
+        1, 10, 50, 100, 200, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 
+        10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 
+        65000, 70000, 75000, 80000, 85000, 90000
+    };
+    
+    // Test correctness first with a few sample sizes
+    std::cout << "=== Testing Correctness ===" << std::endl;
+    std::vector<size_t> correctness_test_sizes = {1, 100, 1000, 10000};
+    for (size_t sz : correctness_test_sizes) {
+        PetDataConfig cfg{sz, 16};
+        auto test_pet = std::make_unique<rf_pet::Pet>();
+        benchmark::pb::Pet dummy_pb_pet;
+        benchmark::idl::Pet dummy_idl_pet;
+        fill_pet(*test_pet, dummy_pb_pet, dummy_idl_pet, cfg);
+        
+        if (!test_correctness(*test_pet, "size " + std::to_string(sz))) {
+            std::cerr << "Correctness test failed! Aborting benchmark." << std::endl;
+            return 1;
+        }
+    }
+    std::cout << "All correctness tests passed! Proceeding with benchmark..." << std::endl << std::endl;
+    
     for (size_t sz : test_sizes) {
         PetDataConfig cfg{sz, 16};
         auto pet = std::make_unique<rf_pet::Pet>();
         benchmark::pb::Pet pb_pet;
         benchmark::idl::Pet idl_pet;
         fill_pet(*pet, pb_pet, idl_pet, cfg);
-        // Calculate and print the real data size
-        size_t real_size = get_total_size(*pet);
-        std::cout << "Total data size to serialize: " << human_readable_size(real_size) << " (" << real_size << " bytes)\n";
+        
+        // Calculate real serialization sizes using FastDDS API
+        size_t fastdds_size = benchmark::idl::Pet::getCdrSerializedSize(idl_pet) + 4; // +4 for encapsulation
+        size_t protobuf_size = pb_pet.ByteSizeLong();
+        
+        // Calculate custom serialization size by actually serializing
+        std::vector<uint8_t> temp_serialized;
+        temp_serialized.reserve(20 * 1024 * 1024); // 20MB
+        pet->dump(temp_serialized);
+        size_t custom_size = temp_serialized.size();
+        
+        // Use FastDDS size as the reference for data size
+        size_t real_size = fastdds_size;
+        
+        std::cout << "Serialization sizes:" << std::endl;
+        std::cout << "  FastDDS: " << human_readable_size(fastdds_size) << " (" << fastdds_size << " bytes)" << std::endl;
+        std::cout << "  Protobuf: " << human_readable_size(protobuf_size) << " (" << protobuf_size << " bytes)" << std::endl;
+        std::cout << "  Custom: " << human_readable_size(custom_size) << " (" << custom_size << " bytes)" << std::endl;
+        std::cout << "  Using FastDDS size as reference: " << human_readable_size(real_size) << " (" << real_size << " bytes)" << std::endl;
+        
         std::vector<uint8_t> custom_serialized;
         custom_serialized.reserve(20 * 1024 * 1024); // 20MB
         std::string pb_serialized;
@@ -269,29 +296,68 @@ int main() {
         std::vector<char> idl_buf(2000000);
         idl_buf.resize(20 * 1024 * 1024); // 20MB
         std::cout << "\n--- Benchmark for data size: " << human_readable_size(real_size) << " (" << real_size << " bytes) ---\n";
-        Bench().epochs(1).epochIterations(1000).run("Custom dump", [&] {
+        
+        // Add context information about the data sizes
+        bench.context("data_size_bytes", std::to_string(real_size));
+        bench.context("data_size_mb", std::to_string(real_size / (1024.0 * 1024.0)));
+        bench.context("data_size_human", human_readable_size(real_size));
+        bench.context("fastdds_size_bytes", std::to_string(fastdds_size));
+        bench.context("protobuf_size_bytes", std::to_string(protobuf_size));
+        bench.context("custom_size_bytes", std::to_string(custom_size));
+        
+        // Keep original format but with milliseconds time unit
+        bench.unit("op").batch(1.0);
+        
+        bench.epochs(1).epochIterations(100).run("rototicfluid dump", [&] {
             custom_serialized.clear();
             pet->dump(custom_serialized);
         });
-        Bench().epochs(1).epochIterations(1000).run("Custom load", [&] {
-            pet->load(custom_serialized);
+        bench.epochs(1).epochIterations(100).run("roboticfluid load", [&] {
+            auto fresh_pet = std::make_unique<rf_pet::Pet>();
+            fresh_pet->load(custom_serialized);
         });
-        Bench().epochs(1).epochIterations(1000).run("Protobuf serialize", [&] {
+        bench.epochs(1).epochIterations(100).run("Protobuf serialize", [&] {
             pb_pet.SerializeToString(&pb_serialized);
         });
-        Bench().epochs(1).epochIterations(1000).run("Protobuf deserialize", [&] {
-            pb_pet.ParseFromString(pb_serialized);
+        bench.epochs(1).epochIterations(100).run("Protobuf deserialize", [&] {
+            benchmark::pb::Pet fresh_pb_pet;
+            fresh_pb_pet.ParseFromString(pb_serialized);
         });
-        Bench().epochs(1).epochIterations(1000).run("FastDDS serialize", [&] {
+        bench.epochs(1).epochIterations(100).run("FastDDS serialize", [&] {
             eprosima::fastcdr::FastBuffer cdrbuffer(idl_buf.data(), idl_buf.size());
             eprosima::fastcdr::Cdr ser(cdrbuffer);
             idl_pet.serialize(ser);
         });
-        Bench().epochs(1).epochIterations(1000).run("FastDDS deserialize", [&] {
+        bench.epochs(1).epochIterations(100).run("FastDDS deserialize", [&] {
+            benchmark::idl::Pet fresh_idl_pet;
             eprosima::fastcdr::FastBuffer cdrbuffer(idl_buf.data(), idl_buf.size());
             eprosima::fastcdr::Cdr deser(cdrbuffer);
-            idl_pet.deserialize(deser);
+            fresh_idl_pet.deserialize(deser);
         });
     }
+    
+    // Output results in different formats
+    std::cout << "Writing results to files..." << std::endl;
+    
+    // Custom CSV format with data size column
+    const char* custom_csv_template = R"DELIM("title";"name";"unit";"batch";"data_size_mb";"elapsed_ns";"total"
+{{#result}}"{{title}}";"{{name}}";"{{unit}}";{{batch}};{{context(data_size_mb)}};{{median(elapsed)}};{{sumProduct(iterations, elapsed)}}
+{{/result}})DELIM";
+    
+    bench.render(custom_csv_template, csv_file);
+    
+    // JSON format
+    bench.render(templates::json(), json_file);
+    
+    // Close files
+    markdown_file.close();
+    csv_file.close();
+    json_file.close();
+    
+    std::cout << "Results written to:" << std::endl;
+    std::cout << "  - benchmark_results.md (markdown table)" << std::endl;
+    std::cout << "  - benchmark_results.csv (CSV format)" << std::endl;
+    std::cout << "  - benchmark_results.json (JSON format)" << std::endl;
+    
     return 0;
 } 
