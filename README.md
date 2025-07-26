@@ -4,7 +4,8 @@ A fast serialization type system and it's compiler. This type system support bot
 - [Supported Types](#supported-types)
   - [Type Categories](#type-categories)
   - [Key Features](#key-features)
-- [Benchmark](#benchmark)
+- [Speed Benchmark](#speed-benchmark)
+- [Caveats](#caveats)
 
 
 # Architecture
@@ -45,7 +46,7 @@ The roboticfluid type system supports a wide range of data types, from basic pri
 - **Nested types**: Support for complex nested data structures
 
 
-# Benchmark
+# Speed Benchmark
 
 ![alt text](poc/benchmark/benchmark_performance_only.png)
 
@@ -57,4 +58,6 @@ The roboticfluid type system supports a wide range of data types, from basic pri
 - **~89% faster** deserialization than Protobuf and **~53% faster** than FastDDS
 - **Consistent performance advantage** that scales with data size
 
-**Caveats**: Due to the memory dump approach, roboticfluid uses significantly more storage space compared to Protobuf and FastDDS, which employ efficient binary encoding schemes to reduce payload size.
+# Caveats
+
+Due to the memory dump approach, roboticfluid uses significantly more storage space compared to Protobuf and FastDDS, which employ efficient binary encoding schemes to reduce payload size.
