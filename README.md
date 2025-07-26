@@ -17,22 +17,24 @@ The roboticfluid type system supports a wide range of data types, from basic pri
 
 ## Type Categories
 
-| Category | C++ Type | Python Type | Fixed Array | Dynamic Array | Example |
-|----------|----------|-------------|-------------|---------------|---------|
-| **Basic Types** | | | | | |
-| Integer (32-bit) | `int32_t` | `int` | `std::array<int32_t, N>` | `std::vector<int32_t>` | `123` |
-| Integer (64-bit) | `int64_t` | `int` | `std::array<int64_t, N>` | `std::vector<int64_t>` | `1234567890123` |
-| Unsigned (32-bit) | `uint32_t` | `int` | `std::array<uint32_t, N>` | `std::vector<uint32_t>` | `123456` |
-| Unsigned (64-bit) | `uint64_t` | `int` | `std::array<uint64_t, N>` | `std::vector<uint64_t>` | `123456789012345` |
-| Unsigned (8-bit) | `uint8_t` | `int` | `std::array<uint8_t, N>` | `std::vector<uint8_t>` | `255` |
-| Float (32-bit) | `float` | `float` | `std::array<float, N>` | `std::vector<float>` | `3.14` |
-| Float (64-bit) | `double` | `float` | `std::array<double, N>` | `std::vector<double>` | `3.14159265359` |
-| Boolean | `bool` | `bool` | `std::array<bool, N>` | `std::vector<bool>` | `True` |
-| String | `std::string` | `str` | `std::array<std::string, N>` | `std::vector<std::string>` | `"Hello World"` |
-| **Enum Types** | | | | | |
-| Enum | `enum class` | `Enum` | `std::array<Enum, N>` | `std::vector<Enum>` | `PetType.DOG` |
-| **Custom Types** | | | | | |
-| Custom Class | `class` | `Class` | `std::array<Class, N>` | `std::vector<Class>` | `Owner()` |
+| Category | C++ Type | Python Type | Remark |
+|----------|----------|-------------|---------|
+| **Basic Types** | | | |
+| Integer (32-bit) | `int32_t` | `int` | |
+| Integer (64-bit) | `int64_t` | `int` | |
+| Unsigned (32-bit) | `uint32_t` | `int` | |
+| Unsigned (64-bit) | `uint64_t` | `int` | |
+| Float (32-bit) | `float` | `float` | |
+| Float (64-bit) | `double` | `float` | |
+| Boolean | `bool` | `bool` | |
+| String | `std::string` | `bytes` | |
+| **Enum Types** | | | |
+| Enum | `enum class` | `Enum` | |
+| **Custom Types** | | | |
+| Custom Class | `class` | `Class` | |
+| **Containers** | | | |
+| Fixed Array | `std::array<T, N>` | `list[N]` | N can be any basic type, string, enum, uint8_t, or custom type |
+| Dynamic Array | `std::vector<T>` | `list[N]` | N can be any basic type, string, enum, uint8_t, or custom type |
 
 ## Key Features
 
