@@ -54,8 +54,8 @@ The roboticfluid type system supports a wide range of data types, from basic pri
 
 **roboticfluid** outperforms **Protobuf** and **FastDDS** in serialization/deserialization:
 
-- **~52% faster** serialization than Protobuf and **~38% faster** than FastDDS
-- **~89% faster** deserialization than Protobuf and **~53% faster** than FastDDS
+- **~2.5x faster** serialization than Protobuf and **~1.5x faster** than FastDDS
+- **~6.5x faster** deserialization than Protobuf and **~1.6x faster** than FastDDS
 - **Consistent performance advantage** that scales with data size
 
 # Caveats
