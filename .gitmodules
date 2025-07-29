@@ -1,0 +1,3 @@
+[submodule "fluidc_impl"]
+	path = fluidc_impl
+	url = https://github.com/shan-weiqiang/fluidc_impl.git
